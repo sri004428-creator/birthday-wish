@@ -1,327 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Nikitha! 🎈</title>
-    <style>
-        /* CSS Reset and Variables */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        :root {
-            --bg-color: #ffeef2;
-            --primary-pink: #ff6b8b;
-            --dark-pink: #e04d70;
-            --gold: #ffd700;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>🎉 Teen Birthday Surprise | Epic Celebration 🎂</title>
+  <!-- Google Fonts & Font Awesome 6 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- canvas-confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle, var(--bg-color) 0%, #fcdbe3 100%);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            perspective: 1000px;
-        }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #ffdde1 0%, #f9c9e2 35%, #fbc8b5 100%);
+      background-attachment: fixed;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-        /* Confetti Canvas */
-        #confetti-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
+    /* floating party elements */
+    .floating-joy {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
 
-        /* Screen Wrapper */
-        .container {
-            text-align: center;
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-        }
+    .float-item {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.6;
+      animation: floatUp 12s infinite ease-in-out;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.1));
+    }
 
-        /* --- GIFT BOX CONTAINER --- */
-        .gift-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all 0.8s ease-in-out;
-        }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-20vh) rotate(15deg);
+        opacity: 0;
+      }
+    }
 
-        .gift-hint {
-            font-size: 1.5rem;
-            color: var(--dark-pink);
-            margin-bottom: 30px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            animation: bounce 1.5s infinite;
-        }
+    /* main glass card */
+    .surprise-card {
+      position: relative;
+      z-index: 10;
+      max-width: 700px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-radius: 68px;
+      box-shadow: 0 30px 55px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
+      padding: 2rem 2rem 2.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      text-align: center;
+      animation: cardGlow 2s ease-out;
+    }
 
-        .gift-box {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            background-color: var(--primary-pink);
-            cursor: pointer;
-            box-shadow: 0 15px 30px rgba(224, 77, 112, 0.3);
-            border-radius: 0 0 10px 10px;
-            transition: transform 0.3s;
-        }
+    .surprise-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 40px 70px rgba(0, 0, 0, 0.25);
+    }
 
-        .gift-box:hover {
-            transform: scale(1.05);
-        }
+    @keyframes cardGlow {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        /* Ribbon Cross Styles */
-        .gift-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 100%;
-            background-color: var(--gold);
-        }
+    .cake-image-wrapper {
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: center;
+      animation: gentleSway 3s infinite alternate ease-in-out;
+    }
 
-        .gift-box::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            width: 100%;
-            height: 30px;
-            background-color: var(--gold);
-        }
+    @keyframes gentleSway {
+      0% {
+        transform: rotate(-2deg);
+      }
+      100% {
+        transform: rotate(2deg);
+      }
+    }
 
-        /* Gift Lid */
-        .gift-lid {
-            position: absolute;
-            top: -25px;
-            left: -10px;
-            width: 180px;
-            height: 30px;
-            background-color: var(--dark-pink);
-            z-index: 2;
-            border-radius: 5px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            transition: all 0.5s ease-in-out;
-        }
+    .birthday-cake-img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 60% 40% 50% 50% / 45% 40% 60% 55%;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.3);
+      border: 4px solid white;
+      transition: all 0.4s;
+      cursor: pointer;
+    }
 
-        .gift-lid::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 34px;
-            height: 100%;
-            background-color: var(--gold);
-        }
+    .birthday-cake-img:hover {
+      transform: scale(1.02) rotate(1deg);
+      filter: brightness(1.02);
+    }
 
-        /* Gift Bow Ribbon */
-        .gift-bow {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 20px;
-            background-color: var(--gold);
-            border-radius: 50% 50% 0 0;
-            z-index: 3;
-            transition: all 0.5s ease-in-out;
-        }
+    .greeting-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(252, 176, 64, 0.25);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.4rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #b4521c;
+    }
 
-        /* --- CARD STYLING --- */
-        .wishes-card {
-            background: #ffffff;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            display: none;
-            opacity: 0;
-            transform: scale(0.6) rotate(-5deg);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 4px double var(--primary-pink);
-        }
+    .main-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #D96C2B, #E83E8C, #6A4E9B);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 0.2rem 0 0.5rem;
+      letter-spacing: -0.5px;
+    }
 
-        .wishes-card.reveal {
-            display: block;
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-        }
+    .birthday-message {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #2d2b2c;
+      font-weight: 500;
+      background: rgba(255,245,235,0.7);
+      padding: 1rem 1.2rem;
+      border-radius: 48px;
+      margin: 1rem 0 1rem 0;
+    }
 
-        .wishes-card h1 {
-            color: var(--dark-pink);
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            font-family: 'Georgia', serif;
-        }
+    .highlight-text {
+      font-weight: 800;
+      color: #d45a2b;
+    }
 
-        .wishes-card p {
-            color: #555;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
+    .surprise-btn {
+      background: linear-gradient(105deg, #FF8C5A, #FF3D6C);
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: white;
+      border-radius: 60px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(255, 61, 108, 0.4);
+      transition: 0.2s all;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0.75rem 0 1rem;
+    }
 
-        .decorations {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            animation: float 2s ease-in-out infinite alternate;
-        }
+    .surprise-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 28px rgba(255, 61, 108, 0.5);
+    }
 
-        /* --- ANIMATIONS --- */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+    .surprise-btn:active {
+      transform: translateY(2px);
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
+    .secret-message-area {
+      margin-top: 1.8rem;
+      background: rgba(255, 255, 245, 0.7);
+      border-radius: 48px;
+      padding: 1rem 1.2rem;
+      min-height: 95px;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border-left: 4px solid #ffa47a;
+      border-right: 4px solid #ffa47a;
+    }
 
-        /* Utility State Classes */
-        .hide-box {
-            opacity: 0;
-            transform: scale(0) rotate(180deg);
-            pointer-events: none;
-            position: absolute;
-        }
-    </style>
+    .dynamic-wish {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #6b2e1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadePop 0.5s ease;
+    }
+
+    @keyframes fadePop {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .default-wish-placeholder {
+      color: #b65f36;
+      font-weight: 500;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .footer-note {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; text-shadow: 0 0 0px gold;}
+      100% { opacity: 1; text-shadow: 0 0 5px #ffd966;}
+    }
+
+    .sparkle-text {
+      animation: twinkle 1.2s infinite alternate;
+    }
+
+    @media (max-width: 550px) {
+      .surprise-card {
+        padding: 1.5rem;
+        border-radius: 48px;
+      }
+      .main-title {
+        font-size: 2.4rem;
+      }
+      .birthday-cake-img {
+        width: 140px;
+        height: 140px;
+      }
+      .surprise-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
+      .dynamic-wish {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <canvas id="confetti-canvas"></canvas>
+  <div class="floating-joy" id="floatBg"></div>
 
-    <div class="container">
-        <!-- Step 1: The Interactive Gift Box -->
-        <div class="gift-wrapper" id="giftWrapper">
-            <div class="gift-hint">Click to open your gift, Nikitha! ✨</div>
-            <div class="gift-box" onclick="openGift()">
-                <div class="gift-bow" id="bow"></div>
-                <div class="gift-lid" id="lid"></div>
-            </div>
-        </div>
-
-        <!-- Step 2: The Hidden Birthday Card -->
-        <div class="wishes-card" id="wishesCard">
-            <div class="decorations">🎉 🎂 💖 ✨</div>
-            <h1>Happy Birthday, Nikitha!</h1>
-            <p>
-                Wishing you a day filled with laughter, bright smiles, and beautiful moments. 
-                May this year bring you closer to all your dreams, endless happiness, 
-                and success in everything you pursue. 
-            </p>
-            <p>Have an amazing, wonderful celebration! 🥳🌸</p>
-        </div>
+  <div class="surprise-card">
+    <div class="greeting-badge">
+      <i class="fas fa-gift" style="color:#E8622E;"></i>
+      <span>🎧 TEEN BIRTHDAY BASH 🎧</span>
+      <i class="fas fa-cake-candles" style="color:#E8622E;"></i>
     </div>
 
-    <script>
-        // Setup variables
-        const canvas = document.getElementById('confetti-canvas');
-        const ctx = canvas.getContext('2d');
-        let confettiArray = [];
-        let animationFrameId;
+    <div class="cake-image-wrapper">
+      <img class="birthday-cake-img" 
+           src="/Screenshot 2026-06-10 153430.png" 
+           alt="Birthday Cake with Candles" 
+           loading="eager">
+    </div>
 
-        // Resize Canvas dynamically
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+    <h1 class="main-title">
+      🎂 Happy Birthday! 🎉
+    </h1>
+    
+    <div class="birthday-message">
+      <i class="fas fa-star" style="color:#f5a623;"></i> 
+      <span class="highlight-text">Another awesome trip around the sun!</span> 
+      <i class="fas fa-star" style="color:#f5a623;"></i><br>
+      Get ready to level up — this year is YOUR year to shine, game on!
+    </div>
 
-        // Confetti Class Pattern
-        class Confetti {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height - canvas.height;
-                this.size = Math.random() * 8 + 6;
-                this.speedX = Math.random() * 4 - 2;
-                this.speedY = Math.random() * 5 + 4;
-                this.color = `hsl(${Math.random() * 360}, 100%, 65%)`;
-                this.rotation = Math.random() * 360;
-                this.rotationSpeed = Math.random() * 4 - 2;
-            }
+    <button class="surprise-btn" id="surpriseButton">
+      <i class="fas fa-magic"></i> Open Your Surprise <i class="fas fa-grin-tongue-squint"></i>
+    </button>
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.rotation += this.rotationSpeed;
+    <div class="secret-message-area" id="secretMessageArea">
+      <div class="default-wish-placeholder" id="defaultPlaceholder">
+        <i class="fas fa-envelope-open-text"></i> ✨ Click the magic button for an epic birthday wish ✨
+      </div>
+    </div>
 
-                // Loop if out of screen borders
-                if (this.y > canvas.height) {
-                    this.y = -20;
-                    this.x = Math.random() * canvas.width;
-                }
-            }
+    <div class="footer-note">
+      <span><i class="fas fa-balloon"></i> Party Hard</span>
+      <span><i class="fas fa-champagne-glasses"></i> Make a Wish</span>
+      <span><i class="fas fa-heart" style="color:#ff4d6d;"></i> You Rock!</span>
+    </div>
+  </div>
 
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate((this.rotation * Math.PI) / 180);
-                ctx.fillStyle = this.color;
-                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-                ctx.restore();
-            }
-        }
+  <script>
+    // ========== FLOATING BACKGROUND ==========
+    function createFloaters() {
+      const floatContainer = document.getElementById('floatBg');
+      if (!floatContainer) return;
+      const iconsArray = ['🎈', '🎂', '🎁', '✨', '🕯️', '🎉', '🌸', '💖', '🍰', '🎊', '🥳', '🎈', '🕹️', '🎧', '⚡'];
+      for (let i = 0; i < 28; i++) {
+        const floatEl = document.createElement('div');
+        floatEl.classList.add('float-item');
+        const randomIcon = iconsArray[Math.floor(Math.random() * iconsArray.length)];
+        floatEl.innerHTML = randomIcon;
+        const leftPos = Math.random() * 100;
+        const size = Math.floor(Math.random() * 28 + 18);
+        const duration = Math.random() * 10 + 8;
+        const delay = Math.random() * 12;
+        floatEl.style.left = leftPos + '%';
+        floatEl.style.fontSize = size + 'px';
+        floatEl.style.animationDuration = duration + 's';
+        floatEl.style.animationDelay = delay + 's';
+        floatEl.style.opacity = Math.random() * 0.5 + 0.2;
+        floatContainer.appendChild(floatEl);
+      }
+    }
 
-        // Initialize confetti system
-        function startConfetti() {
-            for (let i = 0; i < 120; i++) {
-                confettiArray.push(new Confetti());
-            }
-            animateConfetti();
-        }
+    // ========== CONFETTI HELPERS ==========
+    function safeConfetti(options) {
+      if (typeof canvasConfetti === 'function') {
+        canvasConfetti(options);
+      }
+    }
 
-        // Loop animation ticks
-        function animateConfetti() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            confettiArray.forEach(piece => {
-                piece.update();
-                piece.draw();
-            });
-            animationFrameId = requestAnimationFrame(animateConfetti);
-        }
+    function burstConfetti(intensity = 'medium') {
+      if (intensity === 'heavy') {
+        safeConfetti({ particleCount: 300, spread: 120, origin: { y: 0.6 }, startVelocity: 20, colors: ['#ff8c5a', '#ff3d6c', '#ffd966', '#a95cbf', '#45b7d1'] });
+        safeConfetti({ particleCount: 120, spread: 70, origin: { y: 0.3, x: 0.2 }, startVelocity: 25 });
+        safeConfetti({ particleCount: 120, spread: 70, origin: { y: 0.4, x: 0.8 }, startVelocity: 25 });
+      } else if (intensity === 'medium') {
+        safeConfetti({ particleCount: 180, spread: 85, origin: { y: 0.5 }, startVelocity: 18, colors: ['#ffb347', '#ff6b6b', '#aa6dc9', '#4ecdc4'] });
+      } else {
+        safeConfetti({ particleCount: 80, spread: 65, origin: { y: 0.5 }, startVelocity: 12 });
+      }
+    }
 
-        // Main action trigger function
-        function openGift() {
-            const giftWrapper = document.getElementById('giftWrapper');
-            const wishesCard = document.getElementById('wishesCard');
-            const lid = document.getElementById('lid');
-            const bow = document.getElementById('bow');
+    function superConfettiBlast() {
+      safeConfetti({ particleCount: 220, spread: 100, origin: { y: 0.5, x: 0.5 }, startVelocity: 22, decay: 0.9, colors: ['#fc4a1a', '#f7b733', '#ff4e50', '#904e95', '#2bc0e4'] });
+      safeConfetti({ particleCount: 110, spread: 45, origin: { y: 0.7, x: 0.3 }, startVelocity: 28 });
+      safeConfetti({ particleCount: 110, spread: 45, origin: { y: 0.2, x: 0.8 }, startVelocity: 24 });
+      setTimeout(() => {
+        safeConfetti({ particleCount: 60, spread: 35, origin: { y: 0.9, x: 0.1 }, startVelocity: 15 });
+      }, 150);
+    }
 
-            // Apply explosion/lid lift look
-            lid.style.transform = 'translateY(-60px) rotate(-15deg)';
-            bow.style.transform = 'translate(-30px, -70px) rotate(-25deg)';
-            lid.style.opacity = '0';
-            bow.style.opacity = '0';
+    // ========== TEEN-FRIENDLY SURPRISE MESSAGES (NO LOVE/ROMANCE) ==========
+    const teenWishes = [
+      { emoji: "🎮✨", text: "Level up! You just unlocked another year of epic adventures. Game on!" },
+      { emoji: "🕹️🔥", text: "New year, new high score! May your vibes be unstoppable. Happy Birthday!" },
+      { emoji: "🎧⚡", text: "Turn up the volume on happiness! This is your year to shine like a star." },
+      { emoji: "🏆🎉", text: "You're the MVP of today! Celebrate big, you totally deserve it." },
+      { emoji: "🚀🌙", text: "Blast off into another amazing year! The future is yours, go get it!" },
+      { emoji: "🍕🥤", text: "May your day be filled with pizza, gaming, and zero homework. You've earned it!" },
+      { emoji: "📱💥", text: "New age, new vibes! Stay awesome, stay you. Rock this year!" },
+      { emoji: "🎨✨", text: "You're the artist of your own story — make this chapter legendary!" },
+      { emoji: "⚽🎯", text: "Goal getter! This year, smash every dream. Happy Birthday, champion!" },
+      { emoji: "🐉💪", text: "You've got dragon energy! Go conquer the world, one birthday at a time." },
+      { emoji: "🧩🎲", text: "Another year, another piece of the puzzle. Make every moment count!" },
+      { emoji: "🌊🏄", text: "Ride the wave of awesomeness! Hope your birthday is as cool as you." },
+      { emoji: "📸🎬", text: "This is your main character moment. Make it unforgettable!" },
+      { emoji: "🤙🎈", text: "Chill vibes only! Wishing you the most epic birthday ever." }
+    ];
 
+    function getRandomTeenMessage() {
+      const randomIndex = Math.floor(Math.random() * teenWishes.length);
+      return teenWishes[randomIndex];
+    }
+
+    function renderSurpriseMessage() {
+      const secretArea = document.getElementById('secretMessageArea');
+      if (!secretArea) return;
+      const { emoji, text } = getRandomTeenMessage();
+      secretArea.innerHTML = `
+        <div class="dynamic-wish">
+          <span style="font-size: 2rem;">${emoji}</span>
+          <span>${text}</span>
+          <span style="font-size: 2rem;">${emoji}</span>
+        </div>
+      `;
+      const newDiv = secretArea.querySelector('.dynamic-wish');
+      if (newDiv) newDiv.style.animation = 'fadePop 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+    }
+
+    // ========== MAIN SURPRISE HANDLER ==========
+    function handleSurpriseClick() {
+      renderSurpriseMessage();      // show teen-friendly wish
+      burstConfetti('heavy');       // big confetti
+      superConfettiBlast();         // extra blast
+
+      // card animation
+      const card = document.querySelector('.surprise-card');
+      if (card) {
+        card.style.transform = 'scale(1.01)';
+        setTimeout(() => { if(card) card.style.transform = ''; }, 280);
+      }
+
+      // button text change
+      const btn = document.getElementById('surpriseButton');
+      if (btn) {
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-sparkles"></i> BOOM! Surprise Unlocked! 🎉 <i class="fas fa-crown"></i>';
+        setTimeout(() => { if(btn) btn.innerHTML = originalHTML; }, 1800);
+      }
+
+      // title sparkle
+      const title = document.querySelector('.main-title');
+      if (title) {
+        title.classList.add('sparkle-text');
+        setTimeout(() => title.classList.remove('sparkle-text'), 1000);
+      }
+    }
+
+    // ========== PAGE LOAD ==========
+    window.addEventListener('DOMContentLoaded', () => {
+      createFloaters();
+      
+      // entrance confetti
+      burstConfetti('medium');
+      setTimeout(() => burstConfetti('medium'), 500);
+      setTimeout(() => {
+        safeConfetti({ particleCount: 60, spread: 55, origin: { y: 0.8 }, startVelocity: 12, colors: ['#ffaa66', '#ff6f91'] });
+      }, 900);
+      
+      // attach event to magic button
+      const surpriseBtn = document.getElementById('surpriseButton');
+      if (surpriseBtn) {
+        surpriseBtn.removeEventListener('click', handleSurpriseClick);
+        surpriseBtn.addEventListener('click', handleSurpriseClick);
+      }
+      
+      // extra: cake click gives mini surprise (just for fun)
+      const cakeImg = document.querySelector('.birthday-cake-img');
+      if (cakeImg) {
+        cakeImg.addEventListener('click', () => {
+          safeConfetti({ particleCount: 45, spread: 40, origin: { y: 0.55, x: 0.5 }, startVelocity: 8 });
+          const tempArea = document.getElementById('secretMessageArea');
+          if (tempArea && !tempArea.innerHTML.includes('dynamic-wish')) {
+            const originalContent = tempArea.innerHTML;
+            tempArea.innerHTML = `<div class="dynamic-wish" style="background: rgba(255,230,200,0.7); border-radius: 30px; padding: 6px;">
+              🍰 <strong>Sweet!</strong> A little extra sprinkle for you! 🧁
+            </div>`;
             setTimeout(() => {
-                // Collapse gift box area
-                giftWrapper.classList.add('hide-box');
-                
-                // Mount the birthday layout screen
-                wishesCard.style.display = 'block';
-                setTimeout(() => {
-                    wishesCard.classList.add('reveal');
-                    startConfetti();
-                }, 100);
-            }, 500);
-        }
-    </script>
+              if (tempArea.innerHTML.includes('Sweet!')) {
+                tempArea.innerHTML = originalContent;
+              }
+            }, 2000);
+          } else {
+            const msgDiv = tempArea?.querySelector('.dynamic-wish');
+            if(msgDiv) {
+              msgDiv.style.background = "rgba(255,245,200,0.9)";
+              setTimeout(() => { if(msgDiv) msgDiv.style.background = ""; }, 400);
+            }
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
