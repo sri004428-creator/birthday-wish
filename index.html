@@ -515,10 +515,15 @@
                                 <p class="text-xs uppercase tracking-widest text-purple-300">With warmest wishes,</p>
                                 <p id="displaySender" class="font-script text-2xl text-amber-300 mt-1">Your Best Friend</p>
                             </div>
-                            <button id="sendHugBtn" class="self-start sm:self-auto px-5 py-2.5 rounded-xl bg-pink-500/20 hover:bg-pink-500/35 border border-pink-400/30 text-pink-200 text-xs font-semibold transition flex items-center gap-2 cursor-pointer">
-                                <i class="fa-solid fa-heart text-rose-400"></i>
-                                <span>Send Birthday Love</span>
-                            </button>
+                            <div class="flex flex-wrap items-center gap-2.5">
+                                <button id="sendHugBtn" class="px-5 py-2.5 rounded-xl bg-pink-500/20 hover:bg-pink-500/35 border border-pink-400/30 text-pink-200 text-xs font-semibold transition flex items-center gap-2 cursor-pointer">
+                                    <i class="fa-solid fa-heart text-rose-400"></i>
+                                    <span>Send Birthday Love</span>
+                                </button>
+                                <a href="#replySection" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400/20 to-pink-500/25 hover:from-amber-400/30 hover:to-pink-500/35 border border-amber-300/35 text-amber-200 text-xs font-semibold transition flex items-center gap-2">
+                                    <span>Write a Reply 💌</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -592,9 +597,9 @@
                         <textarea id="replyTextInput" rows="3" required placeholder="Type your reply message here... (e.g., Thank you so much for this lovely surprise! 💖)" class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 focus:bg-white/15 transition resize-none text-sm sm:text-base"></textarea>
                     </div>
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <span id="replyStorageStatus" class="text-xs text-purple-300/75 flex items-center gap-1.5">
-                            <i class="fa-solid fa-cloud-check text-emerald-400"></i>
-                            <span>Replies are saved permanently on this link</span>
+                        <span id="replyStorageStatus" class="text-xs text-purple-300/80 flex items-center gap-1.5">
+                            <i id="replyStorageIcon" class="fa-solid fa-spinner fa-spin text-amber-300"></i>
+                            <span id="replyStorageText">Connecting to reply storage...</span>
                         </span>
                         <button type="submit" id="submitReplyBtn" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 hover:from-pink-400 hover:to-amber-400 text-white font-semibold text-sm shadow-lg shadow-pink-500/25 transform transition hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer">
                             <span>Send & Save Reply</span>
@@ -603,17 +608,30 @@
                     </div>
                 </form>
 
-                <!-- Saved Replies Display List -->
-                <div id="savedRepliesWrapper" class="mt-8 pt-6 border-t border-white/10 space-y-4 hidden">
-                    <div class="flex items-center justify-between">
+                <!-- Saved Replies Display List (Always visible with clear loading/empty/populated states) -->
+                <div id="savedRepliesWrapper" class="mt-8 pt-6 border-t border-white/10 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
                         <h3 class="text-xs font-semibold uppercase tracking-widest text-amber-300 flex items-center gap-2">
                             <i class="fa-solid fa-envelope-open-text"></i>
                             <span>Saved Replies (<span id="replyCount">0</span>)</span>
                         </h3>
-                        <span class="text-[11px] text-purple-300/60">Visible whenever this link is opened</span>
+                        <span id="replySyncBadge" class="text-[11px] text-purple-300/70">Visible whenever this link is opened</span>
                     </div>
+
+                    <!-- Loading Indicator -->
+                    <div id="repliesLoadingState" class="py-6 text-center text-sm text-purple-200/80 flex items-center justify-center gap-2.5">
+                        <i class="fa-solid fa-circle-notch fa-spin text-pink-400"></i>
+                        <span>Loading replies...</span>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="repliesEmptyState" class="hidden py-6 px-4 rounded-2xl bg-white/5 border border-dashed border-white/15 text-center text-sm text-purple-200/75">
+                        No replies yet — write a message above! 💌
+                    </div>
+
+                    <!-- Replies Cards Container -->
                     <div id="savedRepliesList" class="space-y-3">
-                        <!-- Dynamically populated from Firestore -->
+                        <!-- Dynamically populated -->
                     </div>
                 </div>
             </div>
@@ -638,41 +656,26 @@
         // ✏️ CREATOR CONFIGURATION: EDIT THESE DETAILS FOR YOUR SPECIAL PERSON
         // =====================================================================
         const BIRTHDAY_CONFIG = {
-            recipientName: "PRABHA DEYAM",                                   // 👈 Change to Birthday Person's Name
-            senderName: "",                                     // 👈 Change to Your Name
+            recipientName: "Ananya",                                   // 👈 Change to Birthday Person's Name
+            senderName: "Karthik",                                     // 👈 Change to Your Name
             tagline: "Today is all about celebrating YOU! ✨",         // 👈 Short top badge text
-            photoUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80", // 👈 Paste their Photo URL or local file path (e.g., "./photo.jpg")
+            photoUrl: ".Screenshot2026-06-10 153430.png", // 👈 Paste their Photo URL or local file path (e.g., "./photo.jpg")
             message: `On your special day, I want you to know how truly appreciated and celebrated you are.\n\nThank you for filling life with warmth, laughter, and unforgettable memories. May this new chapter bring you endless joy, vibrant health, and every success you dream of!` // 👈 Write your heartfelt birthday message here
         };
         // =====================================================================
 
         // -----------------------------------------------------------------
-        // 1. APPLY CREATOR CONFIG TO THE PAGE
+        // 1. TOAST NOTIFICATION & APPLY BIRTHDAY_CONFIG TO PAGE
         // -----------------------------------------------------------------
-        function applyBirthdayConfig() {
-            document.title = `Happy Birthday, ${BIRTHDAY_CONFIG.recipientName}!`;
-            document.getElementById('entranceRecipient').textContent = BIRTHDAY_CONFIG.recipientName;
-            document.getElementById('displayRecipient').textContent = BIRTHDAY_CONFIG.recipientName;
-            document.getElementById('cardRecipientName').textContent = BIRTHDAY_CONFIG.recipientName;
-            document.getElementById('displaySender').textContent = BIRTHDAY_CONFIG.senderName;
-            document.getElementById('replySenderTarget').textContent = BIRTHDAY_CONFIG.senderName;
-            document.getElementById('displayTagline').textContent = BIRTHDAY_CONFIG.tagline;
-            document.getElementById('displayMessage').textContent = BIRTHDAY_CONFIG.message;
-            document.getElementById('displayPhoto').src = BIRTHDAY_CONFIG.photoUrl;
-        }
-        applyBirthdayConfig();
-
-        // -----------------------------------------------------------------
-        // 2. TOAST NOTIFICATION HELPER (Replaces alert())
-        // -----------------------------------------------------------------
-        let toastTimeout;
-        function showToast(msg, iconClass = "fa-solid fa-sparkles text-amber-400") {
+        let toastTimeout = null;
+        function showToast(message, iconClass = "fa-solid fa-sparkles text-amber-400") {
             const banner = document.getElementById('toastBanner');
-            const messageEl = document.getElementById('toastMessage');
+            const msgEl = document.getElementById('toastMessage');
             const iconEl = document.getElementById('toastIcon');
+            if (!banner || !msgEl) return;
 
-            messageEl.textContent = msg;
-            iconEl.className = iconClass;
+            msgEl.textContent = message;
+            if (iconEl) iconEl.className = iconClass;
 
             banner.classList.remove('opacity-0', 'translate-y-6');
             banner.classList.add('opacity-100', 'translate-y-0');
@@ -684,12 +687,65 @@
             }, 3400);
         }
 
+        function applyBirthdayConfig() {
+            const setText = (id, value) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = value;
+            };
+
+            setText('entranceRecipient', BIRTHDAY_CONFIG.recipientName);
+            setText('displayRecipient', BIRTHDAY_CONFIG.recipientName);
+            setText('cardRecipientName', BIRTHDAY_CONFIG.recipientName);
+            setText('displaySender', BIRTHDAY_CONFIG.senderName);
+            setText('replySenderTarget', BIRTHDAY_CONFIG.senderName);
+            setText('displayTagline', BIRTHDAY_CONFIG.tagline);
+            setText('displayMessage', BIRTHDAY_CONFIG.message);
+
+            const photoEl = document.getElementById('displayPhoto');
+            if (photoEl && BIRTHDAY_CONFIG.photoUrl) {
+                photoEl.src = BIRTHDAY_CONFIG.photoUrl;
+            }
+            document.title = `Happy Birthday, ${BIRTHDAY_CONFIG.recipientName}! 🎉`;
+        }
+        applyBirthdayConfig();
+
         // -----------------------------------------------------------------
-        // 3. PERSISTENT CLOUD STORAGE FOR RECIPIENT REPLIES (FIRESTORE)
+        // 3. PERSISTENT CLOUD + INSTANT LOCAL CACHE FOR RECIPIENT REPLIES
         // -----------------------------------------------------------------
         let db = null;
         let currentUser = null;
+        let cloudReady = false;
+        let firstSnapshotReceived = false;
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'birthday-wishes-app';
+        const LOCAL_CACHE_KEY = `birthday_replies_cache_${appId}`;
+
+        let cloudReplies = [];
+        let localReplies = loadLocalCache();
+
+        function loadLocalCache() {
+            try {
+                const raw = localStorage.getItem(LOCAL_CACHE_KEY);
+                const parsed = raw ? JSON.parse(raw) : [];
+                return Array.isArray(parsed) ? parsed : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function saveLocalCache(items) {
+            try {
+                localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(items));
+            } catch (e) {
+                console.warn("Local cache write skipped:", e);
+            }
+        }
+
+        function setStorageStatus(text, iconClass) {
+            const textEl = document.getElementById('replyStorageText');
+            const iconEl = document.getElementById('replyStorageIcon');
+            if (textEl) textEl.textContent = text;
+            if (iconEl) iconEl.className = iconClass;
+        }
 
         function formatTimestamp(ts) {
             if (!ts) return 'Just now';
@@ -709,72 +765,137 @@
             return div.innerHTML;
         }
 
-        function renderReplies(replies) {
-            const wrapper = document.getElementById('savedRepliesWrapper');
+        function mergeAndRenderReplies() {
+            const loadingEl = document.getElementById('repliesLoadingState');
+            const emptyEl = document.getElementById('repliesEmptyState');
             const listEl = document.getElementById('savedRepliesList');
             const countEl = document.getElementById('replyCount');
 
-            if (!replies || replies.length === 0) {
-                wrapper.classList.add('hidden');
-                return;
+            // Merge cloud and local cache, deduplicating by clientId or (author + text + createdAt)
+            const mergedMap = new Map();
+            [...localReplies, ...cloudReplies].forEach(item => {
+                if (!item || !item.text) return;
+                const key = item.clientId || item.id || `${item.author}_${item.createdAt}_${item.text.slice(0, 20)}`;
+                mergedMap.set(key, item);
+            });
+
+            const allReplies = Array.from(mergedMap.values())
+                .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+            // Keep local cache updated with merged results
+            if (allReplies.length > 0) {
+                localReplies = allReplies;
+                saveLocalCache(allReplies);
             }
 
-            wrapper.classList.remove('hidden');
-            countEl.textContent = replies.length;
+            countEl.textContent = allReplies.length;
 
-            // Sort newest first in memory
-            const sorted = [...replies].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-
-            listEl.innerHTML = sorted.map(item => `
-                <div class="p-4 sm:p-5 rounded-2xl bg-white/10 border border-pink-400/25 shadow-md space-y-2">
-                    <div class="flex items-center justify-between text-xs text-pink-300">
-                        <span class="font-semibold flex items-center gap-1.5">
-                            <i class="fa-solid fa-heart text-rose-400"></i>
-                            From ${escapeHTML(item.author || BIRTHDAY_CONFIG.recipientName)}
-                        </span>
-                        <span class="text-purple-300/70">${formatTimestamp(item.createdAt)}</span>
+            if (allReplies.length > 0) {
+                loadingEl.classList.add('hidden');
+                emptyEl.classList.add('hidden');
+                listEl.innerHTML = allReplies.map(item => `
+                    <div class="p-4 sm:p-5 rounded-2xl bg-white/10 border border-pink-400/25 shadow-md space-y-2 transition">
+                        <div class="flex items-center justify-between text-xs text-pink-300">
+                            <span class="font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-heart text-rose-400"></i>
+                                From ${escapeHTML(item.author || BIRTHDAY_CONFIG.recipientName)}
+                            </span>
+                            <span class="text-purple-300/70">${formatTimestamp(item.createdAt)}</span>
+                        </div>
+                        <p class="text-white/95 text-sm sm:text-base leading-relaxed whitespace-pre-line">${escapeHTML(item.text)}</p>
                     </div>
-                    <p class="text-white/95 text-sm sm:text-base leading-relaxed whitespace-pre-line">${escapeHTML(item.text)}</p>
-                </div>
-            `).join('');
+                `).join('');
+            } else if (firstSnapshotReceived) {
+                loadingEl.classList.add('hidden');
+                emptyEl.classList.remove('hidden');
+                listEl.innerHTML = '';
+            } else {
+                loadingEl.classList.remove('hidden');
+                emptyEl.classList.add('hidden');
+                listEl.innerHTML = '';
+            }
+        }
+
+        // Render cached replies immediately on load while cloud connects
+        if (localReplies.length > 0) {
+            mergeAndRenderReplies();
         }
 
         async function initPersistentReplies() {
             try {
-                if (typeof __firebase_config === 'undefined') {
-                    console.warn("Cloud configuration unavailable in standalone preview.");
+                let parsedConfig = null;
+                if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                    parsedConfig = typeof __firebase_config === 'string'
+                        ? JSON.parse(__firebase_config)
+                        : __firebase_config;
+                }
+
+                if (!parsedConfig || !parsedConfig.apiKey) {
+                    firstSnapshotReceived = true;
+                    setStorageStatus(
+                        "Saved locally on this device (open via shared link for cloud sync)",
+                        "fa-solid fa-floppy-disk text-amber-300"
+                    );
+                    mergeAndRenderReplies();
                     return;
                 }
-                const firebaseConfig = JSON.parse(__firebase_config);
-                const app = initializeApp(firebaseConfig);
+
+                const app = initializeApp(parsedConfig);
                 const auth = getAuth(app);
                 db = getFirestore(app);
 
                 // RULE 3: Authenticate FIRST before any Firestore operations
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    const cred = await signInWithCustomToken(auth, __initial_auth_token);
-                    currentUser = cred.user;
+                    try {
+                        const cred = await signInWithCustomToken(auth, __initial_auth_token);
+                        currentUser = cred.user;
+                    } catch {
+                        const cred = await signInAnonymously(auth);
+                        currentUser = cred.user;
+                    }
                 } else {
                     const cred = await signInAnonymously(auth);
                     currentUser = cred.user;
                 }
 
-                if (!currentUser) return;
+                if (!currentUser) {
+                    throw new Error("Authentication returned no user.");
+                }
 
-                // RULE 1 & RULE 2: Strict public artifact path, simple collection query
+                cloudReady = true;
+                setStorageStatus(
+                    "Replies are saved permanently on this link",
+                    "fa-solid fa-cloud-check text-emerald-400"
+                );
+
+                // RULE 1 & RULE 2: Strict public artifact path, simple collection query (no orderBy)
                 const repliesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'birthday_replies');
 
                 onSnapshot(repliesColRef, (snapshot) => {
+                    firstSnapshotReceived = true;
                     const items = [];
                     snapshot.forEach(docSnap => {
                         items.push({ id: docSnap.id, ...docSnap.data() });
                     });
-                    renderReplies(items);
+                    cloudReplies = items;
+                    mergeAndRenderReplies();
                 }, (error) => {
                     console.error("Error listening to saved replies:", error);
+                    firstSnapshotReceived = true;
+                    setStorageStatus(
+                        "Saved locally on this browser (cloud sync restricted)",
+                        "fa-solid fa-circle-info text-amber-300"
+                    );
+                    mergeAndRenderReplies();
                 });
             } catch (err) {
                 console.error("Initialization error for persistent replies:", err);
+                firstSnapshotReceived = true;
+                setStorageStatus(
+                    "Saved locally on this browser",
+                    "fa-solid fa-floppy-disk text-amber-300"
+                );
+                mergeAndRenderReplies();
             }
         }
 
@@ -792,30 +913,39 @@
                 return;
             }
 
-            if (!db || !currentUser) {
-                showToast("Connecting to save your reply... Please try again in a second.", "fa-solid fa-spinner fa-spin text-pink-300");
-                return;
-            }
-
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-70');
 
-            try {
-                const repliesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'birthday_replies');
-                await addDoc(repliesColRef, {
-                    author: BIRTHDAY_CONFIG.recipientName,
-                    to: BIRTHDAY_CONFIG.senderName,
-                    text: text,
-                    createdAt: Date.now()
-                });
+            const newReplyPayload = {
+                clientId: `reply_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+                author: BIRTHDAY_CONFIG.recipientName,
+                to: BIRTHDAY_CONFIG.senderName,
+                text: text,
+                createdAt: Date.now()
+            };
 
-                inputEl.value = '';
-                playCelebrationChime();
-                launchFireworksSequence(4);
-                showToast(`Reply saved! ${BIRTHDAY_CONFIG.senderName} will see it here 💖`, "fa-solid fa-circle-check text-emerald-400");
+            // 1. Immediately add to local cache and display on screen with zero delay
+            localReplies = [newReplyPayload, ...localReplies];
+            saveLocalCache(localReplies);
+            firstSnapshotReceived = true;
+            mergeAndRenderReplies();
+
+            inputEl.value = '';
+            playCelebrationChime();
+            launchFireworksSequence(4);
+
+            // 2. Persist to cloud Firestore if connected
+            try {
+                if (cloudReady && db && currentUser) {
+                    const repliesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'birthday_replies');
+                    await addDoc(repliesColRef, newReplyPayload);
+                    showToast(`Reply saved! ${BIRTHDAY_CONFIG.senderName} will see it here 💖`, "fa-solid fa-circle-check text-emerald-400");
+                } else {
+                    showToast("Reply saved right here on the page! 💖", "fa-solid fa-circle-check text-emerald-400");
+                }
             } catch (err) {
-                console.error("Failed to save reply:", err);
-                showToast("Could not save reply right now. Please try again.", "fa-solid fa-triangle-exclamation text-rose-400");
+                console.error("Failed to sync reply to cloud:", err);
+                showToast("Reply saved on this page! 💖", "fa-solid fa-heart text-pink-400");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-70');
