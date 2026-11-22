@@ -346,15 +346,11 @@
                 <span>Tap to Open Your Surprise!</span>
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
             </button>
-
-            <button id="entranceCustomizeBtn" class="mt-4 text-xs text-purple-300 hover:text-white underline underline-offset-4 transition cursor-pointer">
-                <i class="fa-solid fa-pen-to-square mr-1"></i> Customize Name & Message First
-            </button>
         </div>
     </div>
 
     <!-- =====================================================================
-         TOP FLOATING CONTROLS (Music Toggle & Personalize Drawer Trigger)
+         TOP FLOATING CONTROLS (Music Toggle Only - Clean Recipient View)
     ====================================================================== -->
     <header class="fixed top-4 right-4 left-4 z-30 flex justify-between items-center max-w-6xl mx-auto pointer-events-none">
         <div class="glass-card px-4 py-2 rounded-full flex items-center gap-2 pointer-events-auto">
@@ -364,84 +360,12 @@
 
         <div class="flex items-center gap-2 sm:gap-3 pointer-events-auto">
             <!-- Music Mute/Unmute Toggle -->
-            <button id="audioToggleBtn" aria-label="Toggle Birthday Music" class="glass-card hover:bg-white/15 p-3 rounded-full text-white transition transform active:scale-95 flex items-center gap-2 cursor-pointer" title="Play/Pause Birthday Melody">
+            <button id="audioToggleBtn" aria-label="Toggle Birthday Music" class="glass-card hover:bg-white/15 px-4 py-2.5 rounded-full text-white transition transform active:scale-95 flex items-center gap-2 cursor-pointer shadow-lg" title="Play/Pause Birthday Melody">
                 <i id="audioIcon" class="fa-solid fa-volume-xmark text-pink-300"></i>
-                <span id="audioLabel" class="hidden sm:inline text-xs font-medium">Music Off</span>
-            </button>
-
-            <!-- Personalize / Edit Mode Toggle -->
-            <button id="toggleCustomizeBtn" class="glass-card hover:bg-white/15 px-4 py-2.5 rounded-full text-white text-xs sm:text-sm font-medium transition transform active:scale-95 flex items-center gap-2 border border-pink-400/40 shadow-lg cursor-pointer">
-                <i class="fa-solid fa-sliders text-amber-300"></i>
-                <span>Personalize</span>
+                <span id="audioLabel" class="text-xs font-medium">Music Off</span>
             </button>
         </div>
     </header>
-
-    <!-- =====================================================================
-         CUSTOMIZATION PANEL (Slide-Over Drawer)
-    ====================================================================== -->
-    <aside id="customizeDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md glass-panel shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
-        <div class="p-6 border-b border-white/10 flex items-center justify-between">
-            <div>
-                <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-wand-sparkles text-pink-400"></i>
-                    Personalize Wishes
-                </h2>
-                <p class="text-xs text-purple-300 mt-0.5">Customize names, message & photo before sharing</p>
-            </div>
-            <button id="closeCustomizeBtn" class="p-2 rounded-xl hover:bg-white/10 text-purple-200 hover:text-white transition cursor-pointer">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-        </div>
-
-        <div class="p-6 overflow-y-auto flex-1 space-y-5">
-            <!-- Recipient Name -->
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Recipient's Name</label>
-                <input type="text" id="inputRecipient" placeholder="e.g., Ananya, Karthik, Bestie..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition">
-            </div>
-
-            <!-- Sender Name -->
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Your Name (Sender)</label>
-                <input type="text" id="inputSender" placeholder="e.g., Rahul, Your Best Friend..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition">
-            </div>
-
-            <!-- Custom Headline / Age / Tagline -->
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Celebration Tagline</label>
-                <input type="text" id="inputTagline" placeholder="e.g., Wishing you the happiest 25th birthday!" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition">
-            </div>
-
-            <!-- Heartfelt Custom Message -->
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Heartfelt Birthday Message</label>
-                <textarea id="inputMessage" rows="4" placeholder="Write your warmest birthday wishes here..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition resize-none"></textarea>
-            </div>
-
-            <!-- Photo / Memory URL or Upload -->
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Memory Photo (URL or Upload)</label>
-                <input type="url" id="inputPhotoUrl" placeholder="Paste an image URL (optional)" class="w-full px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition text-sm mb-2">
-                <label class="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl border border-dashed border-purple-400/50 hover:border-pink-400 bg-white/5 hover:bg-white/10 text-xs text-purple-200 cursor-pointer transition">
-                    <i class="fa-solid fa-cloud-arrow-up text-pink-400"></i>
-                    <span>Or choose a photo from device</span>
-                    <input type="file" id="inputPhotoFile" accept="image/*" class="hidden">
-                </label>
-            </div>
-        </div>
-
-        <div class="p-6 border-t border-white/10 space-y-3 bg-black/20">
-            <button id="savePersonalizeBtn" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-semibold shadow-lg transition transform active:scale-98 flex items-center justify-center gap-2 cursor-pointer">
-                <i class="fa-solid fa-check"></i>
-                <span>Apply & Preview Wishes</span>
-            </button>
-            <button id="copyShareLinkBtn" class="w-full py-3 px-5 rounded-xl bg-white/10 hover:bg-white/15 text-purple-100 font-medium text-sm transition flex items-center justify-center gap-2 cursor-pointer">
-                <i class="fa-solid fa-share-nodes text-amber-300"></i>
-                <span>Copy Shareable Link</span>
-            </button>
-        </div>
-    </aside>
 
     <!-- =====================================================================
          MAIN CELEBRATION EXPERIENCE
@@ -644,6 +568,57 @@
             </div>
         </section>
 
+        <!-- =================================================================
+             PERSISTENT REPLY & THANK-YOU NOTE SECTION (Saved in Cloud)
+        ================================================================== -->
+        <section id="replySection" class="max-w-3xl mx-auto">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden border border-pink-400/25">
+                <div class="text-center space-y-2 mb-8">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/20 text-pink-200 text-xs font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-paper-plane text-amber-300"></i> Birthday Reply
+                    </span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white">
+                        Write a Reply Back to <span id="replySenderTarget" class="text-amber-300">Your Best Friend</span>
+                    </h2>
+                    <p class="text-sm text-purple-200/80">
+                        Leave a thank-you note or birthday thoughts below — it stays saved right here on this page!
+                    </p>
+                </div>
+
+                <!-- Reply Submission Form -->
+                <form id="replyForm" class="space-y-4">
+                    <div>
+                        <label for="replyTextInput" class="sr-only">Your Reply Message</label>
+                        <textarea id="replyTextInput" rows="3" required placeholder="Type your reply message here... (e.g., Thank you so much for this lovely surprise! 💖)" class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 focus:bg-white/15 transition resize-none text-sm sm:text-base"></textarea>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <span id="replyStorageStatus" class="text-xs text-purple-300/75 flex items-center gap-1.5">
+                            <i class="fa-solid fa-cloud-check text-emerald-400"></i>
+                            <span>Replies are saved permanently on this link</span>
+                        </span>
+                        <button type="submit" id="submitReplyBtn" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 hover:from-pink-400 hover:to-amber-400 text-white font-semibold text-sm shadow-lg shadow-pink-500/25 transform transition hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Send & Save Reply</span>
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Saved Replies Display List -->
+                <div id="savedRepliesWrapper" class="mt-8 pt-6 border-t border-white/10 space-y-4 hidden">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-semibold uppercase tracking-widest text-amber-300 flex items-center gap-2">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <span>Saved Replies (<span id="replyCount">0</span>)</span>
+                        </h3>
+                        <span class="text-[11px] text-purple-300/60">Visible whenever this link is opened</span>
+                    </div>
+                    <div id="savedRepliesList" class="space-y-3">
+                        <!-- Dynamically populated from Firestore -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- FOOTER -->
@@ -652,547 +627,580 @@
     </footer>
 
     <!-- =====================================================================
-         VANILLA JAVASCRIPT: STATE, WEB AUDIO, CONFETTI/FIREWORKS, MIC BLOW
+         MODULE SCRIPT: EASY CONFIG + FIREBASE PERSISTENT REPLIES + INTERACTIONS
     ====================================================================== -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // -----------------------------------------------------------------
-            // 1. STATE & URL PARAMETER PERSONALIZATION
-            // -----------------------------------------------------------------
-            const defaultState = {
-                recipient: "My Dear Friend",
-                sender: "Your Best Friend",
-                tagline: "Today is all about celebrating YOU!",
-                message: "On your special day, I want you to know how truly appreciated and celebrated you are. Thank you for filling life with warmth, laughter, and unforgettable memories. May this new chapter bring you endless joy, vibrant health, and every success you dream of!",
-                photo: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80"
-            };
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-            let appState = { ...defaultState };
+        // =====================================================================
+        // ✏️ CREATOR CONFIGURATION: EDIT THESE DETAILS FOR YOUR SPECIAL PERSON
+        // =====================================================================
+        const BIRTHDAY_CONFIG = {
+            recipientName: "Ananya",                                   // 👈 Change to Birthday Person's Name
+            senderName: "Karthik",                                     // 👈 Change to Your Name
+            tagline: "Today is all about celebrating YOU! ✨",         // 👈 Short top badge text
+            photoUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80", // 👈 Paste their Photo URL or local file path (e.g., "./photo.jpg")
+            message: `On your special day, I want you to know how truly appreciated and celebrated you are.\n\nThank you for filling life with warmth, laughter, and unforgettable memories. May this new chapter bring you endless joy, vibrant health, and every success you dream of!` // 👈 Write your heartfelt birthday message here
+        };
+        // =====================================================================
 
-            // Load from URL parameters if shared
-            function loadStateFromURL() {
-                try {
-                    const params = new URLSearchParams(window.location.search);
-                    if (params.get('to')) appState.recipient = params.get('to');
-                    if (params.get('from')) appState.sender = params.get('from');
-                    if (params.get('tag')) appState.tagline = params.get('tag');
-                    if (params.get('msg')) appState.message = params.get('msg');
-                    if (params.get('img')) appState.photo = params.get('img');
-                } catch (err) {
-                    console.warn("Could not parse URL params:", err);
+        // -----------------------------------------------------------------
+        // 1. APPLY CREATOR CONFIG TO THE PAGE
+        // -----------------------------------------------------------------
+        function applyBirthdayConfig() {
+            document.title = `Happy Birthday, ${BIRTHDAY_CONFIG.recipientName}!`;
+            document.getElementById('entranceRecipient').textContent = BIRTHDAY_CONFIG.recipientName;
+            document.getElementById('displayRecipient').textContent = BIRTHDAY_CONFIG.recipientName;
+            document.getElementById('cardRecipientName').textContent = BIRTHDAY_CONFIG.recipientName;
+            document.getElementById('displaySender').textContent = BIRTHDAY_CONFIG.senderName;
+            document.getElementById('replySenderTarget').textContent = BIRTHDAY_CONFIG.senderName;
+            document.getElementById('displayTagline').textContent = BIRTHDAY_CONFIG.tagline;
+            document.getElementById('displayMessage').textContent = BIRTHDAY_CONFIG.message;
+            document.getElementById('displayPhoto').src = BIRTHDAY_CONFIG.photoUrl;
+        }
+        applyBirthdayConfig();
+
+        // -----------------------------------------------------------------
+        // 2. TOAST NOTIFICATION HELPER (Replaces alert())
+        // -----------------------------------------------------------------
+        let toastTimeout;
+        function showToast(msg, iconClass = "fa-solid fa-sparkles text-amber-400") {
+            const banner = document.getElementById('toastBanner');
+            const messageEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+
+            messageEl.textContent = msg;
+            iconEl.className = iconClass;
+
+            banner.classList.remove('opacity-0', 'translate-y-6');
+            banner.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                banner.classList.remove('opacity-100', 'translate-y-0');
+                banner.classList.add('opacity-0', 'translate-y-6');
+            }, 3400);
+        }
+
+        // -----------------------------------------------------------------
+        // 3. PERSISTENT CLOUD STORAGE FOR RECIPIENT REPLIES (FIRESTORE)
+        // -----------------------------------------------------------------
+        let db = null;
+        let currentUser = null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'birthday-wishes-app';
+
+        function formatTimestamp(ts) {
+            if (!ts) return 'Just now';
+            try {
+                const date = new Date(ts);
+                return date.toLocaleString(undefined, {
+                    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+            } catch {
+                return 'Saved';
+            }
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function renderReplies(replies) {
+            const wrapper = document.getElementById('savedRepliesWrapper');
+            const listEl = document.getElementById('savedRepliesList');
+            const countEl = document.getElementById('replyCount');
+
+            if (!replies || replies.length === 0) {
+                wrapper.classList.add('hidden');
+                return;
+            }
+
+            wrapper.classList.remove('hidden');
+            countEl.textContent = replies.length;
+
+            // Sort newest first in memory
+            const sorted = [...replies].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+            listEl.innerHTML = sorted.map(item => `
+                <div class="p-4 sm:p-5 rounded-2xl bg-white/10 border border-pink-400/25 shadow-md space-y-2">
+                    <div class="flex items-center justify-between text-xs text-pink-300">
+                        <span class="font-semibold flex items-center gap-1.5">
+                            <i class="fa-solid fa-heart text-rose-400"></i>
+                            From ${escapeHTML(item.author || BIRTHDAY_CONFIG.recipientName)}
+                        </span>
+                        <span class="text-purple-300/70">${formatTimestamp(item.createdAt)}</span>
+                    </div>
+                    <p class="text-white/95 text-sm sm:text-base leading-relaxed whitespace-pre-line">${escapeHTML(item.text)}</p>
+                </div>
+            `).join('');
+        }
+
+        async function initPersistentReplies() {
+            try {
+                if (typeof __firebase_config === 'undefined') {
+                    console.warn("Cloud configuration unavailable in standalone preview.");
+                    return;
                 }
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                db = getFirestore(app);
+
+                // RULE 3: Authenticate FIRST before any Firestore operations
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const cred = await signInWithCustomToken(auth, __initial_auth_token);
+                    currentUser = cred.user;
+                } else {
+                    const cred = await signInAnonymously(auth);
+                    currentUser = cred.user;
+                }
+
+                if (!currentUser) return;
+
+                // RULE 1 & RULE 2: Strict public artifact path, simple collection query
+                const repliesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'birthday_replies');
+
+                onSnapshot(repliesColRef, (snapshot) => {
+                    const items = [];
+                    snapshot.forEach(docSnap => {
+                        items.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    renderReplies(items);
+                }, (error) => {
+                    console.error("Error listening to saved replies:", error);
+                });
+            } catch (err) {
+                console.error("Initialization error for persistent replies:", err);
+            }
+        }
+
+        initPersistentReplies();
+
+        // Handle Reply Form Submission
+        document.getElementById('replyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const inputEl = document.getElementById('replyTextInput');
+            const submitBtn = document.getElementById('submitReplyBtn');
+            const text = inputEl.value.trim();
+
+            if (!text) {
+                showToast("Please write a short reply message first!", "fa-solid fa-pen text-amber-300");
+                return;
             }
 
-            // Sync UI elements with current state
-            function renderState() {
-                document.getElementById('entranceRecipient').textContent = appState.recipient;
-                document.getElementById('displayRecipient').textContent = appState.recipient;
-                document.getElementById('cardRecipientName').textContent = appState.recipient;
-                document.getElementById('displaySender').textContent = appState.sender;
-                document.getElementById('displayTagline').textContent = appState.tagline;
-                document.getElementById('displayMessage').textContent = appState.message;
-                document.getElementById('displayPhoto').src = appState.photo;
-
-                // Populate form inputs
-                document.getElementById('inputRecipient').value = appState.recipient;
-                document.getElementById('inputSender').value = appState.sender;
-                document.getElementById('inputTagline').value = appState.tagline;
-                document.getElementById('inputMessage').value = appState.message;
-                document.getElementById('inputPhotoUrl').value = appState.photo.startsWith('data:') ? '' : appState.photo;
+            if (!db || !currentUser) {
+                showToast("Connecting to save your reply... Please try again in a second.", "fa-solid fa-spinner fa-spin text-pink-300");
+                return;
             }
 
-            loadStateFromURL();
-            renderState();
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-70');
 
-            // -----------------------------------------------------------------
-            // 2. TOAST NOTIFICATION HELPER (Replaces alert())
-            // -----------------------------------------------------------------
-            let toastTimeout;
-            function showToast(msg, iconClass = "fa-solid fa-sparkles text-amber-400") {
-                const banner = document.getElementById('toastBanner');
-                const messageEl = document.getElementById('toastMessage');
-                const iconEl = document.getElementById('toastIcon');
+            try {
+                const repliesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'birthday_replies');
+                await addDoc(repliesColRef, {
+                    author: BIRTHDAY_CONFIG.recipientName,
+                    to: BIRTHDAY_CONFIG.senderName,
+                    text: text,
+                    createdAt: Date.now()
+                });
 
-                messageEl.textContent = msg;
-                iconEl.className = iconClass;
-
-                banner.classList.remove('opacity-0', 'translate-y-6');
-                banner.classList.add('opacity-100', 'translate-y-0');
-
-                clearTimeout(toastTimeout);
-                toastTimeout = setTimeout(() => {
-                    banner.classList.remove('opacity-100', 'translate-y-0');
-                    banner.classList.add('opacity-0', 'translate-y-6');
-                }, 3200);
+                inputEl.value = '';
+                playCelebrationChime();
+                launchFireworksSequence(4);
+                showToast(`Reply saved! ${BIRTHDAY_CONFIG.senderName} will see it here 💖`, "fa-solid fa-circle-check text-emerald-400");
+            } catch (err) {
+                console.error("Failed to save reply:", err);
+                showToast("Could not save reply right now. Please try again.", "fa-solid fa-triangle-exclamation text-rose-400");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-70');
             }
+        });
 
-            // -----------------------------------------------------------------
-            // 3. WEB AUDIO API SYNTHESIZED "HAPPY BIRTHDAY" MELODY & CHIMES
-            // -----------------------------------------------------------------
-            let audioCtx = null;
-            let isMusicPlaying = false;
-            let melodyTimer = null;
-            let noteIndex = 0;
+        // -----------------------------------------------------------------
+        // 4. WEB AUDIO API SYNTHESIZED "HAPPY BIRTHDAY" MELODY & CHIMES
+        // -----------------------------------------------------------------
+        let audioCtx = null;
+        let isMusicPlaying = false;
+        let melodyTimer = null;
+        let noteIndex = 0;
 
-            // Notes (frequencies in Hz) for "Happy Birthday to You"
-            const NOTES = {
-                C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
-                G4: 392.00, A4: 440.00, Bb4: 466.16, C5: 523.25
-            };
+        const NOTES = {
+            C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+            G4: 392.00, A4: 440.00, Bb4: 466.16, C5: 523.25
+        };
 
-            const birthdayMelody = [
-                { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
-                { freq: NOTES.D4, dur: 0.6 },  { freq: NOTES.C4, dur: 0.6 },
-                { freq: NOTES.F4, dur: 0.6 },  { freq: NOTES.E4, dur: 1.0 },
+        const birthdayMelody = [
+            { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
+            { freq: NOTES.D4, dur: 0.6 },  { freq: NOTES.C4, dur: 0.6 },
+            { freq: NOTES.F4, dur: 0.6 },  { freq: NOTES.E4, dur: 1.0 },
 
-                { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
-                { freq: NOTES.D4, dur: 0.6 },  { freq: NOTES.C4, dur: 0.6 },
-                { freq: NOTES.G4, dur: 0.6 },  { freq: NOTES.F4, dur: 1.0 },
+            { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
+            { freq: NOTES.D4, dur: 0.6 },  { freq: NOTES.C4, dur: 0.6 },
+            { freq: NOTES.G4, dur: 0.6 },  { freq: NOTES.F4, dur: 1.0 },
 
-                { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
-                { freq: NOTES.C5, dur: 0.6 },  { freq: NOTES.A4, dur: 0.6 },
-                { freq: NOTES.F4, dur: 0.5 },  { freq: NOTES.E4, dur: 0.5 },
-                { freq: NOTES.D4, dur: 0.9 },
+            { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
+            { freq: NOTES.C5, dur: 0.6 },  { freq: NOTES.A4, dur: 0.6 },
+            { freq: NOTES.F4, dur: 0.5 },  { freq: NOTES.E4, dur: 0.5 },
+            { freq: NOTES.D4, dur: 0.9 },
 
-                { freq: NOTES.Bb4, dur: 0.35 }, { freq: NOTES.Bb4, dur: 0.25 },
-                { freq: NOTES.A4, dur: 0.6 },   { freq: NOTES.F4, dur: 0.6 },
-                { freq: NOTES.G4, dur: 0.6 },   { freq: NOTES.F4, dur: 1.2 }
+            { freq: NOTES.Bb4, dur: 0.35 }, { freq: NOTES.Bb4, dur: 0.25 },
+            { freq: NOTES.A4, dur: 0.6 },   { freq: NOTES.F4, dur: 0.6 },
+            { freq: NOTES.G4, dur: 0.6 },   { freq: NOTES.F4, dur: 1.2 }
+        ];
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playTone(freq, duration, type = 'triangle', volume = 0.14) {
+            if (!audioCtx) return;
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, now);
+
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.exponentialRampToValueAtTime(volume, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(now);
+            osc.stop(now + duration + 0.05);
+        }
+
+        function playCelebrationChime() {
+            initAudio();
+            const chord = [523.25, 659.25, 783.99, 1046.50];
+            chord.forEach((f, idx) => {
+                setTimeout(() => playTone(f, 0.55, 'sine', 0.12), idx * 90);
+            });
+        }
+
+        function scheduleNextNote() {
+            if (!isMusicPlaying) return;
+            const note = birthdayMelody[noteIndex];
+            playTone(note.freq, note.dur * 0.95, 'triangle', 0.13);
+            playTone(note.freq * 2, note.dur * 0.7, 'sine', 0.03);
+
+            noteIndex = (noteIndex + 1) % birthdayMelody.length;
+            const pauseAfterPhrase = (noteIndex === 0) ? 1200 : note.dur * 650;
+            melodyTimer = setTimeout(scheduleNextNote, pauseAfterPhrase);
+        }
+
+        function updateAudioUI() {
+            const icon = document.getElementById('audioIcon');
+            const label = document.getElementById('audioLabel');
+            if (isMusicPlaying) {
+                icon.className = "fa-solid fa-volume-high text-emerald-400";
+                label.textContent = "Music On";
+            } else {
+                icon.className = "fa-solid fa-volume-xmark text-pink-300";
+                label.textContent = "Music Off";
+            }
+        }
+
+        function startMusic() {
+            initAudio();
+            if (!isMusicPlaying) {
+                isMusicPlaying = true;
+                updateAudioUI();
+                scheduleNextNote();
+            }
+        }
+
+        function stopMusic() {
+            isMusicPlaying = false;
+            clearTimeout(melodyTimer);
+            updateAudioUI();
+        }
+
+        document.getElementById('audioToggleBtn').addEventListener('click', () => {
+            if (isMusicPlaying) {
+                stopMusic();
+                showToast("Music paused", "fa-solid fa-volume-xmark text-purple-300");
+            } else {
+                startMusic();
+                showToast("Playing Happy Birthday melody!", "fa-solid fa-music text-pink-400");
+            }
+        });
+
+        // -----------------------------------------------------------------
+        // 5. FLOATING BALLOONS GENERATOR
+        // -----------------------------------------------------------------
+        function spawnBalloons() {
+            const container = document.getElementById('balloonsContainer');
+            const colors = [
+                'radial-gradient(circle at 30% 30%, #ff7eb3, #ff2a85)',
+                'radial-gradient(circle at 30% 30%, #fde047, #f59e0b)',
+                'radial-gradient(circle at 30% 30%, #c084fc, #7e22ce)',
+                'radial-gradient(circle at 30% 30%, #67e8f9, #0284c7)',
+                'radial-gradient(circle at 30% 30%, #fda4af, #e11d48)'
             ];
 
-            function initAudio() {
-                if (!audioCtx) {
-                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                    audioCtx = new AudioContextClass();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
+            for (let i = 0; i < 14; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = `${Math.random() * 94 + 2}%`;
+                balloon.style.background = colors[i % colors.length];
+                balloon.style.animationDuration = `${12 + Math.random() * 10}s`;
+                balloon.style.animationDelay = `${Math.random() * 10}s`;
+                balloon.style.transform = `scale(${0.75 + Math.random() * 0.45})`;
+                container.appendChild(balloon);
             }
+        }
+        spawnBalloons();
 
-            function playTone(freq, duration, type = 'triangle', volume = 0.14) {
-                if (!audioCtx) return;
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
+        // -----------------------------------------------------------------
+        // 6. CONFETTI & FIREWORKS PARTICLE ENGINE (HTML5 Canvas)
+        // -----------------------------------------------------------------
+        const canvas = document.getElementById('celebrationCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
 
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, now);
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-                // Warm music-box envelope
-                gain.gain.setValueAtTime(0.001, now);
-                gain.gain.exponentialRampToValueAtTime(volume, now + 0.04);
-                gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+        const festiveColors = ['#f43f5e', '#ec4899', '#a855f7', '#fbbf24', '#38bdf8', '#34d399', '#ffffff'];
 
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start(now);
-                osc.stop(now + duration + 0.05);
-            }
-
-            function playCelebrationChime() {
-                initAudio();
-                const chord = [523.25, 659.25, 783.99, 1046.50]; // C5 Major arpeggio
-                chord.forEach((f, idx) => {
-                    setTimeout(() => playTone(f, 0.55, 'sine', 0.12), idx * 90);
+        function burstConfetti(x = canvas.width / 2, y = canvas.height / 2, count = 85) {
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 3 + Math.random() * 9;
+                particles.push({
+                    x,
+                    y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - 3,
+                    size: 5 + Math.random() * 6,
+                    color: festiveColors[Math.floor(Math.random() * festiveColors.length)],
+                    alpha: 1,
+                    gravity: 0.16,
+                    drag: 0.97,
+                    rotation: Math.random() * 360,
+                    rotSpeed: (Math.random() - 0.5) * 12,
+                    shape: Math.random() > 0.4 ? 'rect' : 'circle'
                 });
             }
+        }
 
-            function scheduleNextNote() {
-                if (!isMusicPlaying) return;
-                const note = birthdayMelody[noteIndex];
-                playTone(note.freq, note.dur * 0.95, 'triangle', 0.13);
-                // Add subtle harmonic sparkle
-                playTone(note.freq * 2, note.dur * 0.7, 'sine', 0.03);
-
-                noteIndex = (noteIndex + 1) % birthdayMelody.length;
-                const pauseAfterPhrase = (noteIndex === 0) ? 1200 : note.dur * 650;
-                melodyTimer = setTimeout(scheduleNextNote, pauseAfterPhrase);
-            }
-
-            function updateAudioUI() {
-                const icon = document.getElementById('audioIcon');
-                const label = document.getElementById('audioLabel');
-                if (isMusicPlaying) {
-                    icon.className = "fa-solid fa-volume-high text-emerald-400";
-                    label.textContent = "Music On";
-                } else {
-                    icon.className = "fa-solid fa-volume-xmark text-pink-300";
-                    label.textContent = "Music Off";
-                }
-            }
-
-            function startMusic() {
-                initAudio();
-                if (!isMusicPlaying) {
-                    isMusicPlaying = true;
-                    updateAudioUI();
-                    scheduleNextNote();
-                }
-            }
-
-            function stopMusic() {
-                isMusicPlaying = false;
-                clearTimeout(melodyTimer);
-                updateAudioUI();
-            }
-
-            document.getElementById('audioToggleBtn').addEventListener('click', () => {
-                if (isMusicPlaying) {
-                    stopMusic();
-                    showToast("Music paused", "fa-solid fa-volume-xmark text-purple-300");
-                } else {
-                    startMusic();
-                    showToast("Playing Happy Birthday melody!", "fa-solid fa-music text-pink-400");
-                }
-            });
-
-            // -----------------------------------------------------------------
-            // 4. FLOATING BALLOONS GENERATOR
-            // -----------------------------------------------------------------
-            function spawnBalloons() {
-                const container = document.getElementById('balloonsContainer');
-                const colors = [
-                    'radial-gradient(circle at 30% 30%, #ff7eb3, #ff2a85)',
-                    'radial-gradient(circle at 30% 30%, #fde047, #f59e0b)',
-                    'radial-gradient(circle at 30% 30%, #c084fc, #7e22ce)',
-                    'radial-gradient(circle at 30% 30%, #67e8f9, #0284c7)',
-                    'radial-gradient(circle at 30% 30%, #fda4af, #e11d48)'
-                ];
-
-                for (let i = 0; i < 14; i++) {
-                    const balloon = document.createElement('div');
-                    balloon.className = 'balloon';
-                    balloon.style.left = `${Math.random() * 94 + 2}%`;
-                    balloon.style.background = colors[i % colors.length];
-                    balloon.style.animationDuration = `${12 + Math.random() * 10}s`;
-                    balloon.style.animationDelay = `${Math.random() * 10}s`;
-                    balloon.style.transform = `scale(${0.75 + Math.random() * 0.45})`;
-                    container.appendChild(balloon);
-                }
-            }
-            spawnBalloons();
-
-            // -----------------------------------------------------------------
-            // 5. CONFETTI & FIREWORKS PARTICLE ENGINE (HTML5 Canvas)
-            // -----------------------------------------------------------------
-            const canvas = document.getElementById('celebrationCanvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            const festiveColors = ['#f43f5e', '#ec4899', '#a855f7', '#fbbf24', '#38bdf8', '#34d399', '#ffffff'];
-
-            function burstConfetti(x = canvas.width / 2, y = canvas.height / 2, count = 85) {
-                for (let i = 0; i < count; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const speed = 3 + Math.random() * 9;
-                    particles.push({
-                        x,
-                        y,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed - 3,
-                        size: 5 + Math.random() * 6,
-                        color: festiveColors[Math.floor(Math.random() * festiveColors.length)],
-                        alpha: 1,
-                        gravity: 0.16,
-                        drag: 0.97,
-                        rotation: Math.random() * 360,
-                        rotSpeed: (Math.random() - 0.5) * 12,
-                        shape: Math.random() > 0.4 ? 'rect' : 'circle'
-                    });
-                }
-            }
-
-            function launchFireworksSequence(bursts = 5) {
-                for (let i = 0; i < bursts; i++) {
-                    setTimeout(() => {
-                        const rx = canvas.width * (0.2 + Math.random() * 0.6);
-                        const ry = canvas.height * (0.15 + Math.random() * 0.4);
-                        burstConfetti(rx, ry, 95);
-                        if (audioCtx && isMusicPlaying) {
-                            playTone(600 + Math.random() * 400, 0.25, 'sine', 0.06);
-                        }
-                    }, i * 350);
-                }
-            }
-
-            function animateParticles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const p = particles[i];
-                    p.vx *= p.drag;
-                    p.vy *= p.drag;
-                    p.vy += p.gravity;
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.rotation += p.rotSpeed;
-                    p.alpha -= 0.012;
-
-                    if (p.alpha <= 0) {
-                        particles.splice(i, 1);
-                        continue;
-                    }
-
-                    ctx.save();
-                    ctx.globalAlpha = p.alpha;
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate((p.rotation * Math.PI) / 180);
-                    ctx.fillStyle = p.color;
-
-                    if (p.shape === 'rect') {
-                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-                    } else {
-                        ctx.beginPath();
-                        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                    ctx.restore();
-                }
-
-                requestAnimationFrame(animateParticles);
-            }
-            animateParticles();
-
-            // -----------------------------------------------------------------
-            // 6. ENTRANCE SCREEN INTERACTION
-            // -----------------------------------------------------------------
-            const entranceScreen = document.getElementById('entranceScreen');
-            document.getElementById('openSurpriseBtn').addEventListener('click', () => {
-                entranceScreen.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
+        function launchFireworksSequence(bursts = 5) {
+            for (let i = 0; i < bursts; i++) {
                 setTimeout(() => {
-                    entranceScreen.style.display = 'none';
-                }, 700);
-
-                startMusic();
-                launchFireworksSequence(5);
-            });
-
-            document.getElementById('triggerFireworksBtn').addEventListener('click', () => {
-                playCelebrationChime();
-                launchFireworksSequence(6);
-            });
-
-            document.getElementById('sendHugBtn').addEventListener('click', (e) => {
-                const rect = e.target.getBoundingClientRect();
-                burstConfetti(rect.left + rect.width / 2, rect.top, 70);
-                playCelebrationChime();
-                showToast(`Birthday love sent to ${appState.recipient}! 💖`, "fa-solid fa-heart text-rose-400");
-            });
-
-            // Global wish card helper
-            window.celebrateCard = function(cardEl, message) {
-                const rect = cardEl.getBoundingClientRect();
-                burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 55);
-                playCelebrationChime();
-                showToast(message, "fa-solid fa-star text-amber-300");
-            };
-
-            // -----------------------------------------------------------------
-            // 7. INTERACTIVE BIRTHDAY CAKE & CANDLES (Click + Mic Blow)
-            // -----------------------------------------------------------------
-            const candleStates = [true, true, true]; // true = lit
-            let micStream = null;
-            let micMonitoring = false;
-
-            function extinguishCandle(index) {
-                if (!candleStates[index]) return;
-                candleStates[index] = false;
-
-                const flame = document.getElementById(`flame-${index}`);
-                const smoke = document.getElementById(`smoke-${index}`);
-                flame.classList.add('out');
-                smoke.classList.remove('puff');
-                void smoke.offsetWidth; // trigger reflow
-                smoke.classList.add('puff');
-
-                // Check if all candles are blown out
-                if (candleStates.every(state => !state)) {
-                    onAllCandlesBlown();
-                }
-            }
-
-            function blowAllCandles() {
-                candleStates.forEach((isLit, idx) => {
-                    if (isLit) {
-                        setTimeout(() => extinguishCandle(idx), idx * 140);
+                    const rx = canvas.width * (0.2 + Math.random() * 0.6);
+                    const ry = canvas.height * (0.15 + Math.random() * 0.4);
+                    burstConfetti(rx, ry, 95);
+                    if (audioCtx && isMusicPlaying) {
+                        playTone(600 + Math.random() * 400, 0.25, 'sine', 0.06);
                     }
-                });
+                }, i * 350);
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.vx *= p.drag;
+                p.vy *= p.drag;
+                p.vy += p.gravity;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotSpeed;
+                p.alpha -= 0.012;
+
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.fillStyle = p.color;
+
+                if (p.shape === 'rect') {
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
             }
 
-            function onAllCandlesBlown() {
-                document.getElementById('wishGrantedBanner').classList.remove('hidden');
-                document.getElementById('relightBtn').classList.remove('hidden');
-                document.getElementById('cakeInstruction').textContent = "Woohoo! All candles blown out!";
-                playCelebrationChime();
-                launchFireworksSequence(7);
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // -----------------------------------------------------------------
+        // 7. ENTRANCE SCREEN & INTERACTIVE BUTTONS
+        // -----------------------------------------------------------------
+        const entranceScreen = document.getElementById('entranceScreen');
+        document.getElementById('openSurpriseBtn').addEventListener('click', () => {
+            entranceScreen.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
+            setTimeout(() => {
+                entranceScreen.style.display = 'none';
+            }, 700);
+
+            startMusic();
+            launchFireworksSequence(5);
+        });
+
+        document.getElementById('triggerFireworksBtn').addEventListener('click', () => {
+            playCelebrationChime();
+            launchFireworksSequence(6);
+        });
+
+        document.getElementById('sendHugBtn').addEventListener('click', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            burstConfetti(rect.left + rect.width / 2, rect.top, 70);
+            playCelebrationChime();
+            showToast(`Birthday love sent to ${BIRTHDAY_CONFIG.recipientName}! 💖`, "fa-solid fa-heart text-rose-400");
+        });
+
+        window.celebrateCard = function(cardEl, message) {
+            const rect = cardEl.getBoundingClientRect();
+            burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 55);
+            playCelebrationChime();
+            showToast(message, "fa-solid fa-star text-amber-300");
+        };
+
+        // -----------------------------------------------------------------
+        // 8. INTERACTIVE BIRTHDAY CAKE & CANDLES (Click + Mic Blow)
+        // -----------------------------------------------------------------
+        const candleStates = [true, true, true];
+        let micStream = null;
+        let micMonitoring = false;
+
+        function extinguishCandle(index) {
+            if (!candleStates[index]) return;
+            candleStates[index] = false;
+
+            const flame = document.getElementById(`flame-${index}`);
+            const smoke = document.getElementById(`smoke-${index}`);
+            flame.classList.add('out');
+            smoke.classList.remove('puff');
+            void smoke.offsetWidth;
+            smoke.classList.add('puff');
+
+            if (candleStates.every(state => !state)) {
+                onAllCandlesBlown();
+            }
+        }
+
+        function blowAllCandles() {
+            candleStates.forEach((isLit, idx) => {
+                if (isLit) {
+                    setTimeout(() => extinguishCandle(idx), idx * 140);
+                }
+            });
+        }
+
+        function onAllCandlesBlown() {
+            document.getElementById('wishGrantedBanner').classList.remove('hidden');
+            document.getElementById('relightBtn').classList.remove('hidden');
+            document.getElementById('cakeInstruction').textContent = "Woohoo! All candles blown out!";
+            playCelebrationChime();
+            launchFireworksSequence(7);
+            stopMicMonitoring();
+        }
+
+        function relightCandles() {
+            candleStates.fill(true);
+            [0, 1, 2].forEach(idx => {
+                document.getElementById(`flame-${idx}`).classList.remove('out');
+                document.getElementById(`smoke-${idx}`).classList.remove('puff');
+            });
+            document.getElementById('wishGrantedBanner').classList.add('hidden');
+            document.getElementById('relightBtn').classList.add('hidden');
+            document.getElementById('cakeInstruction').textContent = "Tap on each glowing candle flame to blow it out, or use your microphone!";
+            showToast("Candles relit! Make another wish ✨", "fa-solid fa-fire text-amber-400");
+        }
+
+        document.querySelectorAll('.candle').forEach(candleEl => {
+            candleEl.addEventListener('click', () => {
+                const idx = parseInt(candleEl.getAttribute('data-candle'), 10);
+                extinguishCandle(idx);
+            });
+        });
+
+        document.getElementById('blowAllBtn').addEventListener('click', blowAllCandles);
+        document.getElementById('relightBtn').addEventListener('click', relightCandles);
+
+        function stopMicMonitoring() {
+            micMonitoring = false;
+            if (micStream) {
+                micStream.getTracks().forEach(track => track.stop());
+                micStream = null;
+            }
+            document.getElementById('micBtnText').textContent = "Blow via Microphone";
+        }
+
+        document.getElementById('micBlowBtn').addEventListener('click', async () => {
+            if (micMonitoring) {
                 stopMicMonitoring();
+                return;
             }
 
-            function relightCandles() {
-                candleStates.fill(true);
-                [0, 1, 2].forEach(idx => {
-                    document.getElementById(`flame-${idx}`).classList.remove('out');
-                    document.getElementById(`smoke-${idx}`).classList.remove('puff');
-                });
-                document.getElementById('wishGrantedBanner').classList.add('hidden');
-                document.getElementById('relightBtn').classList.add('hidden');
-                document.getElementById('cakeInstruction').textContent = "Tap on each glowing candle flame to blow it out, or use your microphone!";
-                showToast("Candles relit! Make another wish ✨", "fa-solid fa-fire text-amber-400");
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                showToast("Microphone not supported on this browser. Tap the candles instead!", "fa-solid fa-circle-info text-sky-300");
+                return;
             }
 
-            document.querySelectorAll('.candle').forEach(candleEl => {
-                candleEl.addEventListener('click', () => {
-                    const idx = parseInt(candleEl.getAttribute('data-candle'), 10);
-                    extinguishCandle(idx);
-                });
-            });
+            try {
+                micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                initAudio();
+                const source = audioCtx.createMediaStreamSource(micStream);
+                const analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 256;
+                source.connect(analyser);
 
-            document.getElementById('blowAllBtn').addEventListener('click', blowAllCandles);
-            document.getElementById('relightBtn').addEventListener('click', relightCandles);
+                const dataArray = new Uint8Array(analyser.frequencyBinCount);
+                micMonitoring = true;
+                document.getElementById('micBtnText').textContent = "Listening... Blow now! 🌬️";
+                showToast("Blow into your microphone to blow out the candles!", "fa-solid fa-microphone text-pink-400");
 
-            // Optional Microphone Blow Detection
-            function stopMicMonitoring() {
-                micMonitoring = false;
-                if (micStream) {
-                    micStream.getTracks().forEach(track => track.stop());
-                    micStream = null;
-                }
-                document.getElementById('micBtnText').textContent = "Blow via Microphone";
-            }
-
-            document.getElementById('micBlowBtn').addEventListener('click', async () => {
-                if (micMonitoring) {
-                    stopMicMonitoring();
-                    return;
-                }
-
-                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                    showToast("Microphone not supported on this browser. Tap the candles instead!", "fa-solid fa-circle-info text-sky-300");
-                    return;
-                }
-
-                try {
-                    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    initAudio();
-                    const source = audioCtx.createMediaStreamSource(micStream);
-                    const analyser = audioCtx.createAnalyser();
-                    analyser.fftSize = 256;
-                    source.connect(analyser);
-
-                    const dataArray = new Uint8Array(analyser.frequencyBinCount);
-                    micMonitoring = true;
-                    document.getElementById('micBtnText').textContent = "Listening... Blow now! 🌬️";
-                    showToast("Blow into your microphone to blow out the candles!", "fa-solid fa-microphone text-pink-400");
-
-                    function detectBlow() {
-                        if (!micMonitoring) return;
-                        analyser.getByteFrequencyData(dataArray);
-                        // Focus on low-end wind/blow rumble frequencies
-                        let lowFreqSum = 0;
-                        for (let i = 0; i < 20; i++) {
-                            lowFreqSum += dataArray[i];
-                        }
-                        const avg = lowFreqSum / 20;
-
-                        if (avg > 115) {
-                            blowAllCandles();
-                        } else {
-                            requestAnimationFrame(detectBlow);
-                        }
+                function detectBlow() {
+                    if (!micMonitoring) return;
+                    analyser.getByteFrequencyData(dataArray);
+                    let lowFreqSum = 0;
+                    for (let i = 0; i < 20; i++) {
+                        lowFreqSum += dataArray[i];
                     }
-                    detectBlow();
-                } catch (err) {
-                    showToast("Mic permission denied. You can tap the candles to blow them out!", "fa-solid fa-microphone-slash text-amber-300");
+                    const avg = lowFreqSum / 20;
+
+                    if (avg > 115) {
+                        blowAllCandles();
+                    } else {
+                        requestAnimationFrame(detectBlow);
+                    }
                 }
-            });
-
-            // -----------------------------------------------------------------
-            // 8. PERSONALIZATION DRAWER & SHARE LINK GENERATOR
-            // -----------------------------------------------------------------
-            const drawer = document.getElementById('customizeDrawer');
-
-            function openDrawer() {
-                drawer.classList.remove('translate-x-full');
+                detectBlow();
+            } catch (err) {
+                showToast("Mic permission denied. You can tap the candles to blow them out!", "fa-solid fa-microphone-slash text-amber-300");
             }
-            function closeDrawer() {
-                drawer.classList.add('translate-x-full');
-            }
-
-            document.getElementById('toggleCustomizeBtn').addEventListener('click', openDrawer);
-            document.getElementById('entranceCustomizeBtn').addEventListener('click', openDrawer);
-            document.getElementById('closeCustomizeBtn').addEventListener('click', closeDrawer);
-
-            // Handle local image upload preview
-            document.getElementById('inputPhotoFile').addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    appState.photo = event.target.result;
-                    document.getElementById('displayPhoto').src = appState.photo;
-                    showToast("Custom photo uploaded!", "fa-solid fa-image text-emerald-400");
-                };
-                reader.readAsDataURL(file);
-            });
-
-            document.getElementById('savePersonalizeBtn').addEventListener('click', () => {
-                const rec = document.getElementById('inputRecipient').value.trim();
-                const snd = document.getElementById('inputSender').value.trim();
-                const tag = document.getElementById('inputTagline').value.trim();
-                const msg = document.getElementById('inputMessage').value.trim();
-                const url = document.getElementById('inputPhotoUrl').value.trim();
-
-                if (rec) appState.recipient = rec;
-                if (snd) appState.sender = snd;
-                if (tag) appState.tagline = tag;
-                if (msg) appState.message = msg;
-                if (url) appState.photo = url;
-
-                renderState();
-                closeDrawer();
-                burstConfetti(window.innerWidth / 2, window.innerHeight / 3, 70);
-                showToast("Birthday page updated!", "fa-solid fa-check-circle text-emerald-400");
-            });
-
-            // Copy Shareable Link with Query Params
-            document.getElementById('copyShareLinkBtn').addEventListener('click', () => {
-                // Ensure latest input values are captured
-                const rec = document.getElementById('inputRecipient').value.trim() || appState.recipient;
-                const snd = document.getElementById('inputSender').value.trim() || appState.sender;
-                const tag = document.getElementById('inputTagline').value.trim() || appState.tagline;
-                const msg = document.getElementById('inputMessage').value.trim() || appState.message;
-                const url = document.getElementById('inputPhotoUrl').value.trim();
-
-                const shareUrl = new URL(window.location.href.split('?')[0]);
-                shareUrl.searchParams.set('to', rec);
-                shareUrl.searchParams.set('from', snd);
-                shareUrl.searchParams.set('tag', tag);
-                shareUrl.searchParams.set('msg', msg);
-                if (url && !url.startsWith('data:')) {
-                    shareUrl.searchParams.set('img', url);
-                }
-
-                // Fallback-safe copy to clipboard using execCommand
-                const tempInput = document.createElement('textarea');
-                tempInput.value = shareUrl.toString();
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                try {
-                    document.execCommand('copy');
-                    showToast("Personalized link copied! Ready to send 🎁", "fa-solid fa-link text-amber-300");
-                } catch (err) {
-                    showToast("Could not copy link automatically.", "fa-solid fa-triangle-exclamation text-rose-400");
-                }
-                document.body.removeChild(tempInput);
-            });
         });
     </script>
 </body>
