@@ -1,497 +1,1199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>🎉 Teen Birthday Surprise | Epic Celebration 🎂</title>
-  <!-- Google Fonts & Font Awesome 6 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- canvas-confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      background: linear-gradient(145deg, #ffdde1 0%, #f9c9e2 35%, #fbc8b5 100%);
-      background-attachment: fixed;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* floating party elements */
-    .floating-joy {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .float-item {
-      position: absolute;
-      font-size: 2rem;
-      opacity: 0.6;
-      animation: floatUp 12s infinite ease-in-out;
-      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.1));
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-20vh) rotate(15deg);
-        opacity: 0;
-      }
-    }
-
-    /* main glass card */
-    .surprise-card {
-      position: relative;
-      z-index: 10;
-      max-width: 700px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(12px);
-      border-radius: 68px;
-      box-shadow: 0 30px 55px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
-      padding: 2rem 2rem 2.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s;
-      text-align: center;
-      animation: cardGlow 2s ease-out;
-    }
-
-    .surprise-card:hover {
-      transform: scale(1.01);
-      box-shadow: 0 40px 70px rgba(0, 0, 0, 0.25);
-    }
-
-    @keyframes cardGlow {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .cake-image-wrapper {
-      margin-bottom: 1.2rem;
-      display: flex;
-      justify-content: center;
-      animation: gentleSway 3s infinite alternate ease-in-out;
-    }
-
-    @keyframes gentleSway {
-      0% {
-        transform: rotate(-2deg);
-      }
-      100% {
-        transform: rotate(2deg);
-      }
-    }
-
-    .birthday-cake-img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 60% 40% 50% 50% / 45% 40% 60% 55%;
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.3);
-      border: 4px solid white;
-      transition: all 0.4s;
-      cursor: pointer;
-    }
-
-    .birthday-cake-img:hover {
-      transform: scale(1.02) rotate(1deg);
-      filter: brightness(1.02);
-    }
-
-    .greeting-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(252, 176, 64, 0.25);
-      backdrop-filter: blur(4px);
-      padding: 0.5rem 1.4rem;
-      border-radius: 100px;
-      margin-bottom: 1rem;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: #b4521c;
-    }
-
-    .main-title {
-      font-size: 3.2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #D96C2B, #E83E8C, #6A4E9B);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin: 0.2rem 0 0.5rem;
-      letter-spacing: -0.5px;
-    }
-
-    .birthday-message {
-      font-size: 1.1rem;
-      line-height: 1.5;
-      color: #2d2b2c;
-      font-weight: 500;
-      background: rgba(255,245,235,0.7);
-      padding: 1rem 1.2rem;
-      border-radius: 48px;
-      margin: 1rem 0 1rem 0;
-    }
-
-    .highlight-text {
-      font-weight: 800;
-      color: #d45a2b;
-    }
-
-    .surprise-btn {
-      background: linear-gradient(105deg, #FF8C5A, #FF3D6C);
-      border: none;
-      padding: 14px 28px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      font-family: inherit;
-      color: white;
-      border-radius: 60px;
-      cursor: pointer;
-      box-shadow: 0 8px 18px rgba(255, 61, 108, 0.4);
-      transition: 0.2s all;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0.75rem 0 1rem;
-    }
-
-    .surprise-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 28px rgba(255, 61, 108, 0.5);
-    }
-
-    .surprise-btn:active {
-      transform: translateY(2px);
-    }
-
-    .secret-message-area {
-      margin-top: 1.8rem;
-      background: rgba(255, 255, 245, 0.7);
-      border-radius: 48px;
-      padding: 1rem 1.2rem;
-      min-height: 95px;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      border-left: 4px solid #ffa47a;
-      border-right: 4px solid #ffa47a;
-    }
-
-    .dynamic-wish {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #6b2e1a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      animation: fadePop 0.5s ease;
-    }
-
-    @keyframes fadePop {
-      0% {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .default-wish-placeholder {
-      color: #b65f36;
-      font-weight: 500;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .footer-note {
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      color: rgba(0,0,0,0.5);
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    @keyframes twinkle {
-      0% { opacity: 0.2; text-shadow: 0 0 0px gold;}
-      100% { opacity: 1; text-shadow: 0 0 5px #ffd966;}
-    }
-
-    .sparkle-text {
-      animation: twinkle 1.2s infinite alternate;
-    }
-
-    @media (max-width: 550px) {
-      .surprise-card {
-        padding: 1.5rem;
-        border-radius: 48px;
-      }
-      .main-title {
-        font-size: 2.4rem;
-      }
-      .birthday-cake-img {
-        width: 140px;
-        height: 140px;
-      }
-      .surprise-btn {
-        padding: 12px 20px;
-        font-size: 1rem;
-      }
-      .dynamic-wish {
-        font-size: 1rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="floating-joy" id="floatBg"></div>
-
-  <div class="surprise-card">
-    <div class="greeting-badge">
-      <i class="fas fa-gift" style="color:#E8622E;"></i>
-      <span>🎧 BIRTHDAY vibes 🎧</span>
-      <i class="fas fa-cake-candles" style="color:#E8622E;"></i>
-    </div>
-
-    <div class="cake-image-wrapper">
-      <img class="birthday-cake-img" 
-         src="./Screenshot 2026-06-10 153430.png" 
-           alt="Birthday Cake with Candles" 
-           loading="eager">
-    </div>
-
-    <h1 class="main-title">
-      🎂 Happy Birthday! Nikitha 🎉
-    </h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Celebration!</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter, Playfair Display, and Pacifico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for crisp UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <div class="birthday-message">
-      <i class="fas fa-star" style="color:#f5a623;"></i> 
-      <span class="highlight-text">Another awesome trip around the sun!</span> 
-      <i class="fas fa-star" style="color:#f5a623;"></i><br>
-      Get ready to level up — this year is YOUR year to shine, game on!
-    </div>
-
-    <button class="surprise-btn" id="surpriseButton">
-      <i class="fas fa-magic"></i> Open Your Surprise <i class="fas fa-grin-tongue-squint"></i>
-    </button>
-
-    <div class="secret-message-area" id="secretMessageArea">
-      <div class="default-wish-placeholder" id="defaultPlaceholder">
-        <i class="fas fa-envelope-open-text"></i> ✨ Click the magic button for an epic birthday wish ✨
-      </div>
-    </div>
-
-    <div class="footer-note">
-      <span><i class="fas fa-balloon"></i> Party Hard</span>
-      <span><i class="fas fa-champagne-glasses"></i> Make a Wish</span>
-      <span><i class="fas fa-heart" style="color:#ff4d6d;"></i> You Rock!</span>
-    </div>
-  </div>
-
-  <script>
-    // ========== FLOATING BACKGROUND ==========
-    function createFloaters() {
-      const floatContainer = document.getElementById('floatBg');
-      if (!floatContainer) return;
-      const iconsArray = ['🎈', '🎂', '🎁', '✨', '🕯️', '🎉', '🌸', '💖', '🍰', '🎊', '🥳', '🎈', '🕹️', '🎧', '⚡'];
-      for (let i = 0; i < 28; i++) {
-        const floatEl = document.createElement('div');
-        floatEl.classList.add('float-item');
-        const randomIcon = iconsArray[Math.floor(Math.random() * iconsArray.length)];
-        floatEl.innerHTML = randomIcon;
-        const leftPos = Math.random() * 100;
-        const size = Math.floor(Math.random() * 28 + 18);
-        const duration = Math.random() * 10 + 8;
-        const delay = Math.random() * 12;
-        floatEl.style.left = leftPos + '%';
-        floatEl.style.fontSize = size + 'px';
-        floatEl.style.animationDuration = duration + 's';
-        floatEl.style.animationDelay = delay + 's';
-        floatEl.style.opacity = Math.random() * 0.5 + 0.2;
-        floatContainer.appendChild(floatEl);
-      }
-    }
-
-    // ========== CONFETTI HELPERS ==========
-    function safeConfetti(options) {
-      if (typeof canvasConfetti === 'function') {
-        canvasConfetti(options);
-      }
-    }
-
-    function burstConfetti(intensity = 'medium') {
-      if (intensity === 'heavy') {
-        safeConfetti({ particleCount: 300, spread: 120, origin: { y: 0.6 }, startVelocity: 20, colors: ['#ff8c5a', '#ff3d6c', '#ffd966', '#a95cbf', '#45b7d1'] });
-        safeConfetti({ particleCount: 120, spread: 70, origin: { y: 0.3, x: 0.2 }, startVelocity: 25 });
-        safeConfetti({ particleCount: 120, spread: 70, origin: { y: 0.4, x: 0.8 }, startVelocity: 25 });
-      } else if (intensity === 'medium') {
-        safeConfetti({ particleCount: 180, spread: 85, origin: { y: 0.5 }, startVelocity: 18, colors: ['#ffb347', '#ff6b6b', '#aa6dc9', '#4ecdc4'] });
-      } else {
-        safeConfetti({ particleCount: 80, spread: 65, origin: { y: 0.5 }, startVelocity: 12 });
-      }
-    }
-
-    function superConfettiBlast() {
-      safeConfetti({ particleCount: 220, spread: 100, origin: { y: 0.5, x: 0.5 }, startVelocity: 22, decay: 0.9, colors: ['#fc4a1a', '#f7b733', '#ff4e50', '#904e95', '#2bc0e4'] });
-      safeConfetti({ particleCount: 110, spread: 45, origin: { y: 0.7, x: 0.3 }, startVelocity: 28 });
-      safeConfetti({ particleCount: 110, spread: 45, origin: { y: 0.2, x: 0.8 }, startVelocity: 24 });
-      setTimeout(() => {
-        safeConfetti({ particleCount: 60, spread: 35, origin: { y: 0.9, x: 0.1 }, startVelocity: 15 });
-      }, 150);
-    }
-
-    // ========== TEEN-FRIENDLY SURPRISE MESSAGES (NO LOVE/ROMANCE) ==========
-    const teenWishes = [
-      { emoji: "🎮✨", text: "Level up! You just unlocked another year of epic adventures. Game on!" },
-      { emoji: "🕹️🔥", text: "New year, new high score! May your vibes be unstoppable. Happy Birthday!" },
-      { emoji: "🎧⚡", text: "Turn up the volume on happiness! This is your year to shine like a star." },
-      { emoji: "🏆🎉", text: "You're the MVP of today! Celebrate big, you totally deserve it." },
-      { emoji: "🚀🌙", text: "Blast off into another amazing year! The future is yours, go get it!" },
-      { emoji: "🍕🥤", text: "May your day be filled with pizza, gaming, and zero homework. You've earned it!" },
-      { emoji: "📱💥", text: "New age, new vibes! Stay awesome, stay you. Rock this year!" },
-      { emoji: "🎨✨", text: "You're the artist of your own story — make this chapter legendary!" },
-      { emoji: "⚽🎯", text: "Goal getter! This year, smash every dream. Happy Birthday, champion!" },
-      { emoji: "🐉💪", text: "You've got dragon energy! Go conquer the world, one birthday at a time." },
-      { emoji: "🧩🎲", text: "Another year, another piece of the puzzle. Make every moment count!" },
-      { emoji: "🌊🏄", text: "Ride the wave of awesomeness! Hope your birthday is as cool as you." },
-      { emoji: "📸🎬", text: "This is your main character moment. Make it unforgettable!" },
-      { emoji: "🤙🎈", text: "Chill vibes only! Wishing you the most epic birthday ever." }
-    ];
-
-    function getRandomTeenMessage() {
-      const randomIndex = Math.floor(Math.random() * teenWishes.length);
-      return teenWishes[randomIndex];
-    }
-
-    function renderSurpriseMessage() {
-      const secretArea = document.getElementById('secretMessageArea');
-      if (!secretArea) return;
-      const { emoji, text } = getRandomTeenMessage();
-      secretArea.innerHTML = `
-        <div class="dynamic-wish">
-          <span style="font-size: 2rem;">${emoji}</span>
-          <span>${text}</span>
-          <span style="font-size: 2rem;">${emoji}</span>
-        </div>
-      `;
-      const newDiv = secretArea.querySelector('.dynamic-wish');
-      if (newDiv) newDiv.style.animation = 'fadePop 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-    }
-
-    // ========== MAIN SURPRISE HANDLER ==========
-    function handleSurpriseClick() {
-      renderSurpriseMessage();      // show teen-friendly wish
-      burstConfetti('heavy');       // big confetti
-      superConfettiBlast();         // extra blast
-
-      // card animation
-      const card = document.querySelector('.surprise-card');
-      if (card) {
-        card.style.transform = 'scale(1.01)';
-        setTimeout(() => { if(card) card.style.transform = ''; }, 280);
-      }
-
-      // button text change
-      const btn = document.getElementById('surpriseButton');
-      if (btn) {
-        const originalHTML = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-sparkles"></i> BOOM! Surprise Unlocked! 🎉 <i class="fas fa-crown"></i>';
-        setTimeout(() => { if(btn) btn.innerHTML = originalHTML; }, 1800);
-      }
-
-      // title sparkle
-      const title = document.querySelector('.main-title');
-      if (title) {
-        title.classList.add('sparkle-text');
-        setTimeout(() => title.classList.remove('sparkle-text'), 1000);
-      }
-    }
-
-    // ========== PAGE LOAD ==========
-    window.addEventListener('DOMContentLoaded', () => {
-      createFloaters();
-      
-      // entrance confetti
-      burstConfetti('medium');
-      setTimeout(() => burstConfetti('medium'), 500);
-      setTimeout(() => {
-        safeConfetti({ particleCount: 60, spread: 55, origin: { y: 0.8 }, startVelocity: 12, colors: ['#ffaa66', '#ff6f91'] });
-      }, 900);
-      
-      // attach event to magic button
-      const surpriseBtn = document.getElementById('surpriseButton');
-      if (surpriseBtn) {
-        surpriseBtn.removeEventListener('click', handleSurpriseClick);
-        surpriseBtn.addEventListener('click', handleSurpriseClick);
-      }
-      
-      // extra: cake click gives mini surprise (just for fun)
-      const cakeImg = document.querySelector('.birthday-cake-img');
-      if (cakeImg) {
-        cakeImg.addEventListener('click', () => {
-          safeConfetti({ particleCount: 45, spread: 40, origin: { y: 0.55, x: 0.5 }, startVelocity: 8 });
-          const tempArea = document.getElementById('secretMessageArea');
-          if (tempArea && !tempArea.innerHTML.includes('dynamic-wish')) {
-            const originalContent = tempArea.innerHTML;
-            tempArea.innerHTML = `<div class="dynamic-wish" style="background: rgba(255,230,200,0.7); border-radius: 30px; padding: 6px;">
-              🍰 <strong>Sweet!</strong> A little extra sprinkle for you! 🧁
-            </div>`;
-            setTimeout(() => {
-              if (tempArea.innerHTML.includes('Sweet!')) {
-                tempArea.innerHTML = originalContent;
-              }
-            }, 2000);
-          } else {
-            const msgDiv = tempArea?.querySelector('.dynamic-wish');
-            if(msgDiv) {
-              msgDiv.style.background = "rgba(255,245,200,0.9)";
-              setTimeout(() => { if(msgDiv) msgDiv.style.background = ""; }, 400);
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        script: ['Pacifico', 'cursive'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2.5s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-18px) rotate(2deg)' },
+                        }
+                    }
+                }
             }
-          }
+        }
+    </script>
+
+    <style>
+        /* Custom animations & specialized 3D cake / flame styles */
+        body {
+            background: radial-gradient(circle at top left, #2a114b, #13072e 50%, #090318 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Aurora Background Orbs */
+        .aurora-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+            animation: orbMove 15s infinite alternate ease-in-out;
+        }
+        @keyframes orbMove {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.15); }
+        }
+
+        /* Glassmorphism utility */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-panel {
+            background: rgba(19, 7, 46, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Floating Balloons */
+        .balloon {
+            position: fixed;
+            bottom: -150px;
+            width: 55px;
+            height: 68px;
+            border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+            z-index: 5;
+            pointer-events: none;
+            animation: riseUp linear infinite;
+            box-shadow: inset -8px -8px 15px rgba(0,0,0,0.2), inset 8px 8px 15px rgba(255,255,255,0.4);
+        }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            width: 1px;
+            height: 22px;
+            background: rgba(255,255,255,0.5);
+            transform: translateX(-50%);
+        }
+        @keyframes riseUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            50% { transform: translateY(-55vh) rotate(6deg); }
+            100% { transform: translateY(-120vh) rotate(-6deg); opacity: 0; }
+        }
+
+        /* 3D-Style Interactive Birthday Cake */
+        .cake-stage {
+            perspective: 1000px;
+        }
+        .cake-container {
+            position: relative;
+            width: 260px;
+            height: 230px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+        }
+        .cake-container:hover {
+            transform: scale(1.03);
+        }
+
+        /* Cake Plate */
+        .cake-plate {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 24px;
+            background: linear-gradient(90deg, #cbd5e1, #f8fafc, #94a3b8);
+            border-radius: 50%;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Bottom Tier */
+        .tier-bottom {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 75px;
+            background: linear-gradient(90deg, #db2777, #f43f5e, #be185d);
+            border-radius: 16px 16px 24px 24px;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.25);
+        }
+        .tier-bottom::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            width: 100%;
+            height: 24px;
+            background: #fda4af;
+            border-radius: 50%;
+        }
+
+        /* Frosting Drips Bottom */
+        .icing-bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 26px;
+            background: #fff1f2;
+            border-radius: 16px 16px 12px 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Top Tier */
+        .tier-top {
+            position: absolute;
+            bottom: 92px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 155px;
+            height: 62px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7, #6d28d9);
+            border-radius: 14px 14px 18px 18px;
+            box-shadow: inset 0 -8px 15px rgba(0,0,0,0.25);
+        }
+        .tier-top::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #f5d0fe;
+            border-radius: 50%;
+        }
+        .icing-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #ffffff;
+            border-radius: 14px 14px 10px 10px;
+        }
+
+        /* Candles */
+        .candles-row {
+            position: absolute;
+            bottom: 152px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 24px;
+            z-index: 10;
+        }
+        .candle {
+            position: relative;
+            width: 12px;
+            height: 44px;
+            background: repeating-linear-gradient(
+                45deg,
+                #fde047,
+                #fde047 6px,
+                #f97316 6px,
+                #f97316 12px
+            );
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .candle:hover {
+            transform: scale(1.1);
+        }
+        .wick {
+            position: absolute;
+            top: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 7px;
+            background: #1e293b;
+        }
+
+        /* Realistic Flickering Flame */
+        .flame {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 22px;
+            background: radial-gradient(ellipse at bottom, #ffffff 0%, #fef08a 40%, #f97316 80%, transparent 100%);
+            border-radius: 50% 50% 35% 35%;
+            box-shadow: 0 0 15px #f59e0b, 0 0 30px #fbbf24;
+            animation: flicker 0.18s infinite alternate;
+            transform-origin: bottom center;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .flame.out {
+            opacity: 0;
+            transform: translateX(-50%) scale(0);
+            pointer-events: none;
+        }
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+            100% { transform: translateX(-50%) scale(1.08) rotate(3deg); }
+        }
+
+        /* Smoke puff when blown out */
+        .smoke {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .smoke.puff {
+            animation: smokeRise 1.4s ease-out forwards;
+        }
+        @keyframes smokeRise {
+            0% { opacity: 0.8; transform: translate(-50%, 0) scale(1); }
+            100% { opacity: 0; transform: translate(-30%, -45px) scale(2.8); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #13072e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6d28d9;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-pink-500 selection:text-white">
+
+    <!-- Background Aurora Orbs -->
+    <div class="aurora-orb w-96 h-96 bg-pink-600 top-[-50px] left-[-50px]"></div>
+    <div class="aurora-orb w-[500px] h-[500px] bg-purple-700 bottom-[-100px] right-[-100px]" style="animation-delay: 4s;"></div>
+    <div class="aurora-orb w-80 h-80 bg-amber-500 top-[40%] left-[60%]" style="animation-delay: 8s;"></div>
+
+    <!-- Fullscreen Confetti & Fireworks Canvas -->
+    <canvas id="celebrationCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-40"></canvas>
+
+    <!-- Floating Balloons Container -->
+    <div id="balloonsContainer" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+    <!-- Custom Toast Notification (No alert() used) -->
+    <div id="toastBanner" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 translate-y-6 pointer-events-none">
+        <div class="glass-panel px-5 py-3 rounded-full shadow-2xl border border-pink-400/40 flex items-center gap-3 text-sm font-medium text-white">
+            <i id="toastIcon" class="fa-solid fa-sparkles text-amber-400"></i>
+            <span id="toastMessage">Link copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         1. CELEBRATORY ENTRANCE SCREEN ("Tap to Open Your Birthday Surprise!")
+    ====================================================================== -->
+    <div id="entranceScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#1b0938] via-[#2b0f54] to-[#120626] transition-all duration-700">
+        <div class="max-w-md w-full glass-card rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden">
+            <!-- Decorative Shimmer -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-pink-500/20 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-amber-400/20 rounded-full blur-2xl"></div>
+
+            <div class="w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-tr from-pink-500 via-rose-500 to-amber-400 flex items-center justify-center shadow-lg shadow-pink-500/30 animate-bounce-slow">
+                <i class="fa-solid fa-gift text-4xl text-white"></i>
+            </div>
+
+            <p class="uppercase tracking-widest text-xs font-semibold text-pink-300 mb-2">Special Delivery For</p>
+            <h1 id="entranceRecipient" class="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">
+                Someone Special
+            </h1>
+            <p class="text-purple-200/80 text-sm sm:text-base mb-8 leading-relaxed">
+                A magical birthday surprise has been prepared just for you. Turn up your sound and tap below to unwrap it!
+            </p>
+
+            <button id="openSurpriseBtn" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-amber-500 hover:from-pink-400 hover:to-amber-400 text-white font-semibold text-lg shadow-xl shadow-pink-500/25 transform transition hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 cursor-pointer">
+                <span>Tap to Open Your Surprise!</span>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </button>
+
+            <button id="entranceCustomizeBtn" class="mt-4 text-xs text-purple-300 hover:text-white underline underline-offset-4 transition cursor-pointer">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> Customize Name & Message First
+            </button>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         TOP FLOATING CONTROLS (Music Toggle & Personalize Drawer Trigger)
+    ====================================================================== -->
+    <header class="fixed top-4 right-4 left-4 z-30 flex justify-between items-center max-w-6xl mx-auto pointer-events-none">
+        <div class="glass-card px-4 py-2 rounded-full flex items-center gap-2 pointer-events-auto">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-xs font-medium tracking-wide text-purple-100">Birthday Edition</span>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3 pointer-events-auto">
+            <!-- Music Mute/Unmute Toggle -->
+            <button id="audioToggleBtn" aria-label="Toggle Birthday Music" class="glass-card hover:bg-white/15 p-3 rounded-full text-white transition transform active:scale-95 flex items-center gap-2 cursor-pointer" title="Play/Pause Birthday Melody">
+                <i id="audioIcon" class="fa-solid fa-volume-xmark text-pink-300"></i>
+                <span id="audioLabel" class="hidden sm:inline text-xs font-medium">Music Off</span>
+            </button>
+
+            <!-- Personalize / Edit Mode Toggle -->
+            <button id="toggleCustomizeBtn" class="glass-card hover:bg-white/15 px-4 py-2.5 rounded-full text-white text-xs sm:text-sm font-medium transition transform active:scale-95 flex items-center gap-2 border border-pink-400/40 shadow-lg cursor-pointer">
+                <i class="fa-solid fa-sliders text-amber-300"></i>
+                <span>Personalize</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- =====================================================================
+         CUSTOMIZATION PANEL (Slide-Over Drawer)
+    ====================================================================== -->
+    <aside id="customizeDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md glass-panel shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-white/10 flex items-center justify-between">
+            <div>
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-wand-sparkles text-pink-400"></i>
+                    Personalize Wishes
+                </h2>
+                <p class="text-xs text-purple-300 mt-0.5">Customize names, message & photo before sharing</p>
+            </div>
+            <button id="closeCustomizeBtn" class="p-2 rounded-xl hover:bg-white/10 text-purple-200 hover:text-white transition cursor-pointer">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto flex-1 space-y-5">
+            <!-- Recipient Name -->
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Recipient's Name</label>
+                <input type="text" id="inputRecipient" placeholder="e.g., Ananya, Karthik, Bestie..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition">
+            </div>
+
+            <!-- Sender Name -->
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Your Name (Sender)</label>
+                <input type="text" id="inputSender" placeholder="e.g., Rahul, Your Best Friend..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition">
+            </div>
+
+            <!-- Custom Headline / Age / Tagline -->
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Celebration Tagline</label>
+                <input type="text" id="inputTagline" placeholder="e.g., Wishing you the happiest 25th birthday!" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition">
+            </div>
+
+            <!-- Heartfelt Custom Message -->
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Heartfelt Birthday Message</label>
+                <textarea id="inputMessage" rows="4" placeholder="Write your warmest birthday wishes here..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition resize-none"></textarea>
+            </div>
+
+            <!-- Photo / Memory URL or Upload -->
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-pink-300 mb-1.5">Memory Photo (URL or Upload)</label>
+                <input type="url" id="inputPhotoUrl" placeholder="Paste an image URL (optional)" class="w-full px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 transition text-sm mb-2">
+                <label class="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl border border-dashed border-purple-400/50 hover:border-pink-400 bg-white/5 hover:bg-white/10 text-xs text-purple-200 cursor-pointer transition">
+                    <i class="fa-solid fa-cloud-arrow-up text-pink-400"></i>
+                    <span>Or choose a photo from device</span>
+                    <input type="file" id="inputPhotoFile" accept="image/*" class="hidden">
+                </label>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-white/10 space-y-3 bg-black/20">
+            <button id="savePersonalizeBtn" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-semibold shadow-lg transition transform active:scale-98 flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-check"></i>
+                <span>Apply & Preview Wishes</span>
+            </button>
+            <button id="copyShareLinkBtn" class="w-full py-3 px-5 rounded-xl bg-white/10 hover:bg-white/15 text-purple-100 font-medium text-sm transition flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-share-nodes text-amber-300"></i>
+                <span>Copy Shareable Link</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- =====================================================================
+         MAIN CELEBRATION EXPERIENCE
+    ====================================================================== -->
+    <main id="mainContent" class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-20 space-y-16 sm:space-y-24">
+
+        <!-- HERO SECTION -->
+        <section class="text-center space-y-6 pt-4">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-200 text-xs sm:text-sm font-medium animate-float">
+                <i class="fa-solid fa-sparkles text-amber-300"></i>
+                <span id="displayTagline">Today is all about celebrating YOU!</span>
+            </div>
+
+            <h1 class="font-script text-5xl sm:text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-300 to-purple-300 drop-shadow-[0_5px_25px_rgba(236,72,153,0.4)] py-2 leading-tight">
+                Happy Birthday, <br class="sm:hidden">
+                <span id="displayRecipient" class="underline decoration-pink-500/40 decoration-wavy underline-offset-8">My Dear Friend</span>!
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-purple-100/85 font-light leading-relaxed">
+                May your day be overflowing with laughter, unforgettable moments, and every happiness your heart wishes for.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                <button id="triggerFireworksBtn" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-pink-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/25 hover:scale-105 active:scale-95 transition flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                    <span>Launch Fireworks</span>
+                </button>
+                <a href="#cakeSection" class="px-6 py-3 rounded-full glass-card hover:bg-white/15 text-white font-medium text-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-cake-candles text-pink-300"></i>
+                    <span>Make a Wish</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE 3D-STYLE BIRTHDAY CAKE SECTION -->
+        <section id="cakeSection" class="glass-card rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden">
+            <div class="max-w-xl mx-auto space-y-3 mb-8">
+                <span class="text-xs uppercase tracking-widest text-amber-300 font-semibold">Interactive Wish Ritual</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Make a Wish & Blow the Candles</h2>
+                <p id="cakeInstruction" class="text-sm text-purple-200/80">
+                    Tap on each glowing candle flame to blow it out, or use your microphone to blow them out together!
+                </p>
+            </div>
+
+            <!-- 3D Cake Stage -->
+            <div class="cake-stage py-6 select-none">
+                <div class="cake-container" id="birthdayCake">
+                    <!-- 3 Interactive Candles -->
+                    <div class="candles-row" id="candlesRow">
+                        <div class="candle" data-candle="0" title="Tap to blow out">
+                            <div class="wick"></div>
+                            <div class="flame" id="flame-0"></div>
+                            <div class="smoke" id="smoke-0"></div>
+                        </div>
+                        <div class="candle" data-candle="1" title="Tap to blow out">
+                            <div class="wick"></div>
+                            <div class="flame" id="flame-1"></div>
+                            <div class="smoke" id="smoke-1"></div>
+                        </div>
+                        <div class="candle" data-candle="2" title="Tap to blow out">
+                            <div class="wick"></div>
+                            <div class="flame" id="flame-2"></div>
+                            <div class="smoke" id="smoke-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Top Tier -->
+                    <div class="tier-top">
+                        <div class="icing-top"></div>
+                    </div>
+
+                    <!-- Bottom Tier -->
+                    <div class="tier-bottom">
+                        <div class="icing-bottom"></div>
+                    </div>
+
+                    <!-- Cake Plate -->
+                    <div class="cake-plate"></div>
+                </div>
+            </div>
+
+            <!-- Wish Granted Banner (Hidden until all candles blown) -->
+            <div id="wishGrantedBanner" class="hidden max-w-md mx-auto my-4 p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-pink-500/20 to-purple-500/20 border border-amber-300/40 animate-pulse">
+                <p class="font-serif text-xl font-bold text-amber-300">🎉 Your Wish Has Been Sent to the Stars! 🎉</p>
+                <p class="text-xs text-purple-100 mt-1">May every dream you wished for come true this year!</p>
+            </div>
+
+            <!-- Cake Controls (Mic Blow Detection + Relight) -->
+            <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+                <button id="micBlowBtn" class="px-5 py-2.5 rounded-full bg-pink-500/25 hover:bg-pink-500/40 border border-pink-400/40 text-pink-100 text-xs sm:text-sm font-medium transition flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-microphone"></i>
+                    <span id="micBtnText">Blow via Microphone</span>
+                </button>
+                <button id="blowAllBtn" class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-medium transition flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-wind text-sky-300"></i>
+                    <span>Blow All Candles</span>
+                </button>
+                <button id="relightBtn" class="hidden px-5 py-2.5 rounded-full bg-amber-500/25 hover:bg-amber-500/40 border border-amber-400/40 text-amber-200 text-xs sm:text-sm font-medium transition flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>Relight Candles</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- HEARTFELT GREETING CARD & PHOTO MEMORY SECTION -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Photo / Memory Frame -->
+            <div class="lg:col-span-5">
+                <div class="glass-card p-4 rounded-3xl transform -rotate-1 hover:rotate-0 transition duration-500">
+                    <div class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-purple-950/60">
+                        <img id="displayPhoto"
+                             src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x750/2e1065/f472b6?text=Happy+Birthday!';"
+                             alt="Birthday Celebration Memory"
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#13072e] via-transparent to-transparent opacity-75"></div>
+                        <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-xs text-pink-200 border border-white/10">
+                                <i class="fa-solid fa-heart text-rose-400 mr-1"></i> Cherished Moments
+                            </span>
+                            <span class="text-xs text-white/80 font-mono">✨ Celebrating You</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heartfelt Letter Card -->
+            <div class="lg:col-span-7">
+                <div class="glass-card rounded-3xl p-8 sm:p-10 relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-pink-400/30 absolute top-6 left-6"></i>
+                    
+                    <div class="relative z-10 space-y-6">
+                        <div class="inline-block px-3 py-1 rounded-lg bg-amber-400/15 text-amber-300 text-xs font-semibold uppercase tracking-wider">
+                            A Special Note For You
+                        </div>
+
+                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">
+                            Dearest <span id="cardRecipientName" class="text-pink-300">My Dear Friend</span>,
+                        </h3>
+
+                        <p id="displayMessage" class="text-purple-100/90 text-base sm:text-lg leading-relaxed whitespace-pre-line font-light">
+                            On your special day, I want you to know how truly appreciated and celebrated you are. Thank you for filling life with warmth, laughter, and unforgettable memories. May this new chapter bring you endless joy, vibrant health, and every success you dream of!
+                        </p>
+
+                        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-purple-300">With warmest wishes,</p>
+                                <p id="displaySender" class="font-script text-2xl text-amber-300 mt-1">Your Best Friend</p>
+                            </div>
+                            <button id="sendHugBtn" class="self-start sm:self-auto px-5 py-2.5 rounded-xl bg-pink-500/20 hover:bg-pink-500/35 border border-pink-400/30 text-pink-200 text-xs font-semibold transition flex items-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-heart text-rose-400"></i>
+                                <span>Send Birthday Love</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FESTIVE BLESSING & WISH CARDS -->
+        <section class="space-y-6">
+            <div class="text-center">
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white">Three Wishes for Your Year Ahead</h2>
+                <p class="text-sm text-purple-200/75 mt-1">Tap any card to reveal a special birthday blessing</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Wish Card 1 -->
+                <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '✨ Endless Adventures & New Horizons!')">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-2">Boundless Joy</h3>
+                    <p class="text-sm text-purple-200/80 leading-relaxed">
+                        May every sunrise bring new reasons to smile and every moment turn into a cherished memory.
+                    </p>
+                </div>
+
+                <!-- Wish Card 2 -->
+                <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '🚀 Unstoppable Success & Big Dreams!')">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-pink-500/20 text-pink-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-2">Shining Success</h3>
+                    <p class="text-sm text-purple-200/80 leading-relaxed">
+                        May all your hard work bloom into extraordinary achievements and everything you touch turn to gold.
+                    </p>
+                </div>
+
+                <!-- Wish Card 3 -->
+                <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '💖 Deep Love, Peace & Good Health!')">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-2">Love & Harmony</h3>
+                    <p class="text-sm text-purple-200/80 leading-relaxed">
+                        May you always be surrounded by people who uplift, inspire, and celebrate the wonderful person you are.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-20 border-t border-white/10 py-8 text-center text-xs text-purple-300/70 px-4">
+        <p>Crafted with <i class="fa-solid fa-heart text-pink-400 mx-1"></i> to celebrate an unforgettable birthday.</p>
+    </footer>
+
+    <!-- =====================================================================
+         VANILLA JAVASCRIPT: STATE, WEB AUDIO, CONFETTI/FIREWORKS, MIC BLOW
+    ====================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // -----------------------------------------------------------------
+            // 1. STATE & URL PARAMETER PERSONALIZATION
+            // -----------------------------------------------------------------
+            const defaultState = {
+                recipient: "My Dear Friend",
+                sender: "Your Best Friend",
+                tagline: "Today is all about celebrating YOU!",
+                message: "On your special day, I want you to know how truly appreciated and celebrated you are. Thank you for filling life with warmth, laughter, and unforgettable memories. May this new chapter bring you endless joy, vibrant health, and every success you dream of!",
+                photo: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80"
+            };
+
+            let appState = { ...defaultState };
+
+            // Load from URL parameters if shared
+            function loadStateFromURL() {
+                try {
+                    const params = new URLSearchParams(window.location.search);
+                    if (params.get('to')) appState.recipient = params.get('to');
+                    if (params.get('from')) appState.sender = params.get('from');
+                    if (params.get('tag')) appState.tagline = params.get('tag');
+                    if (params.get('msg')) appState.message = params.get('msg');
+                    if (params.get('img')) appState.photo = params.get('img');
+                } catch (err) {
+                    console.warn("Could not parse URL params:", err);
+                }
+            }
+
+            // Sync UI elements with current state
+            function renderState() {
+                document.getElementById('entranceRecipient').textContent = appState.recipient;
+                document.getElementById('displayRecipient').textContent = appState.recipient;
+                document.getElementById('cardRecipientName').textContent = appState.recipient;
+                document.getElementById('displaySender').textContent = appState.sender;
+                document.getElementById('displayTagline').textContent = appState.tagline;
+                document.getElementById('displayMessage').textContent = appState.message;
+                document.getElementById('displayPhoto').src = appState.photo;
+
+                // Populate form inputs
+                document.getElementById('inputRecipient').value = appState.recipient;
+                document.getElementById('inputSender').value = appState.sender;
+                document.getElementById('inputTagline').value = appState.tagline;
+                document.getElementById('inputMessage').value = appState.message;
+                document.getElementById('inputPhotoUrl').value = appState.photo.startsWith('data:') ? '' : appState.photo;
+            }
+
+            loadStateFromURL();
+            renderState();
+
+            // -----------------------------------------------------------------
+            // 2. TOAST NOTIFICATION HELPER (Replaces alert())
+            // -----------------------------------------------------------------
+            let toastTimeout;
+            function showToast(msg, iconClass = "fa-solid fa-sparkles text-amber-400") {
+                const banner = document.getElementById('toastBanner');
+                const messageEl = document.getElementById('toastMessage');
+                const iconEl = document.getElementById('toastIcon');
+
+                messageEl.textContent = msg;
+                iconEl.className = iconClass;
+
+                banner.classList.remove('opacity-0', 'translate-y-6');
+                banner.classList.add('opacity-100', 'translate-y-0');
+
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    banner.classList.remove('opacity-100', 'translate-y-0');
+                    banner.classList.add('opacity-0', 'translate-y-6');
+                }, 3200);
+            }
+
+            // -----------------------------------------------------------------
+            // 3. WEB AUDIO API SYNTHESIZED "HAPPY BIRTHDAY" MELODY & CHIMES
+            // -----------------------------------------------------------------
+            let audioCtx = null;
+            let isMusicPlaying = false;
+            let melodyTimer = null;
+            let noteIndex = 0;
+
+            // Notes (frequencies in Hz) for "Happy Birthday to You"
+            const NOTES = {
+                C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+                G4: 392.00, A4: 440.00, Bb4: 466.16, C5: 523.25
+            };
+
+            const birthdayMelody = [
+                { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
+                { freq: NOTES.D4, dur: 0.6 },  { freq: NOTES.C4, dur: 0.6 },
+                { freq: NOTES.F4, dur: 0.6 },  { freq: NOTES.E4, dur: 1.0 },
+
+                { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
+                { freq: NOTES.D4, dur: 0.6 },  { freq: NOTES.C4, dur: 0.6 },
+                { freq: NOTES.G4, dur: 0.6 },  { freq: NOTES.F4, dur: 1.0 },
+
+                { freq: NOTES.C4, dur: 0.35 }, { freq: NOTES.C4, dur: 0.25 },
+                { freq: NOTES.C5, dur: 0.6 },  { freq: NOTES.A4, dur: 0.6 },
+                { freq: NOTES.F4, dur: 0.5 },  { freq: NOTES.E4, dur: 0.5 },
+                { freq: NOTES.D4, dur: 0.9 },
+
+                { freq: NOTES.Bb4, dur: 0.35 }, { freq: NOTES.Bb4, dur: 0.25 },
+                { freq: NOTES.A4, dur: 0.6 },   { freq: NOTES.F4, dur: 0.6 },
+                { freq: NOTES.G4, dur: 0.6 },   { freq: NOTES.F4, dur: 1.2 }
+            ];
+
+            function initAudio() {
+                if (!audioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    audioCtx = new AudioContextClass();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            }
+
+            function playTone(freq, duration, type = 'triangle', volume = 0.14) {
+                if (!audioCtx) return;
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, now);
+
+                // Warm music-box envelope
+                gain.gain.setValueAtTime(0.001, now);
+                gain.gain.exponentialRampToValueAtTime(volume, now + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + duration + 0.05);
+            }
+
+            function playCelebrationChime() {
+                initAudio();
+                const chord = [523.25, 659.25, 783.99, 1046.50]; // C5 Major arpeggio
+                chord.forEach((f, idx) => {
+                    setTimeout(() => playTone(f, 0.55, 'sine', 0.12), idx * 90);
+                });
+            }
+
+            function scheduleNextNote() {
+                if (!isMusicPlaying) return;
+                const note = birthdayMelody[noteIndex];
+                playTone(note.freq, note.dur * 0.95, 'triangle', 0.13);
+                // Add subtle harmonic sparkle
+                playTone(note.freq * 2, note.dur * 0.7, 'sine', 0.03);
+
+                noteIndex = (noteIndex + 1) % birthdayMelody.length;
+                const pauseAfterPhrase = (noteIndex === 0) ? 1200 : note.dur * 650;
+                melodyTimer = setTimeout(scheduleNextNote, pauseAfterPhrase);
+            }
+
+            function updateAudioUI() {
+                const icon = document.getElementById('audioIcon');
+                const label = document.getElementById('audioLabel');
+                if (isMusicPlaying) {
+                    icon.className = "fa-solid fa-volume-high text-emerald-400";
+                    label.textContent = "Music On";
+                } else {
+                    icon.className = "fa-solid fa-volume-xmark text-pink-300";
+                    label.textContent = "Music Off";
+                }
+            }
+
+            function startMusic() {
+                initAudio();
+                if (!isMusicPlaying) {
+                    isMusicPlaying = true;
+                    updateAudioUI();
+                    scheduleNextNote();
+                }
+            }
+
+            function stopMusic() {
+                isMusicPlaying = false;
+                clearTimeout(melodyTimer);
+                updateAudioUI();
+            }
+
+            document.getElementById('audioToggleBtn').addEventListener('click', () => {
+                if (isMusicPlaying) {
+                    stopMusic();
+                    showToast("Music paused", "fa-solid fa-volume-xmark text-purple-300");
+                } else {
+                    startMusic();
+                    showToast("Playing Happy Birthday melody!", "fa-solid fa-music text-pink-400");
+                }
+            });
+
+            // -----------------------------------------------------------------
+            // 4. FLOATING BALLOONS GENERATOR
+            // -----------------------------------------------------------------
+            function spawnBalloons() {
+                const container = document.getElementById('balloonsContainer');
+                const colors = [
+                    'radial-gradient(circle at 30% 30%, #ff7eb3, #ff2a85)',
+                    'radial-gradient(circle at 30% 30%, #fde047, #f59e0b)',
+                    'radial-gradient(circle at 30% 30%, #c084fc, #7e22ce)',
+                    'radial-gradient(circle at 30% 30%, #67e8f9, #0284c7)',
+                    'radial-gradient(circle at 30% 30%, #fda4af, #e11d48)'
+                ];
+
+                for (let i = 0; i < 14; i++) {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.style.left = `${Math.random() * 94 + 2}%`;
+                    balloon.style.background = colors[i % colors.length];
+                    balloon.style.animationDuration = `${12 + Math.random() * 10}s`;
+                    balloon.style.animationDelay = `${Math.random() * 10}s`;
+                    balloon.style.transform = `scale(${0.75 + Math.random() * 0.45})`;
+                    container.appendChild(balloon);
+                }
+            }
+            spawnBalloons();
+
+            // -----------------------------------------------------------------
+            // 5. CONFETTI & FIREWORKS PARTICLE ENGINE (HTML5 Canvas)
+            // -----------------------------------------------------------------
+            const canvas = document.getElementById('celebrationCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            const festiveColors = ['#f43f5e', '#ec4899', '#a855f7', '#fbbf24', '#38bdf8', '#34d399', '#ffffff'];
+
+            function burstConfetti(x = canvas.width / 2, y = canvas.height / 2, count = 85) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 3 + Math.random() * 9;
+                    particles.push({
+                        x,
+                        y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - 3,
+                        size: 5 + Math.random() * 6,
+                        color: festiveColors[Math.floor(Math.random() * festiveColors.length)],
+                        alpha: 1,
+                        gravity: 0.16,
+                        drag: 0.97,
+                        rotation: Math.random() * 360,
+                        rotSpeed: (Math.random() - 0.5) * 12,
+                        shape: Math.random() > 0.4 ? 'rect' : 'circle'
+                    });
+                }
+            }
+
+            function launchFireworksSequence(bursts = 5) {
+                for (let i = 0; i < bursts; i++) {
+                    setTimeout(() => {
+                        const rx = canvas.width * (0.2 + Math.random() * 0.6);
+                        const ry = canvas.height * (0.15 + Math.random() * 0.4);
+                        burstConfetti(rx, ry, 95);
+                        if (audioCtx && isMusicPlaying) {
+                            playTone(600 + Math.random() * 400, 0.25, 'sine', 0.06);
+                        }
+                    }, i * 350);
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.vx *= p.drag;
+                    p.vy *= p.drag;
+                    p.vy += p.gravity;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.rotation += p.rotSpeed;
+                    p.alpha -= 0.012;
+
+                    if (p.alpha <= 0) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.fillStyle = p.color;
+
+                    if (p.shape === 'rect') {
+                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                }
+
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            // -----------------------------------------------------------------
+            // 6. ENTRANCE SCREEN INTERACTION
+            // -----------------------------------------------------------------
+            const entranceScreen = document.getElementById('entranceScreen');
+            document.getElementById('openSurpriseBtn').addEventListener('click', () => {
+                entranceScreen.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
+                setTimeout(() => {
+                    entranceScreen.style.display = 'none';
+                }, 700);
+
+                startMusic();
+                launchFireworksSequence(5);
+            });
+
+            document.getElementById('triggerFireworksBtn').addEventListener('click', () => {
+                playCelebrationChime();
+                launchFireworksSequence(6);
+            });
+
+            document.getElementById('sendHugBtn').addEventListener('click', (e) => {
+                const rect = e.target.getBoundingClientRect();
+                burstConfetti(rect.left + rect.width / 2, rect.top, 70);
+                playCelebrationChime();
+                showToast(`Birthday love sent to ${appState.recipient}! 💖`, "fa-solid fa-heart text-rose-400");
+            });
+
+            // Global wish card helper
+            window.celebrateCard = function(cardEl, message) {
+                const rect = cardEl.getBoundingClientRect();
+                burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 55);
+                playCelebrationChime();
+                showToast(message, "fa-solid fa-star text-amber-300");
+            };
+
+            // -----------------------------------------------------------------
+            // 7. INTERACTIVE BIRTHDAY CAKE & CANDLES (Click + Mic Blow)
+            // -----------------------------------------------------------------
+            const candleStates = [true, true, true]; // true = lit
+            let micStream = null;
+            let micMonitoring = false;
+
+            function extinguishCandle(index) {
+                if (!candleStates[index]) return;
+                candleStates[index] = false;
+
+                const flame = document.getElementById(`flame-${index}`);
+                const smoke = document.getElementById(`smoke-${index}`);
+                flame.classList.add('out');
+                smoke.classList.remove('puff');
+                void smoke.offsetWidth; // trigger reflow
+                smoke.classList.add('puff');
+
+                // Check if all candles are blown out
+                if (candleStates.every(state => !state)) {
+                    onAllCandlesBlown();
+                }
+            }
+
+            function blowAllCandles() {
+                candleStates.forEach((isLit, idx) => {
+                    if (isLit) {
+                        setTimeout(() => extinguishCandle(idx), idx * 140);
+                    }
+                });
+            }
+
+            function onAllCandlesBlown() {
+                document.getElementById('wishGrantedBanner').classList.remove('hidden');
+                document.getElementById('relightBtn').classList.remove('hidden');
+                document.getElementById('cakeInstruction').textContent = "Woohoo! All candles blown out!";
+                playCelebrationChime();
+                launchFireworksSequence(7);
+                stopMicMonitoring();
+            }
+
+            function relightCandles() {
+                candleStates.fill(true);
+                [0, 1, 2].forEach(idx => {
+                    document.getElementById(`flame-${idx}`).classList.remove('out');
+                    document.getElementById(`smoke-${idx}`).classList.remove('puff');
+                });
+                document.getElementById('wishGrantedBanner').classList.add('hidden');
+                document.getElementById('relightBtn').classList.add('hidden');
+                document.getElementById('cakeInstruction').textContent = "Tap on each glowing candle flame to blow it out, or use your microphone!";
+                showToast("Candles relit! Make another wish ✨", "fa-solid fa-fire text-amber-400");
+            }
+
+            document.querySelectorAll('.candle').forEach(candleEl => {
+                candleEl.addEventListener('click', () => {
+                    const idx = parseInt(candleEl.getAttribute('data-candle'), 10);
+                    extinguishCandle(idx);
+                });
+            });
+
+            document.getElementById('blowAllBtn').addEventListener('click', blowAllCandles);
+            document.getElementById('relightBtn').addEventListener('click', relightCandles);
+
+            // Optional Microphone Blow Detection
+            function stopMicMonitoring() {
+                micMonitoring = false;
+                if (micStream) {
+                    micStream.getTracks().forEach(track => track.stop());
+                    micStream = null;
+                }
+                document.getElementById('micBtnText').textContent = "Blow via Microphone";
+            }
+
+            document.getElementById('micBlowBtn').addEventListener('click', async () => {
+                if (micMonitoring) {
+                    stopMicMonitoring();
+                    return;
+                }
+
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    showToast("Microphone not supported on this browser. Tap the candles instead!", "fa-solid fa-circle-info text-sky-300");
+                    return;
+                }
+
+                try {
+                    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    initAudio();
+                    const source = audioCtx.createMediaStreamSource(micStream);
+                    const analyser = audioCtx.createAnalyser();
+                    analyser.fftSize = 256;
+                    source.connect(analyser);
+
+                    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    micMonitoring = true;
+                    document.getElementById('micBtnText').textContent = "Listening... Blow now! 🌬️";
+                    showToast("Blow into your microphone to blow out the candles!", "fa-solid fa-microphone text-pink-400");
+
+                    function detectBlow() {
+                        if (!micMonitoring) return;
+                        analyser.getByteFrequencyData(dataArray);
+                        // Focus on low-end wind/blow rumble frequencies
+                        let lowFreqSum = 0;
+                        for (let i = 0; i < 20; i++) {
+                            lowFreqSum += dataArray[i];
+                        }
+                        const avg = lowFreqSum / 20;
+
+                        if (avg > 115) {
+                            blowAllCandles();
+                        } else {
+                            requestAnimationFrame(detectBlow);
+                        }
+                    }
+                    detectBlow();
+                } catch (err) {
+                    showToast("Mic permission denied. You can tap the candles to blow them out!", "fa-solid fa-microphone-slash text-amber-300");
+                }
+            });
+
+            // -----------------------------------------------------------------
+            // 8. PERSONALIZATION DRAWER & SHARE LINK GENERATOR
+            // -----------------------------------------------------------------
+            const drawer = document.getElementById('customizeDrawer');
+
+            function openDrawer() {
+                drawer.classList.remove('translate-x-full');
+            }
+            function closeDrawer() {
+                drawer.classList.add('translate-x-full');
+            }
+
+            document.getElementById('toggleCustomizeBtn').addEventListener('click', openDrawer);
+            document.getElementById('entranceCustomizeBtn').addEventListener('click', openDrawer);
+            document.getElementById('closeCustomizeBtn').addEventListener('click', closeDrawer);
+
+            // Handle local image upload preview
+            document.getElementById('inputPhotoFile').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    appState.photo = event.target.result;
+                    document.getElementById('displayPhoto').src = appState.photo;
+                    showToast("Custom photo uploaded!", "fa-solid fa-image text-emerald-400");
+                };
+                reader.readAsDataURL(file);
+            });
+
+            document.getElementById('savePersonalizeBtn').addEventListener('click', () => {
+                const rec = document.getElementById('inputRecipient').value.trim();
+                const snd = document.getElementById('inputSender').value.trim();
+                const tag = document.getElementById('inputTagline').value.trim();
+                const msg = document.getElementById('inputMessage').value.trim();
+                const url = document.getElementById('inputPhotoUrl').value.trim();
+
+                if (rec) appState.recipient = rec;
+                if (snd) appState.sender = snd;
+                if (tag) appState.tagline = tag;
+                if (msg) appState.message = msg;
+                if (url) appState.photo = url;
+
+                renderState();
+                closeDrawer();
+                burstConfetti(window.innerWidth / 2, window.innerHeight / 3, 70);
+                showToast("Birthday page updated!", "fa-solid fa-check-circle text-emerald-400");
+            });
+
+            // Copy Shareable Link with Query Params
+            document.getElementById('copyShareLinkBtn').addEventListener('click', () => {
+                // Ensure latest input values are captured
+                const rec = document.getElementById('inputRecipient').value.trim() || appState.recipient;
+                const snd = document.getElementById('inputSender').value.trim() || appState.sender;
+                const tag = document.getElementById('inputTagline').value.trim() || appState.tagline;
+                const msg = document.getElementById('inputMessage').value.trim() || appState.message;
+                const url = document.getElementById('inputPhotoUrl').value.trim();
+
+                const shareUrl = new URL(window.location.href.split('?')[0]);
+                shareUrl.searchParams.set('to', rec);
+                shareUrl.searchParams.set('from', snd);
+                shareUrl.searchParams.set('tag', tag);
+                shareUrl.searchParams.set('msg', msg);
+                if (url && !url.startsWith('data:')) {
+                    shareUrl.searchParams.set('img', url);
+                }
+
+                // Fallback-safe copy to clipboard using execCommand
+                const tempInput = document.createElement('textarea');
+                tempInput.value = shareUrl.toString();
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand('copy');
+                    showToast("Personalized link copied! Ready to send 🎁", "fa-solid fa-link text-amber-300");
+                } catch (err) {
+                    showToast("Could not copy link automatically.", "fa-solid fa-triangle-exclamation text-rose-400");
+                }
+                document.body.removeChild(tempInput);
+            });
         });
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>
