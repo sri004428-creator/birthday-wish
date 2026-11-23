@@ -990,7 +990,7 @@
         document.getElementById('togglePreviewBtn').addEventListener('click', (e) => {
             forceUnlockPreview = !forceUnlockPreview;
             e.target.textContent = forceUnlockPreview
-                ? "Exit Preview Mode (Restore Date Locks)"
+                ? "."
                 : ".";
             renderActiveStage();
             showToast(
