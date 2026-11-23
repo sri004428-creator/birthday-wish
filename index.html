@@ -465,17 +465,37 @@
 
             <!-- HEARTFELT GREETING CARD & PHOTO MEMORY SECTION -->
             <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Photo Frame -->
+                <!-- Photo Carousel Frame -->
                 <div class="lg:col-span-5">
                     <div class="glass-card p-4 rounded-3xl transform -rotate-1 hover:rotate-0 transition duration-500">
-                        <div class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-purple-950/60">
-                            <img id="displayPhoto"
-                                 src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=80"
-                                 onerror="this.onerror=null;this.src='https://placehold.co/600x750/2e1065/f472b6?text=Happy+Birthday!';"
-                                 alt="Birthday Celebration Photo"
-                                 class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#13072e] via-transparent to-transparent opacity-75"></div>
-                            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                        <div id="photoCarouselContainer" class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-purple-950/60 group select-none">
+                            <!-- Slides Track -->
+                            <div id="carouselTrack" class="flex w-full h-full transition-transform duration-500 ease-out">
+                                <!-- Slides injected dynamically from BIRTHDAY_CONFIG -->
+                            </div>
+
+                            <!-- Gradient Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#13072e] via-transparent to-transparent opacity-75 pointer-events-none"></div>
+
+                            <!-- Prev / Next Carousel Buttons -->
+                            <button id="prevPhotoBtn" type="button" aria-label="Previous Photo" class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/45 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center border border-white/15 transition opacity-90 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer z-10">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button id="nextPhotoBtn" type="button" aria-label="Next Photo" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/45 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center border border-white/15 transition opacity-90 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer z-10">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+
+                            <!-- Photo Counter Pill -->
+                            <div id="photoCounterBadge" class="hidden absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-[11px] font-medium text-white/90 border border-white/10 z-10">
+                                1 / 1
+                            </div>
+
+                            <!-- Carousel Dots -->
+                            <div id="carouselDots" class="hidden absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-10">
+                            </div>
+
+                            <!-- Bottom Badges -->
+                            <div class="absolute bottom-3.5 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
                                 <span id="photoBadgeLeft" class="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-xs text-pink-200 border border-white/10">
                                     <i class="fa-solid fa-heart text-rose-400 mr-1"></i> Turning 2!
                                 </span>
@@ -644,7 +664,7 @@
         // ✏️ CREATOR CONFIGURATION: EDIT NAMES, PHOTOS, DATES & MESSAGES HERE
         // =====================================================================
         const BIRTHDAY_CONFIG = {
-            senderName: "Karthik",               // 👈 Your Name
+            senderName: "",               // 👈 Your Name
             celebrationYear: 2026,               // 👈 Year (e.g., 2026)
             celebrationMonth: 11,                // 👈 Month Number (1 = Jan, ..., 11 = Nov, 12 = Dec)
 
@@ -652,10 +672,15 @@
             day1: {
                 dayOfMonth: 25,
                 dateLabel: "25th • 2nd Birthday",
-                name: "Aadhya",                  // 👈 Daughter's Name
+                name: "PARTHAVI SRI",                  // 👈 Daughter's Name
                 tagline: "25th Celebration • Turning 2 Today! 👑",
                 heroSubtitle: "Wishing the sweetest little princess a magical 2nd birthday filled with giggles, balloons, and endless love!",
-                photoUrl: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=80", // 👈 Daughter's Photo URL
+                // 👇 Add as many photo URLs as you want inside this photos array!
+                photos: [
+                    "/1.png",
+                    "/2.jpg",
+                    
+                ],
                 photoBadge: "Turning 2! 🎂",
                 message: `Happy 2nd Birthday to the brightest little sunshine!\n\nTwo years ago you arrived and filled everyone's world with pure magic, tiny footsteps, and the cutest smiles. May you always grow up surrounded by endless love, joy, and laughter!`
             },
@@ -664,12 +689,20 @@
             day2: {
                 dayOfMonth: 26,
                 dateLabel: "26th • Bestie's Birthday",
-                name: "Ananya",                  // 👈 Best Friend's Name
+                name: "Prabha 👻,                  // 👈 Best Friend's Name
                 tagline: "26th Celebration • Best Friend's Special Day! ✨",
                 heroSubtitle: "Yesterday we celebrated your little one, and today is all about celebrating YOU — the most amazing best friend!",
-                photoUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80", // 👈 Best Friend's Photo URL
+                // 👇 Add as many photo URLs as you want inside this photos array!
+                photos: [
+                    "/3.jpg",
+                    "/10.jpg",
+                    "/4.png",
+            "/5.jpg",
+            "/6.jpg",
+            "/7.jpg",
+                ],
                 photoBadge: "Bestie's Day 💖",
-                message: `Happy Birthday to my wonderful best friend!\n\nSeeing you as such an amazing mom and an even more incredible friend makes me so proud. Thank you for every laugh, every late-night talk, and every unforgettable memory. May this year bring you boundless happiness, good health, and every dream your heart wishes for!`
+                message: `Happy Birthday to my wonderful best friend!\n\nSeeing you as such an amazing psyco bestieeee and an even more incredible friend makes me so proud. Thank you for every laugh, every late-night talk, and every unforgettable memory. May this year bring you boundless happiness, good health, and every dream your heart wishes for!`
             }
         };
         // =====================================================================
@@ -677,6 +710,8 @@
         let activeTab = 'day1'; // 'day1' (25th) or 'day2' (26th)
         let forceUnlockPreview = false;
         let countdownInterval = null;
+        let currentSlideIndex = 0;
+        let carouselAutoTimer = null;
 
         // -----------------------------------------------------------------
         // 1. TOAST HELPER
@@ -822,13 +857,104 @@
                 document.getElementById('photoBadgeRight').textContent = `✨ ${cfg.dayOfMonth}th Celebration`;
                 document.getElementById('cardTopBadge').textContent = cfg.dateLabel;
 
-                const photoEl = document.getElementById('displayPhoto');
-                if (photoEl && cfg.photoUrl) {
-                    photoEl.src = cfg.photoUrl;
-                }
+                // Render Photo Carousel for active day
+                setupPhotoCarousel(cfg.photos || (cfg.photoUrl ? [cfg.photoUrl] : []));
 
                 document.title = `Happy Birthday ${cfg.name}! 🎉`;
             }
+        }
+
+        // -----------------------------------------------------------------
+        // 2B. INTERACTIVE PHOTO CAROUSEL LOGIC (Arrows, Dots, Swipe, Auto)
+        // -----------------------------------------------------------------
+        function setupPhotoCarousel(photoList) {
+            const track = document.getElementById('carouselTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+            const prevBtn = document.getElementById('prevPhotoBtn');
+            const nextBtn = document.getElementById('nextPhotoBtn');
+            const counterBadge = document.getElementById('photoCounterBadge');
+
+            clearInterval(carouselAutoTimer);
+            currentSlideIndex = 0;
+
+            const safePhotos = photoList.length > 0
+                ? photoList
+                : ['https://placehold.co/600x750/2e1065/f472b6?text=Happy+Birthday!'];
+
+            track.innerHTML = safePhotos.map((url, idx) => `
+                <div class="w-full h-full flex-shrink-0">
+                    <img src="${url}"
+                         onerror="this.onerror=null;this.src='https://placehold.co/600x750/2e1065/f472b6?text=Photo+${idx + 1}';"
+                         alt="Birthday Memory ${idx + 1}"
+                         class="w-full h-full object-cover">
+                </div>
+            `).join('');
+
+            dotsContainer.innerHTML = safePhotos.map((_, idx) => `
+                <button type="button" data-slide="${idx}" aria-label="Go to photo ${idx + 1}"
+                        class="carousel-dot h-2 rounded-full transition-all duration-300 cursor-pointer ${idx === 0 ? 'w-5 bg-pink-400' : 'w-2 bg-white/50 hover:bg-white/80'}"></button>
+            `).join('');
+
+            const hasMultiple = safePhotos.length > 1;
+            prevBtn.classList.toggle('hidden', !hasMultiple);
+            nextBtn.classList.toggle('hidden', !hasMultiple);
+            dotsContainer.classList.toggle('hidden', !hasMultiple);
+            counterBadge.classList.toggle('hidden', !hasMultiple);
+
+            function goToSlide(index) {
+                currentSlideIndex = (index + safePhotos.length) % safePhotos.length;
+                track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+                counterBadge.textContent = `${currentSlideIndex + 1} / ${safePhotos.length}`;
+
+                dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, dIdx) => {
+                    if (dIdx === currentSlideIndex) {
+                        dot.className = 'carousel-dot h-2 w-5 rounded-full bg-pink-400 transition-all duration-300 cursor-pointer';
+                    } else {
+                        dot.className = 'carousel-dot h-2 w-2 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300 cursor-pointer';
+                    }
+                });
+            }
+
+            function resetAutoSlide() {
+                clearInterval(carouselAutoTimer);
+                if (hasMultiple) {
+                    carouselAutoTimer = setInterval(() => goToSlide(currentSlideIndex + 1), 3800);
+                }
+            }
+
+            prevBtn.onclick = () => {
+                goToSlide(currentSlideIndex - 1);
+                resetAutoSlide();
+            };
+            nextBtn.onclick = () => {
+                goToSlide(currentSlideIndex + 1);
+                resetAutoSlide();
+            };
+
+            dotsContainer.querySelectorAll('.carousel-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    goToSlide(parseInt(dot.getAttribute('data-slide'), 10));
+                    resetAutoSlide();
+                });
+            });
+
+            // Mobile touch swipe support
+            const container = document.getElementById('photoCarouselContainer');
+            let touchStartX = 0;
+            container.ontouchstart = (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            };
+            container.ontouchend = (e) => {
+                if (!hasMultiple) return;
+                const diffX = e.changedTouches[0].screenX - touchStartX;
+                if (Math.abs(diffX) > 40) {
+                    goToSlide(diffX < 0 ? currentSlideIndex + 1 : currentSlideIndex - 1);
+                    resetAutoSlide();
+                }
+            };
+
+            goToSlide(0);
+            resetAutoSlide();
         }
 
         // Default to 26th automatically if today is already the 26th or later
