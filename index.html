@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Celebration!</title>
+    <title>25th & 26th Double Birthday Surprise!</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter, Playfair Display, and Pacifico -->
@@ -40,7 +40,6 @@
     </script>
 
     <style>
-        /* Custom animations & specialized 3D cake / flame styles */
         body {
             background: radial-gradient(circle at top left, #2a114b, #13072e 50%, #090318 100%);
             color: #ffffff;
@@ -48,7 +47,6 @@
             min-height: 100vh;
         }
 
-        /* Animated Aurora Background Orbs */
         .aurora-orb {
             position: fixed;
             border-radius: 50%;
@@ -63,7 +61,6 @@
             100% { transform: translate(40px, -40px) scale(1.15); }
         }
 
-        /* Glassmorphism utility */
         .glass-card {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(16px);
@@ -73,13 +70,12 @@
         }
 
         .glass-panel {
-            background: rgba(19, 7, 46, 0.85);
+            background: rgba(19, 7, 46, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Floating Balloons */
         .balloon {
             position: fixed;
             bottom: -150px;
@@ -123,7 +119,6 @@
             transform: scale(1.03);
         }
 
-        /* Cake Plate */
         .cake-plate {
             position: absolute;
             bottom: 10px;
@@ -136,7 +131,6 @@
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
         }
 
-        /* Bottom Tier */
         .tier-bottom {
             position: absolute;
             bottom: 22px;
@@ -159,7 +153,6 @@
             border-radius: 50%;
         }
 
-        /* Frosting Drips Bottom */
         .icing-bottom {
             position: absolute;
             top: 0;
@@ -171,7 +164,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* Top Tier */
         .tier-top {
             position: absolute;
             bottom: 92px;
@@ -203,7 +195,6 @@
             border-radius: 14px 14px 10px 10px;
         }
 
-        /* Candles */
         .candles-row {
             position: absolute;
             bottom: 152px;
@@ -242,7 +233,6 @@
             background: #1e293b;
         }
 
-        /* Realistic Flickering Flame */
         .flame {
             position: absolute;
             top: -28px;
@@ -267,7 +257,6 @@
             100% { transform: translateX(-50%) scale(1.08) rotate(3deg); }
         }
 
-        /* Smoke puff when blown out */
         .smoke {
             position: absolute;
             top: -24px;
@@ -287,7 +276,6 @@
             100% { opacity: 0; transform: translate(-30%, -45px) scale(2.8); }
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -313,20 +301,19 @@
     <!-- Floating Balloons Container -->
     <div id="balloonsContainer" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
 
-    <!-- Custom Toast Notification (No alert() used) -->
+    <!-- Custom Toast Notification -->
     <div id="toastBanner" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 translate-y-6 pointer-events-none">
         <div class="glass-panel px-5 py-3 rounded-full shadow-2xl border border-pink-400/40 flex items-center gap-3 text-sm font-medium text-white">
             <i id="toastIcon" class="fa-solid fa-sparkles text-amber-400"></i>
-            <span id="toastMessage">Link copied to clipboard!</span>
+            <span id="toastMessage">Celebration ready!</span>
         </div>
     </div>
 
     <!-- =====================================================================
-         1. CELEBRATORY ENTRANCE SCREEN ("Tap to Open Your Birthday Surprise!")
+         1. CELEBRATORY ENTRANCE SCREEN
     ====================================================================== -->
     <div id="entranceScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#1b0938] via-[#2b0f54] to-[#120626] transition-all duration-700">
         <div class="max-w-md w-full glass-card rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden">
-            <!-- Decorative Shimmer -->
             <div class="absolute -top-24 -right-24 w-48 h-48 bg-pink-500/20 rounded-full blur-2xl"></div>
             <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-amber-400/20 rounded-full blur-2xl"></div>
 
@@ -334,33 +321,32 @@
                 <i class="fa-solid fa-gift text-4xl text-white"></i>
             </div>
 
-            <p class="uppercase tracking-widest text-xs font-semibold text-pink-300 mb-2">Special Delivery For</p>
-            <h1 id="entranceRecipient" class="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">
-                Someone Special
+            <p class="uppercase tracking-widest text-xs font-semibold text-pink-300 mb-2">Two-Day Birthday Surprise</p>
+            <h1 id="entranceHeadline" class="font-serif text-2xl sm:text-3xl font-bold text-white mb-3 leading-snug">
+                For Little Angel & Bestie
             </h1>
             <p class="text-purple-200/80 text-sm sm:text-base mb-8 leading-relaxed">
-                A magical birthday surprise has been prepared just for you. Turn up your sound and tap below to unwrap it!
+                Two magical birthday surprises await on the <strong class="text-amber-300">25th</strong> and <strong class="text-pink-300">26th</strong>! Turn up your sound and tap below to unwrap.
             </p>
 
             <button id="openSurpriseBtn" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-amber-500 hover:from-pink-400 hover:to-amber-400 text-white font-semibold text-lg shadow-xl shadow-pink-500/25 transform transition hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 cursor-pointer">
-                <span>Tap to Open Your Surprise!</span>
+                <span>Tap to Open Surprise!</span>
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
             </button>
         </div>
     </div>
 
     <!-- =====================================================================
-         TOP FLOATING CONTROLS (Music Toggle Only - Clean Recipient View)
+         TOP FLOATING CONTROLS (Music Toggle Only)
     ====================================================================== -->
     <header class="fixed top-4 right-4 left-4 z-30 flex justify-between items-center max-w-6xl mx-auto pointer-events-none">
         <div class="glass-card px-4 py-2 rounded-full flex items-center gap-2 pointer-events-auto">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="text-xs font-medium tracking-wide text-purple-100">Birthday Edition</span>
+            <span class="text-xs font-medium tracking-wide text-purple-100">25th & 26th Special</span>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3 pointer-events-auto">
-            <!-- Music Mute/Unmute Toggle -->
-            <button id="audioToggleBtn" aria-label="Toggle Birthday Music" class="glass-card hover:bg-white/15 px-4 py-2.5 rounded-full text-white transition transform active:scale-95 flex items-center gap-2 cursor-pointer shadow-lg" title="Play/Pause Birthday Melody">
+            <button id="audioToggleBtn" aria-label="Toggle Birthday Music" class="glass-card hover:bg-white/15 px-4 py-2.5 rounded-full text-white transition transform active:scale-95 flex items-center gap-2 cursor-pointer shadow-lg">
                 <i id="audioIcon" class="fa-solid fa-volume-xmark text-pink-300"></i>
                 <span id="audioLabel" class="text-xs font-medium">Music Off</span>
             </button>
@@ -370,147 +356,154 @@
     <!-- =====================================================================
          MAIN CELEBRATION EXPERIENCE
     ====================================================================== -->
-    <main id="mainContent" class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-20 space-y-16 sm:space-y-24">
+    <main id="mainContent" class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-20 space-y-14 sm:space-y-20">
 
-        <!-- HERO SECTION -->
-        <section class="text-center space-y-6 pt-4">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-200 text-xs sm:text-sm font-medium animate-float">
-                <i class="fa-solid fa-sparkles text-amber-300"></i>
-                <span id="displayTagline">Today is all about celebrating YOU!</span>
-            </div>
-
-            <h1 class="font-script text-5xl sm:text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-300 to-purple-300 drop-shadow-[0_5px_25px_rgba(236,72,153,0.4)] py-2 leading-tight">
-                Happy Birthday, <br class="sm:hidden">
-                <span id="displayRecipient" class="underline decoration-pink-500/40 decoration-wavy underline-offset-8">My Dear Friend</span>!
-            </h1>
-
-            <p class="max-w-2xl mx-auto text-base sm:text-lg text-purple-100/85 font-light leading-relaxed">
-                May your day be overflowing with laughter, unforgettable moments, and every happiness your heart wishes for.
-            </p>
-
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <button id="triggerFireworksBtn" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-pink-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/25 hover:scale-105 active:scale-95 transition flex items-center gap-2 cursor-pointer">
-                    <i class="fa-solid fa-fire-flame-curved"></i>
-                    <span>Launch Fireworks</span>
+        <!-- STAGE SWITCHER TABS: DAY 1 (25th) vs DAY 2 (26th) -->
+        <section class="max-w-2xl mx-auto space-y-4">
+            <div class="grid grid-cols-2 gap-3 sm:gap-4 p-2 rounded-3xl glass-card">
+                <!-- Tab 1: 25th (Daughter's 2nd Birthday) -->
+                <button id="tabDay1Btn" type="button" class="py-3.5 px-4 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer text-center border">
+                    <div class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+                        <i id="tabDay1Icon" class="fa-solid fa-crown text-amber-300"></i>
+                        <span id="tabDay1DateLabel">25th • Part 1</span>
+                    </div>
+                    <span id="tabDay1NameLabel" class="font-serif text-sm sm:text-base font-bold truncate max-w-full">2nd Birthday</span>
                 </button>
-                <a href="#cakeSection" class="px-6 py-3 rounded-full glass-card hover:bg-white/15 text-white font-medium text-sm transition flex items-center gap-2">
-                    <i class="fa-solid fa-cake-candles text-pink-300"></i>
-                    <span>Make a Wish</span>
-                </a>
+
+                <!-- Tab 2: 26th (Best Friend's Birthday) -->
+                <button id="tabDay2Btn" type="button" class="py-3.5 px-4 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer text-center border">
+                    <div class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+                        <i id="tabDay2Icon" class="fa-solid fa-lock text-pink-300"></i>
+                        <span id="tabDay2DateLabel">26th • Part 2</span>
+                    </div>
+                    <span id="tabDay2NameLabel" class="font-serif text-sm sm:text-base font-bold truncate max-w-full">Bestie's Day</span>
+                </button>
             </div>
         </section>
 
-        <!-- INTERACTIVE 3D-STYLE BIRTHDAY CAKE SECTION -->
-        <section id="cakeSection" class="glass-card rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden">
-            <div class="max-w-xl mx-auto space-y-3 mb-8">
-                <span class="text-xs uppercase tracking-widest text-amber-300 font-semibold">Interactive Wish Ritual</span>
-                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Make a Wish & Blow the Candles</h2>
-                <p id="cakeInstruction" class="text-sm text-purple-200/80">
-                    Tap on each glowing candle flame to blow it out, or use your microphone to blow them out together!
+        <!-- =================================================================
+             LOCKED COUNTDOWN VIEW (Shown when selected date hasn't arrived yet)
+        ================================================================== -->
+        <section id="lockedCountdownSection" class="hidden max-w-2xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6 border border-amber-400/30 relative overflow-hidden">
+                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-amber-500/30 to-pink-500/30 border border-amber-300/40 flex items-center justify-center text-3xl text-amber-300 animate-pulse">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <span id="lockedBadgeText" class="inline-block px-3.5 py-1 rounded-full bg-amber-400/15 text-amber-300 text-xs font-semibold uppercase tracking-wider">
+                        Surprise Unlocks on the 26th!
+                    </span>
+                    <h2 id="lockedTitleText" class="font-serif text-3xl sm:text-4xl font-bold text-white">
+                        Next Birthday Surprise Coming Soon!
+                    </h2>
+                    <p id="lockedSubtitleText" class="text-sm sm:text-base text-purple-200/80 max-w-md mx-auto">
+                        This special chapter will automatically unlock at midnight on the 26th!
+                    </p>
+                </div>
+
+                <!-- Live Countdown Timer Boxes -->
+                <div class="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-md mx-auto pt-2">
+                    <div class="p-3 sm:p-4 rounded-2xl bg-white/10 border border-white/15">
+                        <div id="cdDays" class="font-serif text-2xl sm:text-4xl font-bold text-amber-300">00</div>
+                        <div class="text-[11px] uppercase tracking-wider text-purple-200/75 mt-1">Days</div>
+                    </div>
+                    <div class="p-3 sm:p-4 rounded-2xl bg-white/10 border border-white/15">
+                        <div id="cdHours" class="font-serif text-2xl sm:text-4xl font-bold text-pink-300">00</div>
+                        <div class="text-[11px] uppercase tracking-wider text-purple-200/75 mt-1">Hours</div>
+                    </div>
+                    <div class="p-3 sm:p-4 rounded-2xl bg-white/10 border border-white/15">
+                        <div id="cdMinutes" class="font-serif text-2xl sm:text-4xl font-bold text-purple-300">00</div>
+                        <div class="text-[11px] uppercase tracking-wider text-purple-200/75 mt-1">Mins</div>
+                    </div>
+                    <div class="p-3 sm:p-4 rounded-2xl bg-white/10 border border-white/15">
+                        <div id="cdSeconds" class="font-serif text-2xl sm:text-4xl font-bold text-sky-300">00</div>
+                        <div class="text-[11px] uppercase tracking-wider text-purple-200/75 mt-1">Secs</div>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button id="switchToUnlockedBtn" type="button" class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-xs sm:text-sm font-medium text-pink-200 transition cursor-pointer">
+                        <i class="fa-solid fa-arrow-left mr-1.5"></i> Back to 25th Celebration
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             UNLOCKED CELEBRATION CONTENT (Changes dynamically for 25th vs 26th)
+        ================================================================== -->
+        <div id="unlockedCelebrationWrapper" class="space-y-16 sm:space-y-24">
+
+            <!-- HERO SECTION -->
+            <section class="text-center space-y-6 pt-2">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-200 text-xs sm:text-sm font-medium animate-float">
+                    <i class="fa-solid fa-sparkles text-amber-300"></i>
+                    <span id="displayTagline">25th Special • Turning 2 Today!</span>
+                </div>
+
+                <h1 class="font-script text-5xl sm:text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-300 to-purple-300 drop-shadow-[0_5px_25px_rgba(236,72,153,0.4)] py-2 leading-tight">
+                    Happy Birthday, <br class="sm:hidden">
+                    <span id="displayRecipient" class="underline decoration-pink-500/40 decoration-wavy underline-offset-8">Little Angel</span>!
+                </h1>
+
+                <p id="displayHeroSubtitle" class="max-w-2xl mx-auto text-base sm:text-lg text-purple-100/85 font-light leading-relaxed">
+                    Wishing the sweetest two-year-old a magical day filled with giggles, balloons, cake, and endless love!
                 </p>
-            </div>
 
-            <!-- 3D Cake Stage -->
-            <div class="cake-stage py-6 select-none">
-                <div class="cake-container" id="birthdayCake">
-                    <!-- 3 Interactive Candles -->
-                    <div class="candles-row" id="candlesRow">
-                        <div class="candle" data-candle="0" title="Tap to blow out">
-                            <div class="wick"></div>
-                            <div class="flame" id="flame-0"></div>
-                            <div class="smoke" id="smoke-0"></div>
-                        </div>
-                        <div class="candle" data-candle="1" title="Tap to blow out">
-                            <div class="wick"></div>
-                            <div class="flame" id="flame-1"></div>
-                            <div class="smoke" id="smoke-1"></div>
-                        </div>
-                        <div class="candle" data-candle="2" title="Tap to blow out">
-                            <div class="wick"></div>
-                            <div class="flame" id="flame-2"></div>
-                            <div class="smoke" id="smoke-2"></div>
-                        </div>
-                    </div>
-
-                    <!-- Top Tier -->
-                    <div class="tier-top">
-                        <div class="icing-top"></div>
-                    </div>
-
-                    <!-- Bottom Tier -->
-                    <div class="tier-bottom">
-                        <div class="icing-bottom"></div>
-                    </div>
-
-                    <!-- Cake Plate -->
-                    <div class="cake-plate"></div>
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <button id="triggerFireworksBtn" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-pink-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/25 hover:scale-105 active:scale-95 transition flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                        <span>Launch Fireworks</span>
+                    </button>
+                    <a href="#cakeSection" class="px-6 py-3 rounded-full glass-card hover:bg-white/15 text-white font-medium text-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-cake-candles text-pink-300"></i>
+                        <span>Cut the Cake & Make a Wish</span>
+                    </a>
                 </div>
-            </div>
+            </section>
 
-            <!-- Wish Granted Banner (Hidden until all candles blown) -->
-            <div id="wishGrantedBanner" class="hidden max-w-md mx-auto my-4 p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-pink-500/20 to-purple-500/20 border border-amber-300/40 animate-pulse">
-                <p class="font-serif text-xl font-bold text-amber-300">🎉 Your Wish Has Been Sent to the Stars! 🎉</p>
-                <p class="text-xs text-purple-100 mt-1">May every dream you wished for come true this year!</p>
-            </div>
-
-            <!-- Cake Controls (Mic Blow Detection + Relight) -->
-            <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-                <button id="micBlowBtn" class="px-5 py-2.5 rounded-full bg-pink-500/25 hover:bg-pink-500/40 border border-pink-400/40 text-pink-100 text-xs sm:text-sm font-medium transition flex items-center gap-2 cursor-pointer">
-                    <i class="fa-solid fa-microphone"></i>
-                    <span id="micBtnText">Blow via Microphone</span>
-                </button>
-                <button id="blowAllBtn" class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-medium transition flex items-center gap-2 cursor-pointer">
-                    <i class="fa-solid fa-wind text-sky-300"></i>
-                    <span>Blow All Candles</span>
-                </button>
-                <button id="relightBtn" class="hidden px-5 py-2.5 rounded-full bg-amber-500/25 hover:bg-amber-500/40 border border-amber-400/40 text-amber-200 text-xs sm:text-sm font-medium transition flex items-center gap-2 cursor-pointer">
-                    <i class="fa-solid fa-fire"></i>
-                    <span>Relight Candles</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- HEARTFELT GREETING CARD & PHOTO MEMORY SECTION -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <!-- Photo / Memory Frame -->
-            <div class="lg:col-span-5">
-                <div class="glass-card p-4 rounded-3xl transform -rotate-1 hover:rotate-0 transition duration-500">
-                    <div class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-purple-950/60">
-                        <img id="displayPhoto"
-                             src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x750/2e1065/f472b6?text=Happy+Birthday!';"
-                             alt="Birthday Celebration Memory"
-                             class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#13072e] via-transparent to-transparent opacity-75"></div>
-                        <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-xs text-pink-200 border border-white/10">
-                                <i class="fa-solid fa-heart text-rose-400 mr-1"></i> Cherished Moments
-                            </span>
-                            <span class="text-xs text-white/80 font-mono">✨ Celebrating You</span>
+            <!-- HEARTFELT GREETING CARD & PHOTO MEMORY SECTION -->
+            <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Photo Frame -->
+                <div class="lg:col-span-5">
+                    <div class="glass-card p-4 rounded-3xl transform -rotate-1 hover:rotate-0 transition duration-500">
+                        <div class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-purple-950/60">
+                            <img id="displayPhoto"
+                                 src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=80"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x750/2e1065/f472b6?text=Happy+Birthday!';"
+                                 alt="Birthday Celebration Photo"
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#13072e] via-transparent to-transparent opacity-75"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                <span id="photoBadgeLeft" class="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-xs text-pink-200 border border-white/10">
+                                    <i class="fa-solid fa-heart text-rose-400 mr-1"></i> Turning 2!
+                                </span>
+                                <span id="photoBadgeRight" class="text-xs text-white/80 font-mono">✨ 25th Celebration</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Heartfelt Letter Card -->
-            <div class="lg:col-span-7">
-                <div class="glass-card rounded-3xl p-8 sm:p-10 relative">
-                    <i class="fa-solid fa-quote-left text-4xl text-pink-400/30 absolute top-6 left-6"></i>
-                    
-                    <div class="relative z-10 space-y-6">
-                        <div class="inline-block px-3 py-1 rounded-lg bg-amber-400/15 text-amber-300 text-xs font-semibold uppercase tracking-wider">
-                            A Special Note For You
-                        </div>
+                <!-- Heartfelt Letter Card -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card rounded-3xl p-8 sm:p-10 relative">
+                        <i class="fa-solid fa-quote-left text-4xl text-pink-400/30 absolute top-6 left-6"></i>
+                        
+                        <div class="relative z-10 space-y-6">
+                            <div id="cardTopBadge" class="inline-block px-3 py-1 rounded-lg bg-amber-400/15 text-amber-300 text-xs font-semibold uppercase tracking-wider">
+                                2nd Birthday Wishes • 25th
+                            </div>
 
-                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">
-                            Dearest <span id="cardRecipientName" class="text-pink-300">My Dear Friend</span>,
-                        </h3>
+                            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">
+                                Dearest <span id="cardRecipientName" class="text-pink-300">Little Angel</span>,
+                            </h3>
 
-                        <p id="displayMessage" class="text-purple-100/90 text-base sm:text-lg leading-relaxed whitespace-pre-line font-light">
-                            On your special day, I want you to know how truly appreciated and celebrated you are. Thank you for filling life with warmth, laughter, and unforgettable memories. May this new chapter bring you endless joy, vibrant health, and every success you dream of!
-                        </p>
+                            <p id="displayMessage" class="text-purple-100/90 text-base sm:text-lg leading-relaxed whitespace-pre-line font-light">
+                                Happy 2nd Birthday to the brightest little sunshine! Two years ago you arrived and filled everyone's world with pure magic, tiny footsteps, and the cutest smiles.
+                            </p>
 
-                        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <p class="text-xs uppercase tracking-widest text-purple-300">With warmest wishes,</p>
                                 <p id="displaySender" class="font-script text-2xl text-amber-300 mt-1">Your Best Friend</p>
@@ -520,9 +513,6 @@
                                     <i class="fa-solid fa-heart text-rose-400"></i>
                                     <span>Send Birthday Love</span>
                                 </button>
-                                <a href="#replySection" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400/20 to-pink-500/25 hover:from-amber-400/30 hover:to-pink-500/35 border border-amber-300/35 text-amber-200 text-xs font-semibold transition flex items-center gap-2">
-                                    <span>Write a Reply 💌</span>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -532,140 +522,164 @@
 
         <!-- FESTIVE BLESSING & WISH CARDS -->
         <section class="space-y-6">
-            <div class="text-center">
-                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white">Three Wishes for Your Year Ahead</h2>
-                <p class="text-sm text-purple-200/75 mt-1">Tap any card to reveal a special birthday blessing</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Wish Card 1 -->
-                <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '✨ Endless Adventures & New Horizons!')">
-                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
-                        <i class="fa-solid fa-compass"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-2">Boundless Joy</h3>
-                    <p class="text-sm text-purple-200/80 leading-relaxed">
-                        May every sunrise bring new reasons to smile and every moment turn into a cherished memory.
-                    </p>
+                <div class="text-center">
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white">Three Special Blessings</h2>
+                    <p class="text-sm text-purple-200/75 mt-1">Tap any card to celebrate with confetti</p>
                 </div>
 
-                <!-- Wish Card 2 -->
-                <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '🚀 Unstoppable Success & Big Dreams!')">
-                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-pink-500/20 text-pink-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
-                        <i class="fa-solid fa-star"></i>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '✨ Endless Smiles & Sweet Adventures!')">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Boundless Joy</h3>
+                        <p class="text-sm text-purple-200/80 leading-relaxed">
+                            May every single day bring bright laughter, sweet surprises, and unforgettable memories.
+                        </p>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-2">Shining Success</h3>
-                    <p class="text-sm text-purple-200/80 leading-relaxed">
-                        May all your hard work bloom into extraordinary achievements and everything you touch turn to gold.
-                    </p>
-                </div>
 
-                <!-- Wish Card 3 -->
-                <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '💖 Deep Love, Peace & Good Health!')">
-                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
-                        <i class="fa-solid fa-heart-pulse"></i>
+                    <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '🌟 Bright Future & Big Dreams!')">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-pink-500/20 text-pink-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Shining Blessings</h3>
+                        <p class="text-sm text-purple-200/80 leading-relaxed">
+                            May good health, happiness, and wonderful milestones follow every step of the way.
+                        </p>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-2">Love & Harmony</h3>
-                    <p class="text-sm text-purple-200/80 leading-relaxed">
-                        May you always be surrounded by people who uplift, inspire, and celebrate the wonderful person you are.
-                    </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- =================================================================
-             PERSISTENT REPLY & THANK-YOU NOTE SECTION (Saved in Cloud)
-        ================================================================== -->
-        <section id="replySection" class="max-w-3xl mx-auto">
-            <div class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden border border-pink-400/25">
-                <div class="text-center space-y-2 mb-8">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/20 text-pink-200 text-xs font-semibold uppercase tracking-wider">
-                        <i class="fa-solid fa-paper-plane text-amber-300"></i> Birthday Reply
-                    </span>
-                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white">
-                        Write a Reply Back to <span id="replySenderTarget" class="text-amber-300">Your Best Friend</span>
-                    </h2>
-                    <p class="text-sm text-purple-200/80">
-                        Leave a thank-you note or birthday thoughts below — it stays saved right here on this page!
-                    </p>
-                </div>
-
-                <!-- Reply Submission Form -->
-                <form id="replyForm" class="space-y-4">
-                    <div>
-                        <label for="replyTextInput" class="sr-only">Your Reply Message</label>
-                        <textarea id="replyTextInput" rows="3" required placeholder="Type your reply message here... (e.g., Thank you so much for this lovely surprise! 💖)" class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400 focus:bg-white/15 transition resize-none text-sm sm:text-base"></textarea>
-                    </div>
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <span id="replyStorageStatus" class="text-xs text-purple-300/80 flex items-center gap-1.5">
-                            <i id="replyStorageIcon" class="fa-solid fa-spinner fa-spin text-amber-300"></i>
-                            <span id="replyStorageText">Connecting to reply storage...</span>
-                        </span>
-                        <button type="submit" id="submitReplyBtn" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 hover:from-pink-400 hover:to-amber-400 text-white font-semibold text-sm shadow-lg shadow-pink-500/25 transform transition hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer">
-                            <span>Send & Save Reply</span>
+                    <div class="wish-card glass-card rounded-2xl p-6 text-center hover:-translate-y-1.5 transition duration-300 cursor-pointer group" onclick="celebrateCard(this, '💖 Forever Cherished & Loved!')">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-2xl group-hover:scale-110 transition">
                             <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Endless Love</h3>
+                        <p class="text-sm text-purple-200/80 leading-relaxed">
+                            May you always be surrounded by warmth, kindness, and people who adore you endlessly.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTERACTIVE 3D-STYLE BIRTHDAY CAKE SECTION -->
+            <section id="cakeSection" class="max-w-2xl mx-auto">
+                <div class="glass-card rounded-3xl p-8 sm:p-10 text-center space-y-6 relative overflow-hidden">
+                    <div class="space-y-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/15 text-amber-300 text-xs font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-cake-candles"></i> Make a Birthday Wish
+                        </span>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white">Blow Out the Candles!</h2>
+                        <p id="cakeInstruction" class="text-sm text-purple-200/80">
+                            Tap on each glowing candle flame to blow it out, or use your microphone!
+                        </p>
+                    </div>
+
+                    <!-- Interactive Cake Stage -->
+                    <div class="cake-stage py-4">
+                        <div class="cake-container">
+                            <div class="candles-row">
+                                <div class="candle" data-candle="0" title="Tap to blow out candle">
+                                    <div class="wick"></div>
+                                    <div id="flame-0" class="flame"></div>
+                                    <div id="smoke-0" class="smoke"></div>
+                                </div>
+                                <div class="candle" data-candle="1" title="Tap to blow out candle">
+                                    <div class="wick"></div>
+                                    <div id="flame-1" class="flame"></div>
+                                    <div id="smoke-1" class="smoke"></div>
+                                </div>
+                                <div class="candle" data-candle="2" title="Tap to blow out candle">
+                                    <div class="wick"></div>
+                                    <div id="flame-2" class="flame"></div>
+                                    <div id="smoke-2" class="smoke"></div>
+                                </div>
+                            </div>
+                            <div class="tier-top"><div class="icing-top"></div></div>
+                            <div class="tier-bottom"><div class="icing-bottom"></div></div>
+                            <div class="cake-plate"></div>
+                        </div>
+                    </div>
+
+                    <!-- Wish Granted Banner -->
+                    <div id="wishGrantedBanner" class="hidden p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-pink-500/20 to-purple-500/20 border border-amber-300/40 text-amber-200 font-medium text-sm sm:text-base animate-pulse">
+                        🎉 Yay! May all your sweetest birthday wishes come true! 🎉
+                    </div>
+
+                    <!-- Cake Action Controls -->
+                    <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                        <button id="blowAllBtn" type="button" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500 to-amber-500 text-white font-semibold text-xs sm:text-sm shadow-lg hover:scale-105 active:scale-95 transition flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-wind"></i>
+                            <span>Blow All Candles</span>
+                        </button>
+                        <button id="micBlowBtn" type="button" class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-purple-100 font-medium text-xs sm:text-sm transition flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-microphone text-pink-300"></i>
+                            <span id="micBtnText">Blow via Microphone</span>
+                        </button>
+                        <button id="relightBtn" type="button" class="hidden px-5 py-2.5 rounded-full bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/30 text-amber-200 font-medium text-xs sm:text-sm transition flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-fire"></i>
+                            <span>Relight Candles</span>
                         </button>
                     </div>
-                </form>
-
-                <!-- Saved Replies Display List (Always visible with clear loading/empty/populated states) -->
-                <div id="savedRepliesWrapper" class="mt-8 pt-6 border-t border-white/10 space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                        <h3 class="text-xs font-semibold uppercase tracking-widest text-amber-300 flex items-center gap-2">
-                            <i class="fa-solid fa-envelope-open-text"></i>
-                            <span>Saved Replies (<span id="replyCount">0</span>)</span>
-                        </h3>
-                        <span id="replySyncBadge" class="text-[11px] text-purple-300/70">Visible whenever this link is opened</span>
-                    </div>
-
-                    <!-- Loading Indicator -->
-                    <div id="repliesLoadingState" class="py-6 text-center text-sm text-purple-200/80 flex items-center justify-center gap-2.5">
-                        <i class="fa-solid fa-circle-notch fa-spin text-pink-400"></i>
-                        <span>Loading replies...</span>
-                    </div>
-
-                    <!-- Empty State -->
-                    <div id="repliesEmptyState" class="hidden py-6 px-4 rounded-2xl bg-white/5 border border-dashed border-white/15 text-center text-sm text-purple-200/75">
-                        No replies yet — write a message above! 💌
-                    </div>
-
-                    <!-- Replies Cards Container -->
-                    <div id="savedRepliesList" class="space-y-3">
-                        <!-- Dynamically populated -->
-                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+        </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="relative z-20 border-t border-white/10 py-8 text-center text-xs text-purple-300/70 px-4">
-        <p>Crafted with <i class="fa-solid fa-heart text-pink-400 mx-1"></i> to celebrate an unforgettable birthday.</p>
+    <!-- FOOTER (Includes discreet preview button for creator testing) -->
+    <footer class="relative z-20 border-t border-white/10 py-8 text-center text-xs text-purple-300/70 px-4 space-y-3">
+        <p>Crafted with <i class="fa-solid fa-heart text-pink-400 mx-1"></i> for the 25th & 26th Birthday Celebrations.</p>
+        <div>
+            <button id="togglePreviewBtn" type="button" class="text-[11px] text-purple-300/50 hover:text-amber-300 underline transition cursor-pointer">
+                Preview Locked Dates (Test Mode)
+            </button>
+        </div>
     </footer>
 
     <!-- =====================================================================
-         MODULE SCRIPT: EASY CONFIG + FIREBASE PERSISTENT REPLIES + INTERACTIONS
+         MODULE SCRIPT: EASY CONFIG + SEPARATE DATE UNLOCK + CELEBRATIONS
     ====================================================================== -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
         // =====================================================================
-        // ✏️ CREATOR CONFIGURATION: EDIT THESE DETAILS FOR YOUR SPECIAL PERSON
+        // ✏️ CREATOR CONFIGURATION: EDIT NAMES, PHOTOS, DATES & MESSAGES HERE
         // =====================================================================
         const BIRTHDAY_CONFIG = {
-            recipientName: "Ananya",                                   // 👈 Change to Birthday Person's Name
-            senderName: "Karthik",                                     // 👈 Change to Your Name
-            tagline: "Today is all about celebrating YOU! ✨",         // 👈 Short top badge text
-            photoUrl: ".Screenshot2026-06-10 153430.png", // 👈 Paste their Photo URL or local file path (e.g., "./photo.jpg")
-            message: `On your special day, I want you to know how truly appreciated and celebrated you are.\n\nThank you for filling life with warmth, laughter, and unforgettable memories. May this new chapter bring you endless joy, vibrant health, and every success you dream of!` // 👈 Write your heartfelt birthday message here
+            senderName: "Karthik",               // 👈 Your Name
+            celebrationYear: 2026,               // 👈 Year (e.g., 2026)
+            celebrationMonth: 11,                // 👈 Month Number (1 = Jan, ..., 11 = Nov, 12 = Dec)
+
+            // 🎂 PART 1: 25th — Best Friend's Daughter's 2nd Birthday
+            day1: {
+                dayOfMonth: 25,
+                dateLabel: "25th • 2nd Birthday",
+                name: "Aadhya",                  // 👈 Daughter's Name
+                tagline: "25th Celebration • Turning 2 Today! 👑",
+                heroSubtitle: "Wishing the sweetest little princess a magical 2nd birthday filled with giggles, balloons, and endless love!",
+                photoUrl: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=80", // 👈 Daughter's Photo URL
+                photoBadge: "Turning 2! 🎂",
+                message: `Happy 2nd Birthday to the brightest little sunshine!\n\nTwo years ago you arrived and filled everyone's world with pure magic, tiny footsteps, and the cutest smiles. May you always grow up surrounded by endless love, joy, and laughter!`
+            },
+
+            // 🎉 PART 2: 26th — Best Friend's Birthday (Unlocks with timer on the 26th!)
+            day2: {
+                dayOfMonth: 26,
+                dateLabel: "26th • Bestie's Birthday",
+                name: "Ananya",                  // 👈 Best Friend's Name
+                tagline: "26th Celebration • Best Friend's Special Day! ✨",
+                heroSubtitle: "Yesterday we celebrated your little one, and today is all about celebrating YOU — the most amazing best friend!",
+                photoUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80", // 👈 Best Friend's Photo URL
+                photoBadge: "Bestie's Day 💖",
+                message: `Happy Birthday to my wonderful best friend!\n\nSeeing you as such an amazing mom and an even more incredible friend makes me so proud. Thank you for every laugh, every late-night talk, and every unforgettable memory. May this year bring you boundless happiness, good health, and every dream your heart wishes for!`
+            }
         };
         // =====================================================================
 
+        let activeTab = 'day1'; // 'day1' (25th) or 'day2' (26th)
+        let forceUnlockPreview = false;
+        let countdownInterval = null;
+
         // -----------------------------------------------------------------
-        // 1. TOAST NOTIFICATION & APPLY BIRTHDAY_CONFIG TO PAGE
+        // 1. TOAST HELPER
         // -----------------------------------------------------------------
         let toastTimeout = null;
         function showToast(message, iconClass = "fa-solid fa-sparkles text-amber-400") {
@@ -687,273 +701,180 @@
             }, 3400);
         }
 
-        function applyBirthdayConfig() {
-            const setText = (id, value) => {
-                const el = document.getElementById(id);
-                if (el) el.textContent = value;
-            };
-
-            setText('entranceRecipient', BIRTHDAY_CONFIG.recipientName);
-            setText('displayRecipient', BIRTHDAY_CONFIG.recipientName);
-            setText('cardRecipientName', BIRTHDAY_CONFIG.recipientName);
-            setText('displaySender', BIRTHDAY_CONFIG.senderName);
-            setText('replySenderTarget', BIRTHDAY_CONFIG.senderName);
-            setText('displayTagline', BIRTHDAY_CONFIG.tagline);
-            setText('displayMessage', BIRTHDAY_CONFIG.message);
-
-            const photoEl = document.getElementById('displayPhoto');
-            if (photoEl && BIRTHDAY_CONFIG.photoUrl) {
-                photoEl.src = BIRTHDAY_CONFIG.photoUrl;
-            }
-            document.title = `Happy Birthday, ${BIRTHDAY_CONFIG.recipientName}! 🎉`;
-        }
-        applyBirthdayConfig();
-
         // -----------------------------------------------------------------
-        // 3. PERSISTENT CLOUD + INSTANT LOCAL CACHE FOR RECIPIENT REPLIES
+        // 2. DATE UNLOCK & COUNTDOWN TIMER LOGIC (25th & 26th)
         // -----------------------------------------------------------------
-        let db = null;
-        let currentUser = null;
-        let cloudReady = false;
-        let firstSnapshotReceived = false;
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'birthday-wishes-app';
-        const LOCAL_CACHE_KEY = `birthday_replies_cache_${appId}`;
+        function getTargetDate(dayOfMonth) {
+            return new Date(
+                BIRTHDAY_CONFIG.celebrationYear,
+                BIRTHDAY_CONFIG.celebrationMonth - 1,
+                dayOfMonth,
+                0, 0, 0, 0
+            );
+        }
 
-        let cloudReplies = [];
-        let localReplies = loadLocalCache();
+        function isDateUnlocked(dayKey) {
+            if (forceUnlockPreview) return true;
+            const cfg = BIRTHDAY_CONFIG[dayKey];
+            const now = new Date();
+            const unlockTime = getTargetDate(cfg.dayOfMonth);
+            return now.getTime() >= unlockTime.getTime();
+        }
 
-        function loadLocalCache() {
-            try {
-                const raw = localStorage.getItem(LOCAL_CACHE_KEY);
-                const parsed = raw ? JSON.parse(raw) : [];
-                return Array.isArray(parsed) ? parsed : [];
-            } catch {
-                return [];
+        function updateCountdownDisplay(targetDate) {
+            const now = new Date().getTime();
+            const diff = Math.max(0, targetDate.getTime() - now);
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
+            document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cdMinutes').textContent = String(mins).padStart(2, '0');
+            document.getElementById('cdSeconds').textContent = String(secs).padStart(2, '0');
+
+            // Auto-unlock right when timer hits 00:00:00:00
+            if (diff === 0 && !forceUnlockPreview) {
+                renderActiveStage();
+                launchFireworksSequence(6);
             }
         }
 
-        function saveLocalCache(items) {
-            try {
-                localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(items));
-            } catch (e) {
-                console.warn("Local cache write skipped:", e);
-            }
-        }
+        function renderActiveStage() {
+            const day1Unlocked = isDateUnlocked('day1');
+            const day2Unlocked = isDateUnlocked('day2');
 
-        function setStorageStatus(text, iconClass) {
-            const textEl = document.getElementById('replyStorageText');
-            const iconEl = document.getElementById('replyStorageIcon');
-            if (textEl) textEl.textContent = text;
-            if (iconEl) iconEl.className = iconClass;
-        }
+            // Update static labels
+            document.getElementById('entranceHeadline').textContent =
+                `For ${BIRTHDAY_CONFIG.day1.name} & ${BIRTHDAY_CONFIG.day2.name}`;
+            document.getElementById('displaySender').textContent = BIRTHDAY_CONFIG.senderName;
 
-        function formatTimestamp(ts) {
-            if (!ts) return 'Just now';
-            try {
-                const date = new Date(ts);
-                return date.toLocaleString(undefined, {
-                    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-                });
-            } catch {
-                return 'Saved';
-            }
-        }
+            document.getElementById('tabDay1DateLabel').textContent = BIRTHDAY_CONFIG.day1.dateLabel;
+            document.getElementById('tabDay1NameLabel').textContent = BIRTHDAY_CONFIG.day1.name;
+            document.getElementById('tabDay2DateLabel').textContent = BIRTHDAY_CONFIG.day2.dateLabel;
+            document.getElementById('tabDay2NameLabel').textContent = BIRTHDAY_CONFIG.day2.name;
 
-        function escapeHTML(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
+            // Tab Icons (Lock vs Crown/Heart)
+            document.getElementById('tabDay1Icon').className = day1Unlocked
+                ? "fa-solid fa-crown text-amber-300"
+                : "fa-solid fa-lock text-amber-300/70";
+            document.getElementById('tabDay2Icon').className = day2Unlocked
+                ? "fa-solid fa-heart text-pink-300"
+                : "fa-solid fa-lock text-pink-300/70";
 
-        function mergeAndRenderReplies() {
-            const loadingEl = document.getElementById('repliesLoadingState');
-            const emptyEl = document.getElementById('repliesEmptyState');
-            const listEl = document.getElementById('savedRepliesList');
-            const countEl = document.getElementById('replyCount');
+            // Tab Active Styling
+            const tab1Btn = document.getElementById('tabDay1Btn');
+            const tab2Btn = document.getElementById('tabDay2Btn');
 
-            // Merge cloud and local cache, deduplicating by clientId or (author + text + createdAt)
-            const mergedMap = new Map();
-            [...localReplies, ...cloudReplies].forEach(item => {
-                if (!item || !item.text) return;
-                const key = item.clientId || item.id || `${item.author}_${item.createdAt}_${item.text.slice(0, 20)}`;
-                mergedMap.set(key, item);
-            });
-
-            const allReplies = Array.from(mergedMap.values())
-                .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-
-            // Keep local cache updated with merged results
-            if (allReplies.length > 0) {
-                localReplies = allReplies;
-                saveLocalCache(allReplies);
-            }
-
-            countEl.textContent = allReplies.length;
-
-            if (allReplies.length > 0) {
-                loadingEl.classList.add('hidden');
-                emptyEl.classList.add('hidden');
-                listEl.innerHTML = allReplies.map(item => `
-                    <div class="p-4 sm:p-5 rounded-2xl bg-white/10 border border-pink-400/25 shadow-md space-y-2 transition">
-                        <div class="flex items-center justify-between text-xs text-pink-300">
-                            <span class="font-semibold flex items-center gap-1.5">
-                                <i class="fa-solid fa-heart text-rose-400"></i>
-                                From ${escapeHTML(item.author || BIRTHDAY_CONFIG.recipientName)}
-                            </span>
-                            <span class="text-purple-300/70">${formatTimestamp(item.createdAt)}</span>
-                        </div>
-                        <p class="text-white/95 text-sm sm:text-base leading-relaxed whitespace-pre-line">${escapeHTML(item.text)}</p>
-                    </div>
-                `).join('');
-            } else if (firstSnapshotReceived) {
-                loadingEl.classList.add('hidden');
-                emptyEl.classList.remove('hidden');
-                listEl.innerHTML = '';
+            if (activeTab === 'day1') {
+                tab1Btn.className = "py-3.5 px-4 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer text-center border bg-gradient-to-r from-amber-500/30 to-pink-500/30 border-amber-300/50 text-white shadow-lg";
+                tab2Btn.className = "py-3.5 px-4 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer text-center border bg-white/5 border-transparent text-purple-200/75 hover:bg-white/10";
             } else {
-                loadingEl.classList.remove('hidden');
-                emptyEl.classList.add('hidden');
-                listEl.innerHTML = '';
+                tab2Btn.className = "py-3.5 px-4 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer text-center border bg-gradient-to-r from-pink-500/30 to-purple-500/30 border-pink-300/50 text-white shadow-lg";
+                tab1Btn.className = "py-3.5 px-4 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer text-center border bg-white/5 border-transparent text-purple-200/75 hover:bg-white/10";
             }
-        }
 
-        // Render cached replies immediately on load while cloud connects
-        if (localReplies.length > 0) {
-            mergeAndRenderReplies();
-        }
+            const cfg = BIRTHDAY_CONFIG[activeTab];
+            const unlocked = isDateUnlocked(activeTab);
 
-        async function initPersistentReplies() {
-            try {
-                let parsedConfig = null;
-                if (typeof __firebase_config !== 'undefined' && __firebase_config) {
-                    parsedConfig = typeof __firebase_config === 'string'
-                        ? JSON.parse(__firebase_config)
-                        : __firebase_config;
-                }
+            const lockedSection = document.getElementById('lockedCountdownSection');
+            const unlockedWrapper = document.getElementById('unlockedCelebrationWrapper');
 
-                if (!parsedConfig || !parsedConfig.apiKey) {
-                    firstSnapshotReceived = true;
-                    setStorageStatus(
-                        "Saved locally on this device (open via shared link for cloud sync)",
-                        "fa-solid fa-floppy-disk text-amber-300"
-                    );
-                    mergeAndRenderReplies();
-                    return;
-                }
+            clearInterval(countdownInterval);
 
-                const app = initializeApp(parsedConfig);
-                const auth = getAuth(app);
-                db = getFirestore(app);
+            if (!unlocked) {
+                // Show Locked Countdown Timer Screen
+                lockedSection.classList.remove('hidden');
+                unlockedWrapper.classList.add('hidden');
 
-                // RULE 3: Authenticate FIRST before any Firestore operations
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    try {
-                        const cred = await signInWithCustomToken(auth, __initial_auth_token);
-                        currentUser = cred.user;
-                    } catch {
-                        const cred = await signInAnonymously(auth);
-                        currentUser = cred.user;
-                    }
+                document.getElementById('lockedBadgeText').textContent =
+                    `Unlocks on the ${cfg.dayOfMonth}th!`;
+                document.getElementById('lockedTitleText').textContent =
+                    `${cfg.name}'s Birthday Surprise`;
+                document.getElementById('lockedSubtitleText').textContent =
+                    `This special birthday chapter will automatically open at 12:00 AM on the ${cfg.dayOfMonth}th!`;
+
+                const switchBtn = document.getElementById('switchToUnlockedBtn');
+                if (activeTab === 'day2' && day1Unlocked) {
+                    switchBtn.classList.remove('hidden');
+                    switchBtn.innerHTML = `<i class="fa-solid fa-arrow-left mr-1.5"></i> View ${BIRTHDAY_CONFIG.day1.name}'s ${BIRTHDAY_CONFIG.day1.dayOfMonth}th Surprise`;
                 } else {
-                    const cred = await signInAnonymously(auth);
-                    currentUser = cred.user;
+                    switchBtn.classList.add('hidden');
                 }
 
-                if (!currentUser) {
-                    throw new Error("Authentication returned no user.");
+                const targetDate = getTargetDate(cfg.dayOfMonth);
+                updateCountdownDisplay(targetDate);
+                countdownInterval = setInterval(() => updateCountdownDisplay(targetDate), 1000);
+            } else {
+                // Show Full Celebration Content for the selected person
+                lockedSection.classList.add('hidden');
+                unlockedWrapper.classList.remove('hidden');
+
+                document.getElementById('displayTagline').textContent = cfg.tagline;
+                document.getElementById('displayRecipient').textContent = cfg.name;
+                document.getElementById('cardRecipientName').textContent = cfg.name;
+                document.getElementById('displayHeroSubtitle').textContent = cfg.heroSubtitle;
+                document.getElementById('displayMessage').textContent = cfg.message;
+                document.getElementById('photoBadgeLeft').innerHTML =
+                    `<i class="fa-solid fa-heart text-rose-400 mr-1"></i> ${cfg.photoBadge}`;
+                document.getElementById('photoBadgeRight').textContent = `✨ ${cfg.dayOfMonth}th Celebration`;
+                document.getElementById('cardTopBadge').textContent = cfg.dateLabel;
+
+                const photoEl = document.getElementById('displayPhoto');
+                if (photoEl && cfg.photoUrl) {
+                    photoEl.src = cfg.photoUrl;
                 }
 
-                cloudReady = true;
-                setStorageStatus(
-                    "Replies are saved permanently on this link",
-                    "fa-solid fa-cloud-check text-emerald-400"
-                );
-
-                // RULE 1 & RULE 2: Strict public artifact path, simple collection query (no orderBy)
-                const repliesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'birthday_replies');
-
-                onSnapshot(repliesColRef, (snapshot) => {
-                    firstSnapshotReceived = true;
-                    const items = [];
-                    snapshot.forEach(docSnap => {
-                        items.push({ id: docSnap.id, ...docSnap.data() });
-                    });
-                    cloudReplies = items;
-                    mergeAndRenderReplies();
-                }, (error) => {
-                    console.error("Error listening to saved replies:", error);
-                    firstSnapshotReceived = true;
-                    setStorageStatus(
-                        "Saved locally on this browser (cloud sync restricted)",
-                        "fa-solid fa-circle-info text-amber-300"
-                    );
-                    mergeAndRenderReplies();
-                });
-            } catch (err) {
-                console.error("Initialization error for persistent replies:", err);
-                firstSnapshotReceived = true;
-                setStorageStatus(
-                    "Saved locally on this browser",
-                    "fa-solid fa-floppy-disk text-amber-300"
-                );
-                mergeAndRenderReplies();
+                document.title = `Happy Birthday ${cfg.name}! 🎉`;
             }
         }
 
-        initPersistentReplies();
+        // Default to 26th automatically if today is already the 26th or later
+        if (isDateUnlocked('day2')) {
+            activeTab = 'day2';
+        }
+        renderActiveStage();
 
-        // Handle Reply Form Submission
-        document.getElementById('replyForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const inputEl = document.getElementById('replyTextInput');
-            const submitBtn = document.getElementById('submitReplyBtn');
-            const text = inputEl.value.trim();
-
-            if (!text) {
-                showToast("Please write a short reply message first!", "fa-solid fa-pen text-amber-300");
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.classList.add('opacity-70');
-
-            const newReplyPayload = {
-                clientId: `reply_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-                author: BIRTHDAY_CONFIG.recipientName,
-                to: BIRTHDAY_CONFIG.senderName,
-                text: text,
-                createdAt: Date.now()
-            };
-
-            // 1. Immediately add to local cache and display on screen with zero delay
-            localReplies = [newReplyPayload, ...localReplies];
-            saveLocalCache(localReplies);
-            firstSnapshotReceived = true;
-            mergeAndRenderReplies();
-
-            inputEl.value = '';
-            playCelebrationChime();
-            launchFireworksSequence(4);
-
-            // 2. Persist to cloud Firestore if connected
-            try {
-                if (cloudReady && db && currentUser) {
-                    const repliesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'birthday_replies');
-                    await addDoc(repliesColRef, newReplyPayload);
-                    showToast(`Reply saved! ${BIRTHDAY_CONFIG.senderName} will see it here 💖`, "fa-solid fa-circle-check text-emerald-400");
-                } else {
-                    showToast("Reply saved right here on the page! 💖", "fa-solid fa-circle-check text-emerald-400");
-                }
-            } catch (err) {
-                console.error("Failed to sync reply to cloud:", err);
-                showToast("Reply saved on this page! 💖", "fa-solid fa-heart text-pink-400");
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-70');
+        document.getElementById('tabDay1Btn').addEventListener('click', () => {
+            activeTab = 'day1';
+            relightCandles(true);
+            renderActiveStage();
+            if (isDateUnlocked('day1')) {
+                launchFireworksSequence(3);
             }
         });
 
+        document.getElementById('tabDay2Btn').addEventListener('click', () => {
+            activeTab = 'day2';
+            relightCandles(true);
+            renderActiveStage();
+            if (isDateUnlocked('day2')) {
+                launchFireworksSequence(3);
+            }
+        });
+
+        document.getElementById('switchToUnlockedBtn').addEventListener('click', () => {
+            activeTab = 'day1';
+            renderActiveStage();
+        });
+
+        // Creator preview toggle so you can inspect both 25th and 26th before those dates arrive
+        document.getElementById('togglePreviewBtn').addEventListener('click', (e) => {
+            forceUnlockPreview = !forceUnlockPreview;
+            e.target.textContent = forceUnlockPreview
+                ? "Exit Preview Mode (Restore Date Locks)"
+                : "Preview Locked Dates (Test Mode)";
+            renderActiveStage();
+            showToast(
+                forceUnlockPreview ? "Preview mode ON: Both 25th & 26th unlocked!" : "Date locks restored!",
+                "fa-solid fa-eye text-amber-300"
+            );
+        });
+
         // -----------------------------------------------------------------
-        // 4. WEB AUDIO API SYNTHESIZED "HAPPY BIRTHDAY" MELODY & CHIMES
+        // 3. WEB AUDIO API SYNTHESIZED "HAPPY BIRTHDAY" MELODY & CHIMES
         // -----------------------------------------------------------------
         let audioCtx = null;
         let isMusicPlaying = false;
@@ -1071,7 +992,7 @@
         });
 
         // -----------------------------------------------------------------
-        // 5. FLOATING BALLOONS GENERATOR
+        // 4. FLOATING BALLOONS GENERATOR
         // -----------------------------------------------------------------
         function spawnBalloons() {
             const container = document.getElementById('balloonsContainer');
@@ -1097,7 +1018,7 @@
         spawnBalloons();
 
         // -----------------------------------------------------------------
-        // 6. CONFETTI & FIREWORKS PARTICLE ENGINE (HTML5 Canvas)
+        // 5. CONFETTI & FIREWORKS PARTICLE ENGINE
         // -----------------------------------------------------------------
         const canvas = document.getElementById('celebrationCanvas');
         const ctx = canvas.getContext('2d');
@@ -1185,7 +1106,7 @@
         animateParticles();
 
         // -----------------------------------------------------------------
-        // 7. ENTRANCE SCREEN & INTERACTIVE BUTTONS
+        // 6. ENTRANCE SCREEN & INTERACTIVE BUTTONS
         // -----------------------------------------------------------------
         const entranceScreen = document.getElementById('entranceScreen');
         document.getElementById('openSurpriseBtn').addEventListener('click', () => {
@@ -1207,7 +1128,8 @@
             const rect = e.target.getBoundingClientRect();
             burstConfetti(rect.left + rect.width / 2, rect.top, 70);
             playCelebrationChime();
-            showToast(`Birthday love sent to ${BIRTHDAY_CONFIG.recipientName}! 💖`, "fa-solid fa-heart text-rose-400");
+            const activeName = BIRTHDAY_CONFIG[activeTab].name;
+            showToast(`Birthday love sent to ${activeName}! 💖`, "fa-solid fa-heart text-rose-400");
         });
 
         window.celebrateCard = function(cardEl, message) {
@@ -1218,7 +1140,7 @@
         };
 
         // -----------------------------------------------------------------
-        // 8. INTERACTIVE BIRTHDAY CAKE & CANDLES (Click + Mic Blow)
+        // 7. INTERACTIVE BIRTHDAY CAKE & CANDLES (Click + Mic Blow)
         // -----------------------------------------------------------------
         const candleStates = [true, true, true];
         let micStream = null;
@@ -1257,7 +1179,7 @@
             stopMicMonitoring();
         }
 
-        function relightCandles() {
+        function relightCandles(silent = false) {
             candleStates.fill(true);
             [0, 1, 2].forEach(idx => {
                 document.getElementById(`flame-${idx}`).classList.remove('out');
@@ -1266,7 +1188,9 @@
             document.getElementById('wishGrantedBanner').classList.add('hidden');
             document.getElementById('relightBtn').classList.add('hidden');
             document.getElementById('cakeInstruction').textContent = "Tap on each glowing candle flame to blow it out, or use your microphone!";
-            showToast("Candles relit! Make another wish ✨", "fa-solid fa-fire text-amber-400");
+            if (!silent) {
+                showToast("Candles relit! Make another wish ✨", "fa-solid fa-fire text-amber-400");
+            }
         }
 
         document.querySelectorAll('.candle').forEach(candleEl => {
@@ -1277,7 +1201,7 @@
         });
 
         document.getElementById('blowAllBtn').addEventListener('click', blowAllCandles);
-        document.getElementById('relightBtn').addEventListener('click', relightCandles);
+        document.getElementById('relightBtn').addEventListener('click', () => relightCandles(false));
 
         function stopMicMonitoring() {
             micMonitoring = false;
