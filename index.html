@@ -340,7 +340,20 @@
          TOP FLOATING CONTROLS (Music Toggle Only)
     ====================================================================== -->
     <header class="fixed top-4 right-4 left-4 z-30 flex justify-between items-center max-w-6xl mx-auto pointer-events-none">
-        <div class="glass-card px-4 py-2 rounded-full flex items-center gap-2 pointer-events-auto">
+        <header class="fixed top-4 right-4 left-4 z-30 flex justify-between items-center max-w-6xl mx-auto pointer-events-none">
+        <div class="flex items-center gap-2 pointer-events-auto">
+            <div class="glass-card px-4 py-2 rounded-full flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-xs font-medium tracking-wide text-purple-100">25th & 26th Special</span>
+            </div>
+
+            <!-- 👇 EE VIEWS BADGE ADD CHEYANDI -->
+            <div class="glass-card px-3.5 py-2 rounded-full flex items-center gap-2 border border-amber-300/25 shadow-lg" title="Total Surprise Views">
+                <i class="fa-solid fa-eye text-amber-300 text-xs"></i>
+                <span id="viewCountDisplay" class="text-xs font-bold text-white">...</span>
+                <span class="text-[11px] text-purple-200/80 hidden sm:inline">Views</span>
+            </div>
+        </div>
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
             <span class="text-xs font-medium tracking-wide text-purple-100">25th & 26th Special</span>
         </div>
@@ -661,6 +674,45 @@
     ====================================================================== -->
     <script type="module">
         // =====================================================================
+        // 👀 LIVE VIEWS COUNTER (Works anywhere you host/share the link!)
+        // =====================================================================
+        async function updateLiveViews() {
+            const viewEl = document.getElementById('viewCountDisplay');
+            if (!viewEl) return;
+
+            // 👇 Ee unique key ni marchakunda alage unchandi (lekapothe mee name pettukondi)
+            const counterNamespace = "parthavi-prabha-bday-2026";
+            const counterKey = "total-views";
+            const alreadyCounted = sessionStorage.getItem('bday_view_counted');
+
+            try {
+                // Oka sari open chesthe +1 increment avuthundi, refresh chesthe only count chupisthundi
+                const endpoint = alreadyCounted
+                    ? `https://api.counterapi.dev/v1/${counterNamespace}/${counterKey}/`
+                    : `https://api.counterapi.dev/v1/${counterNamespace}/${counterKey}/up`;
+
+                const res = await fetch(endpoint);
+                const data = await res.json();
+
+                if (data && typeof data.count === 'number') {
+                    viewEl.textContent = data.count.toLocaleString();
+                    sessionStorage.setItem('bday_view_counted', 'true');
+                } else {
+                    viewEl.textContent = "1";
+                }
+            } catch (err) {
+                // Offline lo open chesthe local fallback
+                let localViews = parseInt(localStorage.getItem('bday_local_views') || '0', 10);
+                if (!alreadyCounted) {
+                    localViews += 1;
+                    localStorage.setItem('bday_local_views', String(localViews));
+                    sessionStorage.setItem('bday_view_counted', 'true');
+                }
+                viewEl.textContent = localViews.toLocaleString();
+            }
+        }
+        updateLiveViews();
+        // =====================================================================
         // ✏️ CREATOR CONFIGURATION: EDIT NAMES, PHOTOS, DATES & MESSAGES HERE
         // =====================================================================
         const BIRTHDAY_CONFIG = {
@@ -679,6 +731,9 @@
                 photos: [
                     "1.png",
                     "2.jpg",
+                    "15.jpeg",
+                    "13.jpeg",
+                    "14.jpeg",
                     
                 ],
                 photoBadge: "Turning 2! 🎂",
@@ -697,6 +752,8 @@
                     "3.jpg",
                     "10.jpg",
                     "4.png",
+                    "11.jpeg",
+                    "12.jpeg",
             "5.jpg",
             "6.jpg",
             "7.jpg",
