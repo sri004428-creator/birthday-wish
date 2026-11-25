@@ -337,25 +337,21 @@
     </div>
 
     <!-- =====================================================================
-         TOP FLOATING CONTROLS (Music Toggle Only)
+         TOP FLOATING CONTROLS (Views Counter + Music Toggle)
     ====================================================================== -->
     <header class="fixed top-4 right-4 left-4 z-30 flex justify-between items-center max-w-6xl mx-auto pointer-events-none">
-        <header class="fixed top-4 right-4 left-4 z-30 flex justify-between items-center max-w-6xl mx-auto pointer-events-none">
         <div class="flex items-center gap-2 pointer-events-auto">
             <div class="glass-card px-4 py-2 rounded-full flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
                 <span class="text-xs font-medium tracking-wide text-purple-100">25th & 26th Special</span>
             </div>
 
-            <!-- 👇 EE VIEWS BADGE ADD CHEYANDI -->
+            <!-- Live Views Counter Pill -->
             <div class="glass-card px-3.5 py-2 rounded-full flex items-center gap-2 border border-amber-300/25 shadow-lg" title="Total Surprise Views">
                 <i class="fa-solid fa-eye text-amber-300 text-xs"></i>
-                <span id="viewCountDisplay" class="text-xs font-bold text-white">...</span>
+                <span id="viewCountDisplay" class="text-xs font-bold text-white">1</span>
                 <span class="text-[11px] text-purple-200/80 hidden sm:inline">Views</span>
             </div>
-        </div>
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="text-xs font-medium tracking-wide text-purple-100">25th & 26th Special</span>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3 pointer-events-auto">
@@ -664,7 +660,7 @@
         <p>Crafted with <i class="fa-solid fa-heart text-pink-400 mx-1"></i> for the 25th & 26th Birthday Celebrations.</p>
         <div>
             <button id="togglePreviewBtn" type="button" class="text-[11px] text-purple-300/50 hover:text-amber-300 underline transition cursor-pointer">
-                .
+                Preview Locked Dates (Test Mode)
             </button>
         </div>
     </footer>
@@ -680,38 +676,37 @@
             const viewEl = document.getElementById('viewCountDisplay');
             if (!viewEl) return;
 
-            // 👇 Ee unique key ni marchakunda alage unchandi (lekapothe mee name pettukondi)
             const counterNamespace = "parthavi-prabha-bday-2026";
             const counterKey = "total-views";
             const alreadyCounted = sessionStorage.getItem('bday_view_counted');
 
             try {
-                // Oka sari open chesthe +1 increment avuthundi, refresh chesthe only count chupisthundi
                 const endpoint = alreadyCounted
-                    ? `https://api.counterapi.dev/v1/${counterNamespace}/${counterKey}/`
-                    : `https://api.counterapi.dev/v1/${counterNamespace}/${counterKey}/up`;
+                    ? `https://abacus.jasoncameron.dev/get/${counterNamespace}/${counterKey}`
+                    : `https://abacus.jasoncameron.dev/hit/${counterNamespace}/${counterKey}`;
 
                 const res = await fetch(endpoint);
                 const data = await res.json();
 
-                if (data && typeof data.count === 'number') {
-                    viewEl.textContent = data.count.toLocaleString();
+                if (data && typeof data.value === 'number') {
+                    viewEl.textContent = data.value.toLocaleString();
                     sessionStorage.setItem('bday_view_counted', 'true');
-                } else {
-                    viewEl.textContent = "1";
+                    return;
                 }
             } catch (err) {
-                // Offline lo open chesthe local fallback
-                let localViews = parseInt(localStorage.getItem('bday_local_views') || '0', 10);
-                if (!alreadyCounted) {
-                    localViews += 1;
-                    localStorage.setItem('bday_local_views', String(localViews));
-                    sessionStorage.setItem('bday_view_counted', 'true');
-                }
-                viewEl.textContent = localViews.toLocaleString();
+                // Fallback if offline or blocked
             }
+
+            let localViews = parseInt(localStorage.getItem('bday_local_views') || '0', 10);
+            if (!alreadyCounted) {
+                localViews += 1;
+                localStorage.setItem('bday_local_views', String(localViews));
+                sessionStorage.setItem('bday_view_counted', 'true');
+            }
+            viewEl.textContent = Math.max(1, localViews).toLocaleString();
         }
         updateLiveViews();
+
         // =====================================================================
         // ✏️ CREATOR CONFIGURATION: EDIT NAMES, PHOTOS, DATES & MESSAGES HERE
         // =====================================================================
@@ -733,8 +728,7 @@
                     "2.jpg",
                     "15.jpeg",
                     "13.jpeg",
-                    "14.jpeg",
-                    
+                    "14.jpeg"
                 ],
                 photoBadge: "Turning 2! 🎂",
                 message: `Happy 2nd Birthday to the brightest little sunshine!\n\nTwo years ago you arrived and filled everyone's world with pure magic, tiny footsteps, and the cutest smiles. May you always grow up surrounded by endless love, joy, and laughter!`
@@ -754,9 +748,9 @@
                     "4.png",
                     "11.jpeg",
                     "12.jpeg",
-            "5.jpg",
-            "6.jpg",
-            "7.jpg",
+                    "5.jpg",
+                    "6.jpg",
+                    "7.jpg"
                 ],
                 photoBadge: "Bestie's Day 💖",
                 message: `Happy Birthday to my wonderful best friend!\n\nSeeing you as such an amazing psyco bestieeee and an even more incredible friend makes me so proud. Thank you for every laugh, every late-night talk, and every unforgettable memory. May this year bring you boundless happiness, good health, and every dream your heart wishes for!`
@@ -769,6 +763,61 @@
         let countdownInterval = null;
         let currentSlideIndex = 0;
         let carouselAutoTimer = null;
+
+        // -----------------------------------------------------------------
+        // 0. REAL-TIME SHARED VIEWS TRACKER
+        // -----------------------------------------------------------------
+        async function initViewsTracker() {
+            const viewEl = document.getElementById('viewCountDisplay');
+            if (!viewEl) return;
+
+            try {
+                if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'birthday-surprise-app';
+                    const firebaseConfig = JSON.parse(__firebase_config);
+                    const app = initializeApp(firebaseConfig);
+                    const auth = getAuth(app);
+                    const db = getFirestore(app);
+
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+
+                    if (!auth.currentUser) return;
+
+                    const statsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'pageStats', 'viewsCounter');
+
+                    // Listen for real-time view count updates
+                    onSnapshot(statsDocRef, (snapshot) => {
+                        if (snapshot.exists()) {
+                            const count = snapshot.data().count || 1;
+                            viewEl.textContent = count.toLocaleString();
+                        }
+                    }, (err) => {
+                        console.warn("Views listener warning:", err);
+                    });
+
+                    // Increment view count once per browser tab session
+                    if (!sessionStorage.getItem('bday_view_counted')) {
+                        sessionStorage.setItem('bday_view_counted', 'true');
+                        const snap = await getDoc(statsDocRef);
+                        if (!snap.exists()) {
+                            await setDoc(statsDocRef, { count: 1, updatedAt: Date.now() });
+                        } else {
+                            await updateDoc(statsDocRef, { count: increment(1), updatedAt: Date.now() });
+                        }
+                    }
+                } else {
+                    // Standalone file mode fallback
+                    viewEl.textContent = "1";
+                }
+            } catch (err) {
+                console.warn("View tracker fallback:", err);
+            }
+        }
+        initViewsTracker();
 
         // -----------------------------------------------------------------
         // 1. TOAST HELPER
@@ -1047,8 +1096,8 @@
         document.getElementById('togglePreviewBtn').addEventListener('click', (e) => {
             forceUnlockPreview = !forceUnlockPreview;
             e.target.textContent = forceUnlockPreview
-                ? "."
-                : ".";
+                ? "Exit Preview Mode (Restore Date Locks)"
+                : "Preview Locked Dates (Test Mode)";
             renderActiveStage();
             showToast(
                 forceUnlockPreview ? "Preview mode ON: Both 25th & 26th unlocked!" : "Date locks restored!",
