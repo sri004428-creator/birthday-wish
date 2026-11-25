@@ -660,7 +660,7 @@
         <p>Crafted with <i class="fa-solid fa-heart text-pink-400 mx-1"></i> for the 25th & 26th Birthday Celebrations.</p>
         <div>
             <button id="togglePreviewBtn" type="button" class="text-[11px] text-purple-300/50 hover:text-amber-300 underline transition cursor-pointer">
-                Preview Locked Dates (Test Mode)
+                
             </button>
         </div>
     </footer>
@@ -1096,8 +1096,8 @@
         document.getElementById('togglePreviewBtn').addEventListener('click', (e) => {
             forceUnlockPreview = !forceUnlockPreview;
             e.target.textContent = forceUnlockPreview
-                ? "Exit Preview Mode (Restore Date Locks)"
-                : "Preview Locked Dates (Test Mode)";
+                ? ""
+                : "";
             renderActiveStage();
             showToast(
                 forceUnlockPreview ? "Preview mode ON: Both 25th & 26th unlocked!" : "Date locks restored!",
